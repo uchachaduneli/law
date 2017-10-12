@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <mvc:annotation-driven/>
+
+    <context:component-scan base-package="ge.abara.mobile"/>
+    <!--<context:component-scan base-package="ge.abara.mobile.service"/>-->
+    <!--<context:component-scan base-package="ge.abara.mobile.dao"/>-->
+    <!--<context:component-scan base-package="ge.abara.mobile.controller"/>-->
+
+    <context:annotation-config/>
+
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+    <tx:annotation-driven transaction-manager="platformTransactionManager"/>
+
+    <bean id="dtSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+        <!--<property name="url" value="jdbc:oracle:thin:@10.0.0.10:1521:abara"/>-->
+        <property name="url" value="jdbc:oracle:thin:@212.72.143.212:1521:abara"/>
+        <property name="username" value="restappuser"/>
+        <property name="password" value="anacuabanacua123"/>
+    </bean>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          p:dataSource-ref="dtSource" p:persistenceUnitName="restaurant">
+        <property name="packagesToScan" value="ge.abara.mobile.model"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.connection.useUnicode">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="platformTransactionManager" name="platformTransactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager"
+          p:entityManagerFactory-ref="entityManagerFactory"
+          p:dataSource-ref="dtSource"
+          p:persistenceUnitName="restaurant"/>
+
+    <!--<bean id="corePropertyPlaceholderConfigurer"-->
+          <!--class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+        <!--<property name="ignoreUnresolvablePlaceholders" value="true"/>-->
+        <!--<property name="ignoreResourceNotFound" value="true"/>-->
+    <!--</bean>-->
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="ge.abara.mobile.security.auth.AuthInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean name="fileService" class="ge.abara.mobile.service.FileService">
+        <property name="rootDir"
+                  value="C:\Program Files\Apache Software Foundation\Apache Tomcat 8.0.27\webapps\ROOT\uploads"/>
+        <!--<property name="rootDir" value="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\ROOT\uploads"/>-->
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="500000000"/>
+    </bean>
+
+</beans>
