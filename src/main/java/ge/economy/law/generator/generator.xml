@@ -3,9 +3,9 @@
     <!-- Configure the database connection here -->
     <jdbc>
         <driver>org.postgresql.Driver</driver>
-        <url>jdbc:postgresql://localhost:5432/involve</url>
-        <user>nlomineishvili</user>
-        <password>123456</password>
+        <url>jdbc:postgresql://localhost:5432/law</url>
+        <user>postgres</user>
+        <password>root</password>
 
         <!--     You can also pass user/password and other JDBC properties in the optional properties tag:
             <properties>
@@ -26,7 +26,7 @@
                     <type>java.util.Date</type>
 
                     <!-- Associate that custom type with your converter. -->
-                    <converter>ge.economy.involve.database.converter.TimestampConverter</converter>
+                    <converter>ge.economy.law.utils.TimestampConverter</converter>
                 </customType>
             </customTypes>
 
@@ -92,10 +92,10 @@
         <target>
             <!-- The destination package of your generated classes (within the
                  destination directory) -->
-            <packageName>ge.economy.involve.database.database</packageName>
+            <packageName>ge.economy.law.model</packageName>
 
             <!-- The destination directory of your generated classes -->
-            <directory>../involve-database/src/main/java/</directory>
+            <directory>../</directory>
         </target>
     </generator>
 </configuration>

@@ -1,5 +1,5 @@
 
-package ge.abara.mobile.misc;
+package ge.economy.law.misc;
 
 import com.google.gson.Gson;
 

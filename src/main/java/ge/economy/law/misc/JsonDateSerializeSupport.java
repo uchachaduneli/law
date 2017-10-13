@@ -1,13 +1,15 @@
-package ge.abara.mobile.misc;
+package ge.economy.law.misc;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import static ge.abara.mobile.misc.JsonDateDeSerializeSupport.DATE_FORMAT;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static ge.economy.law.misc.JsonDateDeSerializeSupport.DATE_FORMAT;
 
 /**
  *

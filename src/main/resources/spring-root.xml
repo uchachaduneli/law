@@ -14,13 +14,9 @@
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-
     <mvc:annotation-driven/>
 
-    <context:component-scan base-package="ge.abara.mobile"/>
-    <!--<context:component-scan base-package="ge.abara.mobile.service"/>-->
-    <!--<context:component-scan base-package="ge.abara.mobile.dao"/>-->
-    <!--<context:component-scan base-package="ge.abara.mobile.controller"/>-->
+    <context:component-scan base-package="ge.economy.law"/>
 
     <context:annotation-config/>
 
@@ -28,19 +24,47 @@
 
     <tx:annotation-driven transaction-manager="platformTransactionManager"/>
 
-    <bean id="dtSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-        <!--<property name="url" value="jdbc:oracle:thin:@10.0.0.10:1521:abara"/>-->
-        <property name="url" value="jdbc:oracle:thin:@212.72.143.212:1521:abara"/>
-        <property name="username" value="restappuser"/>
-        <property name="password" value="anacuabanacua123"/>
+    <bean id="dtSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/law?currentSchema=public"/>
+        <!--<property name="url" value="jdbc:postgresql://10.0.11.7:5432/law?currentSchema=public"/>-->
+        <property name="username" value="postgres"/>
+        <property name="password" value="root"/>
+    </bean>
+
+    <bean id="transactionAwareDataSource"
+          class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
+        <constructor-arg ref="dtSource"/>
+    </bean>
+
+    <bean class="org.jooq.impl.DataSourceConnectionProvider" name="connectionProvider">
+        <constructor-arg ref="transactionAwareDataSource"/>
+    </bean>
+
+    <bean id="dsl" class="org.jooq.impl.DefaultDSLContext">
+        <constructor-arg ref="config"/>
+    </bean>
+
+    <bean class="org.jooq.impl.DefaultConfiguration" name="config">
+        <property name="SQLDialect">
+            <value type="org.jooq.SQLDialect">POSTGRES</value>
+        </property>
+        <property name="connectionProvider" ref="connectionProvider"/>
+        <!--<property name="transactionProvider" ref="transactionProvider"/>-->
+        <!--<property name="executeListenerProvider">-->
+        <!--<array>-->
+        <!--<bean class="org.jooq.impl.DefaultExecuteListenerProvider">-->
+        <!--&lt;!&ndash;<constructor-arg index="0" ref="exceptionTranslator"/>&ndash;&gt;-->
+        <!--</bean>-->
+        <!--</array>-->
+        <!--</property>-->
     </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
           p:dataSource-ref="dtSource" p:persistenceUnitName="restaurant">
-        <property name="packagesToScan" value="ge.abara.mobile.model"/>
+        <property name="packagesToScan" value="ge.economy.law.model"/>
         <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
         <property name="jpaProperties">
             <props>
@@ -58,16 +82,10 @@
           p:dataSource-ref="dtSource"
           p:persistenceUnitName="restaurant"/>
 
-    <!--<bean id="corePropertyPlaceholderConfigurer"-->
-          <!--class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
-        <!--<property name="ignoreUnresolvablePlaceholders" value="true"/>-->
-        <!--<property name="ignoreResourceNotFound" value="true"/>-->
-    <!--</bean>-->
-
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean class="ge.abara.mobile.security.auth.AuthInterceptor"/>
+            <bean class="ge.economy.law.security.auth.AuthInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
@@ -76,11 +94,11 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean name="fileService" class="ge.abara.mobile.service.FileService">
-        <property name="rootDir"
-                  value="C:\Program Files\Apache Software Foundation\Apache Tomcat 8.0.27\webapps\ROOT\uploads"/>
-        <!--<property name="rootDir" value="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\ROOT\uploads"/>-->
-    </bean>
+    <!--<bean name="fileService" class="ge.economy.law.service.">-->
+    <!--<property name="rootDir"-->
+    <!--value="C:\Program Files\Apache Software Foundation\Apache Tomcat 8.0.27\webapps\ROOT\uploads"/>-->
+    <!--&lt;!&ndash;<property name="rootDir" value="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\ROOT\uploads"/>&ndash;&gt;-->
+    <!--</bean>-->
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="500000000"/>

@@ -1,6 +1,5 @@
-package ge.abara.mobile.security.auth;
+package ge.economy.law.security.auth;
 
-import ge.abara.mobile.security.api.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -19,8 +18,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws IOException {
 
-        String uri = request.getRequestURI();
-        User user = (User) request.getSession().getAttribute(CURRENT_USER);
+//        String uri = request.getRequestURI();
+//        User user = (User) request.getSession().getAttribute(CURRENT_USER);
 
 //        if (user == null && request.getHeader("X-Requested-With") == null) {
 //

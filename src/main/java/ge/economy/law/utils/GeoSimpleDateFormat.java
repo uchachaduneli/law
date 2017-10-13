@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ge.abara.mobile.utils;
+package ge.economy.law.utils;
 
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;

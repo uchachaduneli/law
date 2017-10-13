@@ -1,43 +1,69 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package ge.abara.mobile.dao;
+package ge.economy.law.dao;
 
-import ge.abara.mobile.dto.MobileUsersDTO;
-import ge.abara.mobile.model.MobileUsers;
+import ge.economy.law.model.Tables;
+import ge.economy.law.model.tables.records.UserRecord;
+import org.jooq.Record;
+import org.jooq.SelectConditionStep;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * @author ucha
+ * Created by nino on 7/10/16.
  */
+
 @Repository
-public class UserDao extends AbstractDao<MobileUsers> {
+public class UserDAO extends AbstractDAO {
 
-    @PersistenceContext(unitName = "restaurant")
-    private EntityManager entityManager;
-
-    @Override
-    public EntityManager getEntityManager() {
-        return entityManager;
+    public List<Record> getUsers() {
+        return dslContext.
+                select().
+                from(Tables.USER).
+                fetch();
     }
 
-    public List<MobileUsers> login(String username, String password, int loginType) {
-        StringBuilder q = new StringBuilder();
-        q.append("Select e From ").append(MobileUsers.class.getSimpleName()).
-                append(" e Where e.username ='").append(username).append("'");
-        if (loginType == MobileUsersDTO.LOGIN_TYPE_USER_PASS) {
-            q.append(" and e.password ='").append(password).append("'");
-        }
+    public UserRecord getUserObjectById(int id) {
+        return dslContext.fetchOne(Tables.USER, Tables.USER.USER_ID.eq(id));
+    }
 
-        TypedQuery<MobileUsers> query = entityManager.createQuery(q.toString(), MobileUsers.class);
-        return query.getResultList();
+    public Record getUserById(int id) {
+        return dslContext.select().
+                from(Tables.USER).
+                where(Tables.USER.USER_ID.eq(id)).fetchAny();
+    }
+
+
+    public List<UserRecord> search(String userName) {
+
+        SelectConditionStep<Record> selectConditionStep =
+                dslContext.
+                        select().
+                        from(Tables.USER).where(Tables.USER.USER_ID.eq(Tables.USER.USER_ID));
+
+        if (userName != null) {
+            selectConditionStep.and(Tables.USER.USERNAME.eq(userName));
+        }
+        return selectConditionStep.fetch().into(UserRecord.class);
+    }
+
+    public Record getUser(String username, String password) {
+        return dslContext
+                .select()
+                .from(Tables.USER)
+                .where(Tables.USER.USERNAME.eq(username))
+                .and(Tables.USER.PASSWORD.eq(password))
+                .fetchOne();
+
+    }
+
+
+    public void deleteUser(int itemId) {
+        dslContext.deleteFrom(Tables.USER).where(Tables.USER.USER_ID.eq(itemId)).execute();
+    }
+
+
+    public void updateUserPassword(String password, int userId) {
+        dslContext.update(Tables.USER).set(Tables.USER.PASSWORD, password).where(Tables.USER.USER_ID.eq(userId)).execute();
     }
 
 }

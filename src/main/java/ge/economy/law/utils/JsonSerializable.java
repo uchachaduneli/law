@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package ge.abara.mobile.utils;
+package ge.economy.law.utils;
 
 import com.google.gson.Gson;
 

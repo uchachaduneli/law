@@ -1,4 +1,4 @@
-package ge.abara.mobile.security;
+package ge.economy.law.security;
 
 /**
  *

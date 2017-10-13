@@ -1,7 +1,7 @@
 
-package ge.abara.mobile.security.auth;
+package ge.economy.law.security.auth;
 
-import ge.abara.mobile.security.api.User;
+import ge.economy.law.security.api.User;
 
 /**
  *

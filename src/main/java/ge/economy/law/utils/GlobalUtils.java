@@ -1,4 +1,4 @@
-package ge.abara.mobile.utils;
+package ge.economy.law.utils;
 
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
