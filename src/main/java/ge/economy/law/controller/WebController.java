@@ -20,6 +20,11 @@ public class WebController {
         return "users";
     }
 
+    @RequestMapping("/index")
+    public String index() {
+        return "index";
+    }
+
     @RequestMapping("/")
     public String defaultFnc() {
         return "login";
