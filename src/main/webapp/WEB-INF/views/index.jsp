@@ -13,19 +13,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>LAW</title>
-    <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="resources/css/bootstrap.css">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="resources/css/font-awesome.css">
-    <!-- Theme style -->
     <link rel="stylesheet" href="resources/css/AdminLTE.css">
-    <!-- DataTables -->
     <link rel="stylesheet" href="resources/css/dataTables.bootstrap.css">
-    <!-- AdminLTE Skins -->
     <link rel="stylesheet" href="resources/css/skin-blue-light.css">
-
 
     <script src="resources/js/jquery.js"></script>
     <script src="resources/js/jquery-ui.js"></script>
