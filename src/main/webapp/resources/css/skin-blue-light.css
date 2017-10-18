@@ -81,7 +81,7 @@
 }
 .skin-blue-light .sidebar-menu > li > a {
     border-left: 3px solid transparent;
-    font-weight: 600;
+    /*font-weight: 600;*/
 }
 .skin-blue-light .sidebar-menu > li:hover > a,
 .skin-blue-light .sidebar-menu > li.active > a {
@@ -92,7 +92,7 @@
     border-left-color: #3c8dbc;
 }
 .skin-blue-light .sidebar-menu > li.active > a {
-    font-weight: 600;
+    /*font-weight: 600;*/
 }
 .skin-blue-light .sidebar-menu > li > .treeview-menu {
     background: #f4f4f5;
