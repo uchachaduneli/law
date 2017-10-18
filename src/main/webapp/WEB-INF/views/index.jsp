@@ -26,7 +26,7 @@
     <script>
         $(document).ready(function () {
             var url = window.location;
-            $('.list-group a').filter(function () {
+            $('.menuItem').filter(function () {
                 return this.href.indexOf(url.pathname) > -1;
             }).addClass('active');
             if (url.pathname.indexOf("cases") > -1) {
@@ -45,13 +45,7 @@
                 $('#selected_item').text("მომხმარებლები");
             }
         });
-        menuCtrl = function ($scope, $http) {
-            function getUser(res) {
-//                $scope.currentUser = res.userData.name;
-            }
-
-            //ajaxCall($http, "get-user", {}, getUser);
-        };
+        var myapp = angular.module('app', []);
     </script>
 </head>
 <body ng-app="app" class="hold-transition skin-blue-light sidebar-mini">
@@ -96,53 +90,53 @@
             </div>
         </nav>
     </header>
-    <div class="row" class="main-sidebar" ng-controller="menuCtrl">
+    <div class="row" class="main-sidebar">
         <aside class="main-sidebar">
             <section class="sidebar">
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="active treeview">
-                        <a href="cases">
+                    <li>
+                        <a class="menuItem" href="cases">
                             <i class="fa fa-briefcase"></i>
                             <span>საქმე</span>
                             </span>
                         </a>
                     </li>
-                    <li class="treeview">
-                        <a href="courts">
+                    <li>
+                        <a class="menuItem" href="courts">
                             <i class="fa fa-bank"></i>
                             <span>სასამართლოები</span>
                             </span>
                         </a>
                     </li>
-                    <li class="treeview">
+                    <li>
                         <a href="instaces">
                             <i class="fa fa-sitemap"></i>
                             <span>სასამართლო ინსტანცია</span>
                             </span>
                         </a>
                     </li>
-                    <li class="treeview">
+                    <li>
                         <a href="caseresults">
                             <i class="fa fa-folder-open"></i>
                             <span>საქმის დამთ. შედეგები</span>
                             </span>
                         </a>
                     </li>
-                    <li class="treeview">
+                    <li>
                         <a href="iligsubject">
                             <i class="fa fa-balance-scale"></i>
                             <span>დავის საგანი</span>
                             </span>
                         </a>
                     </li>
-                    <li class="treeview">
+                    <li>
                         <a href="judges">
                             <i class="fa fa-graduation-cap"></i>
                             <span>მოსამართლეები</span>
                             </span>
                         </a>
                     </li>
-                    <li class="treeview">
+                    <li>
                         <a href="users">
                             <i class="fa fa-users"></i>
                             <span>მომხმარებლები</span>
