@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <base href="${pageContext.request.contextPath}/"/>
     <title>LAW</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="resources/css/bootstrap.css">
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="resources/css/dataTables.bootstrap.css">
     <link rel="stylesheet" href="resources/css/skin-blue-light.css">
     <link rel="stylesheet" href="resources/css/global.css">
+    <link rel="shortcut icon" type="image/png" href="resources/imgs/favicon.png"/>
 
     <script src="resources/js/jquery.js"></script>
     <script src="resources/js/jquery-ui.js"></script>
@@ -20,20 +21,48 @@
     </script>
     <script src="resources/js/bootstrap.js"></script>
     <script src="resources/js/adminlte.js"></script>
-</head>
-<body class="hold-transition skin-blue-light sidebar-mini">
-<div class="wrapper">
+    <script src="resources/js/angular.js"></script>
+    <script src="resources/js/global_util.js"></script>
+    <script>
+        $(document).ready(function () {
+            var url = window.location;
+            $('.list-group a').filter(function () {
+                return this.href.indexOf(url.pathname) > -1;
+            }).addClass('active');
+            if (url.pathname.indexOf("cases") > -1) {
+                $('#selected_item').text("საქმე");
+            } else if (url.pathname.indexOf("courts") > -1) {
+                $('#selected_item').text("სასამართლოები");
+            } else if (url.pathname.indexOf("instaces") > -1) {
+                $('#selected_item').text("სასამართლო ინსტანციები");
+            } else if (url.pathname.indexOf("caseresults") > -1) {
+                $('#selected_item').text("საქმის დამთავრების შედეგები");
+            } else if (url.pathname.indexOf("iligsubject") > -1) {
+                $('#selected_item').text("დავის საგნები");
+            } else if (url.pathname.indexOf("judges") > -1) {
+                $('#selected_item').text("მოსამართლეები");
+            } else if (url.pathname.indexOf("users") > -1) {
+                $('#selected_item').text("მომხმარებლები");
+            }
+        });
+        menuCtrl = function ($scope, $http) {
+            function getUser(res) {
+//                $scope.currentUser = res.userData.name;
+            }
 
+            //ajaxCall($http, "get-user", {}, getUser);
+        };
+    </script>
+</head>
+<body ng-app="app" class="hold-transition skin-blue-light sidebar-mini">
+<div class="wrapper">
     <header class="main-header">
-        <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="#" class="logo">
             <span class="logo-lg"><b>LAW</b></span>
         </a>
-        <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                <span class="sr-only">Toggle navigation</span>
+                <span class="sr-only">მენიუს შეკეცვა</span>
             </a>
 
             <div class="navbar-custom-menu">
@@ -67,63 +96,68 @@
             </div>
         </nav>
     </header>
-    <aside class="main-sidebar">
-        <section class="sidebar">
-            <ul class="sidebar-menu" data-widget="tree">
-                <li class="active treeview">
-                    <a href="cases">
-                        <i class="fa fa-briefcase"></i>
-                        <span>საქმე</span>
-                        </span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="courts">
-                        <i class="fa fa-bank"></i>
-                        <span>სასამართლოები</span>
-                        </span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="instaces">
-                        <i class="fa fa-sitemap"></i>
-                        <span>სასამართლო ინსტანცია</span>
-                        </span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="caseresults">
-                        <i class="fa fa-folder-open"></i>
-                        <span>საქმის დამთ. შედეგები</span>
-                        </span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="iligsubject">
-                        <i class="fa fa-balance-scale"></i>
-                        <span>დავის საგანი</span>
-                        </span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="judges">
-                        <i class="fa fa-graduation-cap"></i>
-                        <span>მოსამართლეები</span>
-                        </span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="users">
-                        <i class="fa fa-users"></i>
-                        <span>მომხმარებლები</span>
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </section>
-    </aside>
+    <div class="row" class="main-sidebar" ng-controller="menuCtrl">
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="active treeview">
+                        <a href="cases">
+                            <i class="fa fa-briefcase"></i>
+                            <span>საქმე</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="courts">
+                            <i class="fa fa-bank"></i>
+                            <span>სასამართლოები</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="instaces">
+                            <i class="fa fa-sitemap"></i>
+                            <span>სასამართლო ინსტანცია</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="caseresults">
+                            <i class="fa fa-folder-open"></i>
+                            <span>საქმის დამთ. შედეგები</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="iligsubject">
+                            <i class="fa fa-balance-scale"></i>
+                            <span>დავის საგანი</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="judges">
+                            <i class="fa fa-graduation-cap"></i>
+                            <span>მოსამართლეები</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="users">
+                            <i class="fa fa-users"></i>
+                            <span>მომხმარებლები</span>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+    </div>
 
     <div class="content-wrapper">
+        <section class="content-header">
+            <h4 id="selected_item"></h4>
+        </section>
         <section class="content">
 
             asdadasd as
@@ -131,8 +165,8 @@
         </section>
     </div>
     <footer class="main-footer">
-        <strong>Copyright &copy; 2017 All rights
-            reserved.
+        Copyright &copy; 2017 All rights
+        reserved.
     </footer>
 
 </div>
