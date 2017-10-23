@@ -36,6 +36,22 @@
             }
         };
 
+        $scope.init = function () {
+            $scope.request = null;
+            $scope.request = {statusId: 1};
+        };
+
+        $scope.save = function () {
+            function asd(res) {
+                if (res.errorCode == 0) {
+                    successMsg('ოპერაცია დასრულდა წარმატებით');
+                    $scope.loadMainData();
+                }
+            }
+
+            ajaxCall($http, "users/add-user", angular.toJson($scope.request), asd);
+        };
+
     });
 </script>
 
@@ -112,7 +128,8 @@
         <div class="box">
             <div class="box-header">
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-block btn-primary btn-md">
+                    <button type="button" class="btn btn-block btn-primary btn-md" ng-click="init()" data-toggle="modal"
+                            data-target="#editModal">
                         <i class="fa fa-plus" aria-hidden="true"></i> &nbsp;
                         დამატება
                     </button>
