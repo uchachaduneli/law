@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class WebController {
 
-    @RequestMapping("/home")
-    public String homeFc() {
-        return "home";
+    @RequestMapping("/cases")
+    public String cases() {
+        return "cases";
     }
 
     @RequestMapping("/users")
@@ -20,14 +20,34 @@ public class WebController {
         return "users";
     }
 
-    @RequestMapping("/index")
-    public String index() {
-        return "index";
+    @RequestMapping("/courts")
+    public String courts() {
+        return "courts";
+    }
+
+    @RequestMapping("/iligsubjects")
+    public String iligsubjects() {
+        return "iligsubjects";
+    }
+
+    @RequestMapping("/instances")
+    public String instances() {
+        return "instances";
+    }
+
+    @RequestMapping("/judges")
+    public String judges() {
+        return "judges";
+    }
+
+    @RequestMapping("/caseresults")
+    public String caseresults() {
+        return "caseresults";
     }
 
     @RequestMapping("/")
     public String defaultFnc() {
-        return "login";
+        return "";
     }
 
 }

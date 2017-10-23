@@ -45,7 +45,7 @@
                 $('#selected_item').text("მომხმარებლები");
             }
         });
-        var myapp = angular.module('app', []);
+        //        var myapp = angular.module('app', []);
     </script>
 </head>
 <body ng-app="app" class="hold-transition skin-blue-light sidebar-mini">
@@ -148,7 +148,7 @@
         </aside>
     </div>
 
-    <div class="content-wrapper">
+    <div class="content-wrapper" ng-controller="angController">
         <section class="content-header">
             <h4 id="selected_item"></h4>
         </section>
