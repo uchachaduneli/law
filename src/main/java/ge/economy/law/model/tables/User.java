@@ -29,7 +29,7 @@ import java.util.List;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-	private static final long serialVersionUID = -1767856944;
+    private static final long serialVersionUID = 1703684511;
 
 	/**
 	 * The reference instance of <code>public.user</code>
@@ -127,8 +127,8 @@ public class User extends TableImpl<UserRecord> {
 	 */
 	@Override
 	public List<UniqueKey<UserRecord>> getKeys() {
-		return Arrays.<UniqueKey<UserRecord>>asList(Keys.USER_PKEY);
-	}
+        return Arrays.<UniqueKey<UserRecord>>asList(Keys.USER_PKEY, Keys.UNIQ_USRNM);
+    }
 
 	/**
 	 * {@inheritDoc}

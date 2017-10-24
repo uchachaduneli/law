@@ -35,11 +35,11 @@
                 $('#selected_item').text("საქმე");
             } else if (url.pathname.indexOf("courts") > -1) {
                 $('#selected_item').text("სასამართლოები");
-            } else if (url.pathname.indexOf("instaces") > -1) {
+            } else if (url.pathname.indexOf("instances") > -1) {
                 $('#selected_item').text("სასამართლო ინსტანციები");
             } else if (url.pathname.indexOf("caseresults") > -1) {
                 $('#selected_item').text("საქმის დამთავრების შედეგები");
-            } else if (url.pathname.indexOf("iligsubject") > -1) {
+            } else if (url.pathname.indexOf("litigsubjects") > -1) {
                 $('#selected_item').text("დავის საგნები");
             } else if (url.pathname.indexOf("judges") > -1) {
                 $('#selected_item').text("მოსამართლეები");
@@ -111,7 +111,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="instaces">
+                        <a href="instances">
                             <i class="fa fa-sitemap"></i>
                             <span>სასამართლო ინსტანცია</span>
                             </span>
@@ -125,7 +125,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="iligsubject">
+                        <a href="litigsubjects">
                             <i class="fa fa-balance-scale"></i>
                             <span>დავის საგანი</span>
                             </span>
@@ -151,7 +151,7 @@
     </div>
 
     <div class="content-wrapper" ng-controller="angController">
-        <section class="content-header">
+        <section class="content-header text-center">
             <h4 id="selected_item"></h4>
         </section>
         <section class="content">

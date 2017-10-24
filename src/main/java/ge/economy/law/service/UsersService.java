@@ -3,6 +3,8 @@ package ge.economy.law.service;
 
 import ge.economy.law.dao.UserDAO;
 import ge.economy.law.dto.UserDTO;
+import ge.economy.law.dto.UserStatusDTO;
+import ge.economy.law.dto.UserTypeDTO;
 import ge.economy.law.model.Tables;
 import ge.economy.law.model.tables.records.UserRecord;
 import ge.economy.law.request.AddUserRequest;
@@ -38,6 +40,7 @@ public class UsersService {
             record = dslContext.newRecord(Tables.USER);
             newRecord = true;
         }
+
         record.setFirstname(request.getFirstname());
         record.setLastname(request.getLastname());
         record.setUsername(request.getUsername());
@@ -57,6 +60,14 @@ public class UsersService {
 
     public List<UserDTO> getUsers() {
         return UserDTO.translateArray(userDAO.getUsers());
+    }
+
+    public List<UserTypeDTO> getUserTypes() {
+        return UserTypeDTO.translateArray(userDAO.getUserTypes());
+    }
+
+    public List<UserStatusDTO> getUserStatuses() {
+        return UserStatusDTO.translateArray(userDAO.getUserStatus());
     }
 
     public UserDTO getUserById(int id) {
@@ -84,4 +95,7 @@ public class UsersService {
         return user;
     }
 
+    public void deleteUser(int id) {
+        userDAO.deleteUser(id);
+    }
 }

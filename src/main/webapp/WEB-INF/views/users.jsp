@@ -12,19 +12,30 @@
     var app = angular.module("app", []);
     app.controller("angController", function ($scope, $http, $filter) {
         $scope.users = [];
+        $scope.userTypes = [];
+        $scope.userStatuses = [];
 
-        function getUsers(res) {
-            console.log(res.data);
-            $scope.users = res.data;
+        $scope.loadMainData = function () {
+            function getUsers(res) {
+                $scope.users = res.data;
+            }
+
+            ajaxCall($http, "users/get-users", null, getUsers);
         }
 
-        ajaxCall($http, "users/get-users", null, getUsers);
-
+        $scope.loadMainData();
 
         $scope.remove = function (id) {
             if (confirm("დარწმუნებული ხართ რომ გსურთ წაშლა?")) {
                 if (id != undefined) {
-                    ajaxCall($http, "users/delete-user?userId=" + id, null, reload);
+                    function resFnc(res) {
+                        if (res.errorCode == 0) {
+                            successMsg('ოპერაცია დასრულდა წარმატებით');
+                            $scope.loadMainData();
+                        }
+                    }
+
+                    ajaxCall($http, "users/delete-user?id=" + id, null, resFnc);
                 }
             }
         };
@@ -38,19 +49,35 @@
 
         $scope.init = function () {
             $scope.request = null;
-            $scope.request = {statusId: 1};
+            $scope.request = {statusId: 1, typeId: 1};
         };
 
         $scope.save = function () {
-            function asd(res) {
+            function resFunc(res) {
                 if (res.errorCode == 0) {
                     successMsg('ოპერაცია დასრულდა წარმატებით');
                     $scope.loadMainData();
+                    closeModal('editModal');
+                } else {
+                    errorMsg('მითითებული ნიკით მომხმარებელი უკვე არსებობს');
                 }
             }
 
-            ajaxCall($http, "users/add-user", angular.toJson($scope.request), asd);
+            ajaxCall($http, "users/save-user", angular.toJson($scope.request), resFunc);
         };
+
+        function getUserTypes(res) {
+            $scope.userTypes = res.data;
+        }
+
+        ajaxCall($http, "users/get-user-types", null, getUserTypes);
+
+
+        function getUserStatuses(res) {
+            $scope.userStatuses = res.data;
+        }
+
+        ajaxCall($http, "users/get-user-statuses", null, getUserStatuses);
 
     });
 </script>
@@ -71,7 +98,7 @@
                         <div class="form-group col-sm-10 ">
                             <label class="control-label col-sm-3">ნიკი</label>
                             <div class="col-sm-9">
-                                <input type="password" name="password" ng-model="request.password"
+                                <input type="text" ng-model="request.username"
                                        class="form-control input-sm">
                             </div>
                         </div>
@@ -95,15 +122,19 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-10">
+                            <label class="control-label col-sm-3">ტიპი</label>
+                            <div class="col-xs-9 btn-group">
+                                <select class="form-control" ng-model="request.typeId">
+                                    <option ng-repeat="s in userTypes" value="{{s.typeId}}">{{s.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10">
                             <label class="control-label col-sm-3">სტატუსი</label>
                             <div class="col-xs-9 btn-group">
-                                <div class="radio col-xs-3">
-                                    <label><input type="radio" ng-model="request.statusId" value="1"
-                                                  class="input-sm"> ატიური</label>
-                                </div>
-                                <div class="radio col-xs-3">
-                                    <label><input type="radio" ng-model="request.statusId" value="2"
-                                                  class=" input-sm"> პასიური</label>
+                                <div class="radio col-xs-3" ng-repeat=" s in userStatuses">
+                                    <label><input type="radio" ng-model="request.statusId" value="{{s.statusId}}"
+                                                  class="input-sm">{{s.name}}</label>
                                 </div>
                             </div>
                         </div>

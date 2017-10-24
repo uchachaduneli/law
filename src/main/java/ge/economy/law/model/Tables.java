@@ -33,9 +33,14 @@ public class Tables {
 	public static final Court COURT = ge.economy.law.model.tables.Court.COURT;
 
 	/**
-	 * საქმის სასამართლო ინსტანციების ისტორია
-	 */
+     * The table public.court_instance
+     */
 	public static final CourtInstance COURT_INSTANCE = ge.economy.law.model.tables.CourtInstance.COURT_INSTANCE;
+
+    /**
+     * საქმის სასამართლო ინსტანციების ისტორია
+     */
+    public static final CourtInstanceHistory COURT_INSTANCE_HISTORY = ge.economy.law.model.tables.CourtInstanceHistory.COURT_INSTANCE_HISTORY;
 
 	/**
 	 * საქმის დამთავრების შედეგი

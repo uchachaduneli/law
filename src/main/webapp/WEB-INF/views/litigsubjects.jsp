@@ -17,7 +17,7 @@
                 $scope.list = res.data;
             }
 
-            ajaxCall($http, "courtInstances/get-courtinstances", null, getMainData);
+            ajaxCall($http, "litigationsubjects/get-litigationsubjects", null, getMainData);
         }
 
         $scope.loadMainData();
@@ -32,14 +32,14 @@
                         }
                     }
 
-                    ajaxCall($http, "courtInstances/delete-courtinstance?id=" + id, null, resFnc);
+                    ajaxCall($http, "litigationsubjects/delete-litigationsubject?id=" + id, null, resFnc);
                 }
             }
         };
 
         $scope.edit = function (id) {
             if (id != undefined) {
-                var selected = $filter('filter')($scope.list, {instanceId: id}, true);
+                var selected = $filter('filter')($scope.list, {litigationSubjectId: id}, true);
                 $scope.request = selected[0];
             }
         };
@@ -57,8 +57,8 @@
                 }
             }
 
-            ajaxCall($http, "courtInstances/save-courtinstance", angular.toJson({
-                id: $scope.request.instanceId,
+            ajaxCall($http, "litigationsubjects/save-litigationsubject", angular.toJson({
+                id: $scope.request.litigationSubjectId,
                 name: $scope.request.name
             }), resFunc);
         };
@@ -80,7 +80,7 @@
                 <div class="row">
                     <form class="form-horizontal" name="myForm">
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">სასამართლო ინსტანცია</label>
+                            <label class="control-label col-sm-3">დავის საგანი</label>
                             <div class="col-sm-9">
                                 <input type="text" ng-model="request.name"
                                        class="form-control input-sm">
@@ -126,14 +126,14 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="r in list">
-                        <td>{{r.instanceId}}</td>
+                        <td>{{r.litigationSubjectId}}</td>
                         <td>{{r.name}}</td>
                         <td class="text-center">
-                            <a ng-click="edit(r.instanceId)" data-toggle="modal" data-target="#editModal"
+                            <a ng-click="edit(r.litigationSubjectId)" data-toggle="modal" data-target="#editModal"
                                class="btn btn-xs">
                                 <i class="fa fa-pencil"></i>&nbsp;შეცვლა
                             </a>&nbsp;|&nbsp;
-                            <a ng-click="remove(r.instanceId)" class="btn btn-xs">
+                            <a ng-click="remove(r.litigationSubjectId)" class="btn btn-xs">
                                 <i class="fa fa-trash-o"></i>&nbsp;წაშლა
                             </a>
                         </td>
@@ -144,4 +144,5 @@
         </div>
     </div>
 </div>
+
 <%@include file="footer.jsp" %>

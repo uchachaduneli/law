@@ -25,9 +25,9 @@ public class WebController {
         return "courts";
     }
 
-    @RequestMapping("/iligsubjects")
-    public String iligsubjects() {
-        return "iligsubjects";
+    @RequestMapping("/litigsubjects")
+    public String litigsubjects() {
+        return "litigsubjects";
     }
 
     @RequestMapping("/instances")

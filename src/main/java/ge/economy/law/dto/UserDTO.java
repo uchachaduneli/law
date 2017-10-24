@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-;
-
 public class UserDTO {
 
     private Integer userId;
@@ -22,6 +20,10 @@ public class UserDTO {
     private Integer statusId;
     @JsonSerialize(using = JsonDateSerializeSupport.class)
     private Date insertDate;
+
+
+    public final static Integer USER_STATUS_ACTIVE = 1;
+    public final static Integer USER_STATUS_INACTIVE = 2;
 
 
     public static UserDTO translate(Record record) {
