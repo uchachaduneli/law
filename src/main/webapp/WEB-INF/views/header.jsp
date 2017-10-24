@@ -20,9 +20,11 @@
         $.widget.bridge('uibutton', $.ui.button);
     </script>
     <script src="resources/js/bootstrap.js"></script>
+    <script type="text/javascript" src="resources/js/jquery.bootstrap-growl.min.js"></script>
     <script src="resources/js/adminlte.js"></script>
     <script src="resources/js/angular.js"></script>
     <script src="resources/js/global_util.js"></script>
+    <script src="resources/js/growlMessages.js"></script>
     <script>
         $(document).ready(function () {
             var url = window.location;
