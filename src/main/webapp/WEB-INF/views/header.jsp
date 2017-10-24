@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="resources/css/dataTables.bootstrap.css">
     <link rel="stylesheet" href="resources/css/skin-blue-light.css">
     <link rel="stylesheet" href="resources/css/global.css">
+    <link rel="stylesheet" href="resources/css/bootstrap-select.css">
     <link rel="shortcut icon" type="image/png" href="resources/imgs/favicon.png"/>
 
+    <script src="resources/js/bootstrap-select.js" type="text/javascript"></script>
     <script src="resources/js/jquery.js"></script>
     <script src="resources/js/jquery-ui.js"></script>
     <script>
