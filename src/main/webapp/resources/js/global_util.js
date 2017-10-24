@@ -42,3 +42,7 @@ function ajaxCallNotJsonContentType(http, url, data, sucessCallback, errorCallba
         }
     });
 }
+
+function closeModal(modalId) {
+    $(modalId).modal('hide');
+}
