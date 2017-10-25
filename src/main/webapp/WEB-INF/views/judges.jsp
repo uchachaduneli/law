@@ -121,7 +121,7 @@
                     <tr>
                         <th>ID</th>
                         <th>სახელი</th>
-                        <th class="col-md-2 text-center">Action</th>
+                        <th class="col-md-3 text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>

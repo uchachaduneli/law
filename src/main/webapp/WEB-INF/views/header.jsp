@@ -15,14 +15,14 @@
     <link rel="stylesheet" href="resources/css/bootstrap-select.css">
     <link rel="shortcut icon" type="image/png" href="resources/imgs/favicon.png"/>
 
-    <script src="resources/js/bootstrap-select.js" type="text/javascript"></script>
     <script src="resources/js/jquery.js"></script>
     <script src="resources/js/jquery-ui.js"></script>
+    <script src="resources/js/bootstrap-select.js"></script>
     <script>
         $.widget.bridge('uibutton', $.ui.button);
     </script>
     <script src="resources/js/bootstrap.js"></script>
-    <script type="text/javascript" src="resources/js/jquery.bootstrap-growl.min.js"></script>
+    <script src="resources/js/jquery.bootstrap-growl.min.js"></script>
     <script src="resources/js/adminlte.js"></script>
     <script src="resources/js/angular.js"></script>
     <script src="resources/js/global_util.js"></script>
@@ -48,6 +48,7 @@
             } else if (url.pathname.indexOf("users") > -1) {
                 $('#selected_item').text("მომხმარებლები");
             }
+
         });
         //        var myapp = angular.module('app', []);
     </script>
