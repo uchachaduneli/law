@@ -3,7 +3,6 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd
@@ -50,37 +49,7 @@
             <value type="org.jooq.SQLDialect">POSTGRES</value>
         </property>
         <property name="connectionProvider" ref="connectionProvider"/>
-        <!--<property name="transactionProvider" ref="transactionProvider"/>-->
-        <!--<property name="executeListenerProvider">-->
-        <!--<array>-->
-        <!--<bean class="org.jooq.impl.DefaultExecuteListenerProvider">-->
-        <!--&lt;!&ndash;<constructor-arg index="0" ref="exceptionTranslator"/>&ndash;&gt;-->
-        <!--</bean>-->
-        <!--</array>-->
-        <!--</property>-->
     </bean>
-
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-          p:dataSource-ref="dtSource" p:persistenceUnitName="restaurant">
-        <property name="packagesToScan" value="ge.economy.law.model"/>
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
-        </property>
-        <property name="jpaProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.format_sql">true</prop>
-                <prop key="hibernate.connection.useUnicode">true</prop>
-            </props>
-        </property>
-    </bean>
-
-    <bean id="platformTransactionManager" name="platformTransactionManager"
-          class="org.springframework.orm.jpa.JpaTransactionManager"
-          p:entityManagerFactory-ref="entityManagerFactory"
-          p:dataSource-ref="dtSource"
-          p:persistenceUnitName="restaurant"/>
 
     <mvc:interceptors>
         <mvc:interceptor>
