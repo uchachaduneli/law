@@ -9,6 +9,27 @@
 <%@include file="header.jsp" %>
 
 <script>
+
+    $(document).ready(function () {
+
+        $('input[name="startdate"]').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            language: 'ka'
+        }).on('changeDate', function (ev) {
+//            $("#monthSeterInputId").val($("#srch_datepicker").val());
+        });
+
+        $('input[name="enddate"]').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            language: 'ka'
+        }).on('changeDate', function (ev) {
+//            $("#monthSeterInputId").val($("#srch_datepicker").val());
+        });
+
+    });
+
     var app = angular.module("app", []);
     app.controller("angController", function ($scope, $http, $filter) {
         $scope.start = 0;
@@ -23,6 +44,36 @@
         }
 
         $scope.loadMainData();
+
+        function getlitigationsubjects(res) {
+            $scope.litigationsubjects = res.data;
+        }
+
+        ajaxCall($http, "litigationsubjects/get-litigationsubjects", null, getlitigationsubjects);
+
+        function getjudges(res) {
+            $scope.judges = res.data;
+        }
+
+        ajaxCall($http, "judges/get-judges", null, getjudges);
+
+        function getcourtInstances(res) {
+            $scope.courtInstances = res.data;
+        }
+
+        ajaxCall($http, "courtInstances/get-courtinstances", null, getcourtInstances);
+
+        function getendresults(res) {
+            $scope.endresults = res.data;
+        }
+
+        ajaxCall($http, "endresults/get-endresults", null, getendresults);
+
+        function getcourts(res) {
+            $scope.courts = res.data;
+        }
+
+        ajaxCall($http, "courts/get-courts", null, getcourts);
 
         $scope.remove = function (id) {
             if (confirm("დარწმუნებული ხართ რომ გსურთ წაშლა?")) {
@@ -41,12 +92,21 @@
 
         $scope.showDetails = function (id) {
             if (id != undefined) {
+
+                var selected = $filter('filter')($scope.list, {caseId: id}, true);
+                $scope.slcted = selected[0];
+
                 function rsFnc(res) {
                     $scope.slctedCaseInstances = res.data;
                 }
 
                 ajaxCall($http, "cases/get-instance-history?id=" + id, null, rsFnc);
             }
+        };
+
+        $scope.handleDoubleClick = function (id) {
+            $scope.showDetails(id);
+            $('#detailModal').modal('show');
         };
 
         $scope.edit = function (id) {
@@ -149,7 +209,7 @@
                         </tr>
 
                         <tr ng-show="slctedCaseInstances.length > 0">
-                            <th class="text-right">კატეგორია(ები):</th>
+                            <th class="text-right">სასამართლო ინსტანცია(ები):</th>
                             <td>
                                 <ul>
                                     <li ng-repeat="v in slctedCaseInstances">{{v.id}}</li>
@@ -179,10 +239,56 @@
                 <div class="row">
                     <form class="form-horizontal" name="myForm">
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">საქმის დამთავრების შედეგი</label>
+                            <label class="control-label col-sm-3">დასახელება</label>
                             <div class="col-sm-9">
-                                <textarea rows="5" cols="10" ng-model="request.name"
-                                          class="form-control input-sm"></textarea>
+                                <input type="text" ng-model="request.name"
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">საქმის #</label>
+                            <div class="col-sm-9">
+                                <input type="text" ng-model="request.number"
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">მოსამართლე</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="request.judgeId">
+                                    <option ng-repeat="v in judges" value="{{v.judgeId}}">{{v.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">თანაშემწის ტელეფონი</label>
+                            <div class="col-sm-9">
+                                <input type="text" ng-model="request.judgeAssistantPhone"
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">საქმის დაწყების თარიღი</label>
+                            <div class="col-sm-9">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" name="startdate" ng-model="caseStartDate"
+                                           class="form-control pull-right">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">საქმის დასრულების თარიღი</label>
+                            <div class="col-sm-9">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" name="enddate" ng-model="caseEndDate"
+                                           class="form-control pull-right">
+                                </div>
                             </div>
                         </div>
                         <div class="form-group col-sm-10"></div>
@@ -239,8 +345,8 @@
                         <th class="col-md-2 text-center">Action</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr ng-repeat="r in list">
+                    <tbody title="დეტალური ინფორმაციისთვის დაკლიკეთ ორჯერ">
+                    <tr ng-repeat="r in list" ng-dblclick="handleDoubleClick(r.caseId)">
                         <td>{{r.caseId}}</td>
                         <td>{{r.name}}</td>
                         <td>{{r.number}}</td>
@@ -252,7 +358,7 @@
                         <td>{{r.statusName}}</td>
                         <td class="text-center">
                             <a ng-click="showDetails(r.caseId)" data-toggle="modal" title="დეტალურად"
-                               data-target="#detailModal" class="btn btn-lg">
+                               data-target="#detailModal" class="btn btn-xs">
                                 <i class="fa fa-sticky-note-o"></i>&nbsp; დეტალურად
                             </a>&nbsp;&nbsp;
                             <a ng-click="edit(r.caseId)" data-toggle="modal" data-target="#editModal"
