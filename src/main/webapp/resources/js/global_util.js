@@ -46,3 +46,11 @@ function ajaxCallNotJsonContentType(http, url, data, sucessCallback, errorCallba
 function closeModal(modalId) {
     $('#' + modalId).modal('hide');
 }
+
+function reverseDateString(date) {
+    if (date.length > 0) {
+        var arraydates = date.split("/");
+        var newdate = arraydates[1] + "/" + arraydates[0] + "/" + arraydates[2];
+        return newdate;
+    }
+}
