@@ -35,7 +35,7 @@ public class Tables {
 	/**
      * The table public.court_instance
      */
-	public static final CourtInstance COURT_INSTANCE = ge.economy.law.model.tables.CourtInstance.COURT_INSTANCE;
+    public static final CourtInstance COURT_INSTANCE = ge.economy.law.model.tables.CourtInstance.COURT_INSTANCE;
 
     /**
      * საქმის სასამართლო ინსტანციების ისტორია

@@ -34,21 +34,21 @@ public class CourtInstanceRecord extends UpdatableRecordImpl<CourtInstanceRecord
      */
     public void setInstanceId(Integer value) {
         setValue(0, value);
-	}
+    }
 
 	/**
      * Getter for <code>public.court_instance.instance_id</code>.
      */
     public Integer getInstanceId() {
         return (Integer) getValue(0);
-	}
+    }
 
 	/**
      * Setter for <code>public.court_instance.name</code>.
      */
     public void setName(String value) {
         setValue(1, value);
-	}
+    }
 
 	/**
      * Getter for <code>public.court_instance.name</code>.
@@ -128,7 +128,7 @@ public class CourtInstanceRecord extends UpdatableRecordImpl<CourtInstanceRecord
 	public CourtInstanceRecord value1(Integer value) {
         setInstanceId(value);
         return this;
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -137,7 +137,7 @@ public class CourtInstanceRecord extends UpdatableRecordImpl<CourtInstanceRecord
     public CourtInstanceRecord value2(String value) {
         setName(value);
         return this;
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -145,7 +145,7 @@ public class CourtInstanceRecord extends UpdatableRecordImpl<CourtInstanceRecord
 	@Override
     public CourtInstanceRecord values(Integer value1, String value2) {
         value1(value1);
-		value2(value2);
+        value2(value2);
 		return this;
 	}
 
