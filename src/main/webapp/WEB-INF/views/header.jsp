@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="resources/css/skin-blue-light.css">
     <link rel="stylesheet" href="resources/css/global.css">
     <link rel="stylesheet" href="resources/css/bootstrap-select.css">
+    <link rel="stylesheet" href="resources/css/bootstrap-datepicker.css">
     <link rel="shortcut icon" type="image/png" href="resources/imgs/favicon.png"/>
 
     <script src="resources/js/jquery.js"></script>
@@ -22,6 +23,8 @@
         $.widget.bridge('uibutton', $.ui.button);
     </script>
     <script src="resources/js/bootstrap.js"></script>
+    <script src="resources/js/bootstrap-datepicker.js"></script>
+    <script src="resources/js/bootstrap-datepicker.ka.js"></script>
     <script src="resources/js/jquery.bootstrap-growl.min.js"></script>
     <script src="resources/js/adminlte.js"></script>
     <script src="resources/js/angular.js"></script>
@@ -29,6 +32,7 @@
     <script src="resources/js/growlMessages.js"></script>
     <script>
         $(document).ready(function () {
+            $(".datepicker").datepicker({language: 'ka'});
             var url = window.location;
             $('.menuItem').filter(function () {
                 return this.href.indexOf(url.pathname) > -1;
