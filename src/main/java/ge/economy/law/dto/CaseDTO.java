@@ -14,18 +14,23 @@ public class CaseDTO {
     private String name;
     private String number;
     private Integer judgeId;
+    private String judgeName;
     private String judgeAssistantPhone;
     @JsonSerialize(using = JsonDateSerializeSupport.class)
     private Date caseStartDate;
     private Integer litigationSubjectId;
+    private String litigationSubjectName;
     private String litigationDescription;
     private Integer endResultId;
+    private String endResultName;
     @JsonSerialize(using = JsonDateSerializeSupport.class)
     private Date caseEndDate;
     private String note;
     private String addUser;
     private Integer courtId;
+    private String courtName;
     private Integer statusId;
+    private String statusName;
 
     public static CaseDTO translate(Record record) {
         CaseDTO dto = new CaseDTO();
@@ -33,16 +38,31 @@ public class CaseDTO {
         dto.setName(record.getValue(Tables.CASE.NAME));
         dto.setNumber(record.getValue(Tables.CASE.NUMBER));
         dto.setJudgeId(record.getValue(Tables.CASE.JUDGE_ID));
+        if (dto.getJudgeId() != null && record.field(Tables.JUDGE.NAME) != null) {
+            dto.setJudgeName(record.getValue(Tables.JUDGE.NAME));
+        }
         dto.setJudgeAssistantPhone(record.getValue(Tables.CASE.JUDGE_ASSISTANT_PHONE));
         dto.setCaseStartDate(record.getValue(Tables.CASE.CASE_START_DATE));
         dto.setLitigationSubjectId(record.getValue(Tables.CASE.LITIGATION_SUBJECT_ID));
+        if (dto.getLitigationSubjectId() != null && record.field(Tables.LITIGATION_SUBJECT.NAME) != null) {
+            dto.setLitigationSubjectName(record.getValue(Tables.LITIGATION_SUBJECT.NAME));
+        }
         dto.setLitigationDescription(record.getValue(Tables.CASE.LITIGATION_DESCRIPTION));
         dto.setEndResultId(record.getValue(Tables.CASE.END_RESULT_ID));
+        if (dto.getEndResultId() != null && record.field(Tables.END_RESULT.NAME) != null) {
+            dto.setEndResultName(record.getValue(Tables.END_RESULT.NAME));
+        }
         dto.setCaseEndDate(record.getValue(Tables.CASE.CASE_END_DATE));
         dto.setNote(record.getValue(Tables.CASE.NOTE));
         dto.setAddUser(record.getValue(Tables.CASE.ADD_USER));
         dto.setCourtId(record.getValue(Tables.CASE.COURT_ID));
+        if (dto.getCourtId() != null && record.field(Tables.COURT.NAME) != null) {
+            dto.setCourtName(record.getValue(Tables.COURT.NAME));
+        }
         dto.setStatusId(record.getValue(Tables.CASE.STATUS_ID));
+        if (dto.getStatusId() != null && record.field(Tables.STATUS.NAME) != null) {
+            dto.setStatusName(record.getValue(Tables.STATUS.NAME));
+        }
         return dto;
     }
 
@@ -53,6 +73,46 @@ public class CaseDTO {
             list.add(CaseDTO.translate(record));
         }
         return list;
+    }
+
+    public String getJudgeName() {
+        return judgeName;
+    }
+
+    public void setJudgeName(String judgeName) {
+        this.judgeName = judgeName;
+    }
+
+    public String getLitigationSubjectName() {
+        return litigationSubjectName;
+    }
+
+    public void setLitigationSubjectName(String litigationSubjectName) {
+        this.litigationSubjectName = litigationSubjectName;
+    }
+
+    public String getEndResultName() {
+        return endResultName;
+    }
+
+    public void setEndResultName(String endResultName) {
+        this.endResultName = endResultName;
+    }
+
+    public String getCourtName() {
+        return courtName;
+    }
+
+    public void setCourtName(String courtName) {
+        this.courtName = courtName;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
     }
 
     public Integer getCaseId() {
