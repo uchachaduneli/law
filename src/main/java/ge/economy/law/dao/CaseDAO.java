@@ -49,6 +49,13 @@ public class CaseDAO extends AbstractDAO {
                 .fetch();
     }
 
+    public List<Record> getCaseStatuses() {
+        return dslContext.
+                select().
+                from(Tables.STATUS).
+                fetch();
+    }
+
     public void deleteCase(int itemId) {
         dslContext.deleteFrom(Tables.CASE).where(Tables.CASE.CASE_ID.eq(itemId)).execute();
     }

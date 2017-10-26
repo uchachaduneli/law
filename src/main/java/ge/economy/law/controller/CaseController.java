@@ -1,12 +1,17 @@
 package ge.economy.law.controller;
 
 import ge.economy.law.misc.Response;
+import ge.economy.law.model.tables.User;
+import ge.economy.law.request.AddCaseRequest;
 import ge.economy.law.service.CaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -26,21 +31,23 @@ public class CaseController {
     }
 
     @ResponseBody
+    @RequestMapping({"/get-status"})
+    public Response getStatuses() {
+        return Response.withSuccess(caseService.getStatus());
+    }
+
+    @ResponseBody
     @RequestMapping({"/get-instance-history"})
     public Response getInitiate(@RequestParam int id) {
         return Response.withSuccess(caseService.getInstanceHistory(id));
     }
 
-//    @ResponseBody
-//    @RequestMapping({"/save-case"})
-//    public Response saveIssue(@RequestBody AddInitiateRequest request, HttpServletRequest servletRequest) {
-//        User u = (User) servletRequest.getSession().getAttribute(AuthInterceptor.CURRENT_USER);
-//        if (u != null) {
-//            UserDTO dto = (UserDTO) u.getUserData();
-//            request.setUserId(dto.getId());
-//        }
-//        return Response.withData(initiateService.saveIssue(request));
-//    }
+    @ResponseBody
+    @RequestMapping({"/save-case"})
+    public Response saveIssue(@RequestBody AddCaseRequest request, HttpServletRequest servletRequest) {
+        request.setAddUser((String) servletRequest.getSession().getAttribute("user_desc"));
+        return Response.withSuccess(caseService.save(request));
+    }
 
     @RequestMapping({"/delete-case"})
     @ResponseBody

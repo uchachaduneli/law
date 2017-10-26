@@ -7,13 +7,20 @@ package ge.economy.law.model.tables;
 import ge.economy.law.model.Keys;
 import ge.economy.law.model.Public;
 import ge.economy.law.model.tables.records.CaseRecord;
-import org.jooq.*;
-import org.jooq.impl.TableImpl;
 
-import javax.annotation.Generated;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.annotation.Generated;
+
+import org.jooq.Field;
+import org.jooq.ForeignKey;
+import org.jooq.Identity;
+import org.jooq.Table;
+import org.jooq.TableField;
+import org.jooq.UniqueKey;
+import org.jooq.impl.TableImpl;
 
 
 /**
@@ -29,7 +36,7 @@ import java.util.List;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Case extends TableImpl<CaseRecord> {
 
-	private static final long serialVersionUID = -1034259469;
+	private static final long serialVersionUID = -1183616585;
 
 	/**
 	 * The reference instance of <code>public.case</code>
@@ -113,6 +120,11 @@ public class Case extends TableImpl<CaseRecord> {
 	 * The column <code>public.case.status_id</code>.
 	 */
 	public final TableField<CaseRecord, Integer> STATUS_ID = createField("status_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
+
+	/**
+	 * The column <code>public.case.court_instance_id</code>.
+	 */
+	public final TableField<CaseRecord, Integer> COURT_INSTANCE_ID = createField("court_instance_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>public.case</code> table reference

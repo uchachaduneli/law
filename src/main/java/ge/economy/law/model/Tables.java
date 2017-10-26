@@ -4,7 +4,17 @@
 package ge.economy.law.model;
 
 
-import ge.economy.law.model.tables.*;
+import ge.economy.law.model.tables.Case;
+import ge.economy.law.model.tables.Court;
+import ge.economy.law.model.tables.CourtInstance;
+import ge.economy.law.model.tables.CourtInstanceHistory;
+import ge.economy.law.model.tables.EndResult;
+import ge.economy.law.model.tables.Judge;
+import ge.economy.law.model.tables.LitigationSubject;
+import ge.economy.law.model.tables.Status;
+import ge.economy.law.model.tables.User;
+import ge.economy.law.model.tables.UserStatus;
+import ge.economy.law.model.tables.UserType;
 
 import javax.annotation.Generated;
 
@@ -33,14 +43,14 @@ public class Tables {
 	public static final Court COURT = ge.economy.law.model.tables.Court.COURT;
 
 	/**
-     * The table public.court_instance
-     */
-    public static final CourtInstance COURT_INSTANCE = ge.economy.law.model.tables.CourtInstance.COURT_INSTANCE;
+	 * The table public.court_instance
+	 */
+	public static final CourtInstance COURT_INSTANCE = ge.economy.law.model.tables.CourtInstance.COURT_INSTANCE;
 
-    /**
-     * საქმის სასამართლო ინსტანციების ისტორია
-     */
-    public static final CourtInstanceHistory COURT_INSTANCE_HISTORY = ge.economy.law.model.tables.CourtInstanceHistory.COURT_INSTANCE_HISTORY;
+	/**
+	 * საქმის სასამართლო ინსტანციების ისტორია
+	 */
+	public static final CourtInstanceHistory COURT_INSTANCE_HISTORY = ge.economy.law.model.tables.CourtInstanceHistory.COURT_INSTANCE_HISTORY;
 
 	/**
 	 * საქმის დამთავრების შედეგი

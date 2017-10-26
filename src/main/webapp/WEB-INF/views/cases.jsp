@@ -75,6 +75,12 @@
 
         ajaxCall($http, "courts/get-courts", null, getcourts);
 
+        function getstatuses(res) {
+            $scope.statuses = res.data;
+        }
+
+        ajaxCall($http, "cases/get-status", null, getstatuses);
+
         $scope.remove = function (id) {
             if (confirm("დარწმუნებული ხართ რომ გსურთ წაშლა?")) {
                 if (id != undefined) {
@@ -126,13 +132,12 @@
                     successMsg('ოპერაცია დასრულდა წარმატებით');
                     $scope.loadMainData();
                     closeModal('editModal');
+                } else {
+                    errorMsg('ოპერაცია არ სრულდება');
                 }
             }
 
-            ajaxCall($http, "cases/save-case", angular.toJson({
-                id: $scope.request.caseId,
-                name: $scope.request.name
-            }), resFunc);
+            ajaxCall($http, "cases/save-case", angular.toJson($scope.request), resFunc);
         };
 
         $scope.handlePage = function (h) {
@@ -194,6 +199,10 @@
                         <tr>
                             <th class="text-right">დავის საგანი</th>
                             <td>{{slcted.litigationSubjectName}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">დავის შინაარსი</th>
+                            <td>{{slcted.litigationDescription}}</td>
                         </tr>
                         <tr>
                             <th class="text-right">დამთავრების შედეგი</th>
@@ -289,6 +298,63 @@
                                     <input type="text" name="enddate" ng-model="caseEndDate"
                                            class="form-control pull-right">
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">დავის საგანი</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="request.litigationSubjectId">
+                                    <option ng-repeat="v in litigationsubjects" value="{{v.litigationSubjectId}}">
+                                        {{v.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">დავის შინაარსი</label>
+                            <div class="col-sm-9">
+                                <textarea rows="5" cols="10" ng-model="request.litigationDescription"
+                                          class="form-control input-sm"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">სასამართლო ინსტანცია</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="request.courtInstanceId">
+                                    <option ng-repeat="v in courtInstances" value="{{v.courtInstanceId}}">{{v.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">საქმის დამთავრების შედეგი</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="request.endResultId">
+                                    <option ng-repeat="v in endresults" value="{{v.endResultId}}">{{v.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">სასამართლო</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="request.endResultId">
+                                    <option ng-repeat="v in courts" value="{{v.courtId}}">{{v.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">სტატუსი</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="request.statusId">
+                                    <option ng-repeat="v in statuses" value="{{v.statusId}}">{{v.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">შენიშვნა</label>
+                            <div class="col-sm-9">
+                                <textarea rows="5" cols="10" ng-model="request.note"
+                                          class="form-control input-sm"></textarea>
                             </div>
                         </div>
                         <div class="form-group col-sm-10"></div>

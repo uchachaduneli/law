@@ -4,15 +4,27 @@
 package ge.economy.law.model;
 
 
-import ge.economy.law.model.tables.*;
-import org.jooq.Sequence;
-import org.jooq.Table;
-import org.jooq.impl.SchemaImpl;
+import ge.economy.law.model.tables.Case;
+import ge.economy.law.model.tables.Court;
+import ge.economy.law.model.tables.CourtInstance;
+import ge.economy.law.model.tables.CourtInstanceHistory;
+import ge.economy.law.model.tables.EndResult;
+import ge.economy.law.model.tables.Judge;
+import ge.economy.law.model.tables.LitigationSubject;
+import ge.economy.law.model.tables.Status;
+import ge.economy.law.model.tables.User;
+import ge.economy.law.model.tables.UserStatus;
+import ge.economy.law.model.tables.UserType;
 
-import javax.annotation.Generated;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.annotation.Generated;
+
+import org.jooq.Sequence;
+import org.jooq.Table;
+import org.jooq.impl.SchemaImpl;
 
 
 /**
@@ -28,7 +40,7 @@ import java.util.List;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = -1608708519;
+	private static final long serialVersionUID = -1608708519;
 
 	/**
 	 * The reference instance of <code>public</code>
@@ -54,9 +66,9 @@ public class Public extends SchemaImpl {
 			Sequences.CASE_CASE_ID_SEQ,
 			Sequences.COURT_COURT_ID_SEQ,
 			Sequences.COURT_INSTANCE_COURT_INSTANCE_ID_SEQ,
-                Sequences.COURT_INSTANCE_INSTANCE_ID_SEQ,
-                Sequences.END_RESULT_END_RESULT_ID_SEQ,
-                Sequences.JUDGE_JUDGE_ID_SEQ,
+			Sequences.COURT_INSTANCE_INSTANCE_ID_SEQ,
+			Sequences.END_RESULT_END_RESULT_ID_SEQ,
+			Sequences.JUDGE_JUDGE_ID_SEQ,
 			Sequences.LITIGATION_SUBJECT_LITIGATION_SUBJECT_SEQ,
 			Sequences.STATUS_STATUS_ID_SEQ,
 			Sequences.USER_STATUS_STATUS_ID_SEQ,
@@ -76,9 +88,9 @@ public class Public extends SchemaImpl {
 			Case.CASE,
 			Court.COURT,
 			CourtInstance.COURT_INSTANCE,
-                CourtInstanceHistory.COURT_INSTANCE_HISTORY,
-                EndResult.END_RESULT,
-                Judge.JUDGE,
+			CourtInstanceHistory.COURT_INSTANCE_HISTORY,
+			EndResult.END_RESULT,
+			Judge.JUDGE,
 			LitigationSubject.LITIGATION_SUBJECT,
 			Status.STATUS,
 			User.USER,

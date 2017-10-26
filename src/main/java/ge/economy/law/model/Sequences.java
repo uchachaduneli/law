@@ -4,10 +4,10 @@
 package ge.economy.law.model;
 
 
+import javax.annotation.Generated;
+
 import org.jooq.Sequence;
 import org.jooq.impl.SequenceImpl;
-
-import javax.annotation.Generated;
 
 
 /**
@@ -38,10 +38,10 @@ public class Sequences {
 	 */
 	public static final Sequence<Integer> COURT_INSTANCE_COURT_INSTANCE_ID_SEQ = new SequenceImpl<Integer>("court_instance_court_instance_id_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.INTEGER.nullable(false));
 
-    /**
-     * The sequence <code>public.court_instance_instance_id_seq</code>
-     */
-    public static final Sequence<Integer> COURT_INSTANCE_INSTANCE_ID_SEQ = new SequenceImpl<Integer>("court_instance_instance_id_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.INTEGER.nullable(false));
+	/**
+	 * The sequence <code>public.court_instance_instance_id_seq</code>
+	 */
+	public static final Sequence<Integer> COURT_INSTANCE_INSTANCE_ID_SEQ = new SequenceImpl<Integer>("court_instance_instance_id_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.INTEGER.nullable(false));
 
 	/**
 	 * The sequence <code>public.end_result_end_result_id_seq</code>

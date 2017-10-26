@@ -7,12 +7,18 @@ package ge.economy.law.model.tables;
 import ge.economy.law.model.Keys;
 import ge.economy.law.model.Public;
 import ge.economy.law.model.tables.records.CourtInstanceRecord;
-import org.jooq.*;
-import org.jooq.impl.TableImpl;
 
-import javax.annotation.Generated;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.annotation.Generated;
+
+import org.jooq.Field;
+import org.jooq.Identity;
+import org.jooq.Table;
+import org.jooq.TableField;
+import org.jooq.UniqueKey;
+import org.jooq.impl.TableImpl;
 
 
 /**
@@ -28,7 +34,7 @@ import java.util.List;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CourtInstance extends TableImpl<CourtInstanceRecord> {
 
-    private static final long serialVersionUID = -308199769;
+	private static final long serialVersionUID = -308199769;
 
 	/**
 	 * The reference instance of <code>public.court_instance</code>
@@ -44,14 +50,14 @@ public class CourtInstance extends TableImpl<CourtInstanceRecord> {
 	}
 
 	/**
-     * The column <code>public.court_instance.instance_id</code>.
-     */
-    public final TableField<CourtInstanceRecord, Integer> INSTANCE_ID = createField("instance_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
+	 * The column <code>public.court_instance.instance_id</code>.
+	 */
+	public final TableField<CourtInstanceRecord, Integer> INSTANCE_ID = createField("instance_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
-     * The column <code>public.court_instance.name</code>.
-     */
-    public final TableField<CourtInstanceRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR.length(500).nullable(false), this, "");
+	 * The column <code>public.court_instance.name</code>.
+	 */
+	public final TableField<CourtInstanceRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR.length(500).nullable(false), this, "");
 
 	/**
 	 * Create a <code>public.court_instance</code> table reference
@@ -72,8 +78,8 @@ public class CourtInstance extends TableImpl<CourtInstanceRecord> {
 	}
 
 	private CourtInstance(String alias, Table<CourtInstanceRecord> aliased, Field<?>[] parameters) {
-        super(alias, Public.PUBLIC, aliased, parameters, "");
-    }
+		super(alias, Public.PUBLIC, aliased, parameters, "");
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -88,16 +94,16 @@ public class CourtInstance extends TableImpl<CourtInstanceRecord> {
 	 */
 	@Override
 	public UniqueKey<CourtInstanceRecord> getPrimaryKey() {
-        return Keys.COURT_INSTANCE_PKEY1;
-    }
+		return Keys.COURT_INSTANCE_PKEY1;
+	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public List<UniqueKey<CourtInstanceRecord>> getKeys() {
-        return Arrays.<UniqueKey<CourtInstanceRecord>>asList(Keys.COURT_INSTANCE_PKEY1);
-    }
+		return Arrays.<UniqueKey<CourtInstanceRecord>>asList(Keys.COURT_INSTANCE_PKEY1);
+	}
 
 	/**
 	 * {@inheritDoc}
