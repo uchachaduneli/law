@@ -24,6 +24,15 @@ public class AddCaseRequest {
     private Integer courtId;
     private Integer statusId;
     private Integer courtInstanceId;
+    private String courtInstanceNote;
+
+    public String getCourtInstanceNote() {
+        return courtInstanceNote;
+    }
+
+    public void setCourtInstanceNote(String courtInstanceNote) {
+        this.courtInstanceNote = courtInstanceNote;
+    }
 
     public Integer getCaseId() {
         return caseId;
