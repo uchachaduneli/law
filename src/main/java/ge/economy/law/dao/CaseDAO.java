@@ -1,6 +1,7 @@
 package ge.economy.law.dao;
 
 import ge.economy.law.model.Tables;
+import ge.economy.law.model.tables.records.CaseRecord;
 import org.jooq.Record;
 import org.jooq.SelectOnConditionStep;
 import org.springframework.stereotype.Repository;
@@ -58,6 +59,10 @@ public class CaseDAO extends AbstractDAO {
 
     public void deleteCase(int itemId) {
         dslContext.deleteFrom(Tables.CASE).where(Tables.CASE.CASE_ID.eq(itemId)).execute();
+    }
+
+    public CaseRecord getCaseObjectById(int id) {
+        return dslContext.fetchOne(Tables.CASE, Tables.CASE.CASE_ID.eq(id));
     }
 
 }

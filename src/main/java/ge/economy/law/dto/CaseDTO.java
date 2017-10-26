@@ -33,6 +33,7 @@ public class CaseDTO {
     private String statusName;
     private Integer courtInstanceId;
     private String courtInstanceName;
+    private String courtInstanceNote;
 
 
     public static CaseDTO translate(Record record) {
@@ -66,7 +67,7 @@ public class CaseDTO {
         if (dto.getStatusId() != null && record.field(Tables.STATUS.NAME) != null) {
             dto.setStatusName(record.getValue(Tables.STATUS.NAME));
         }
-        dto.setCourtInstanceId(record.getValue(Tables.COURT_INSTANCE.INSTANCE_ID));
+        dto.setCourtInstanceId(record.getValue(Tables.CASE.COURT_INSTANCE_ID));
         if (dto.getCourtInstanceId() != null && record.field(Tables.COURT_INSTANCE.NAME) != null) {
             dto.setCourtInstanceName(record.getValue(Tables.COURT_INSTANCE.NAME));
         }
@@ -80,6 +81,14 @@ public class CaseDTO {
             list.add(CaseDTO.translate(record));
         }
         return list;
+    }
+
+    public String getCourtInstanceNote() {
+        return courtInstanceNote;
+    }
+
+    public void setCourtInstanceNote(String courtInstanceNote) {
+        this.courtInstanceNote = courtInstanceNote;
     }
 
     public Integer getCourtInstanceId() {

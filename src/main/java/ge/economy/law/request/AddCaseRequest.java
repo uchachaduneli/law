@@ -11,28 +11,26 @@ public class AddCaseRequest {
     private String name;
     private String number;
     private Integer judgeId;
+    private String judgeName;
     private String judgeAssistantPhone;
     @JsonSerialize(using = JsonDateSerializeSupport.class)
     private Date caseStartDate;
     private Integer litigationSubjectId;
+    private String litigationSubjectName;
     private String litigationDescription;
     private Integer endResultId;
+    private String endResultName;
     @JsonSerialize(using = JsonDateSerializeSupport.class)
     private Date caseEndDate;
     private String note;
     private String addUser;
     private Integer courtId;
+    private String courtName;
     private Integer statusId;
+    private String statusName;
     private Integer courtInstanceId;
+    private String courtInstanceName;
     private String courtInstanceNote;
-
-    public String getCourtInstanceNote() {
-        return courtInstanceNote;
-    }
-
-    public void setCourtInstanceNote(String courtInstanceNote) {
-        this.courtInstanceNote = courtInstanceNote;
-    }
 
     public Integer getCaseId() {
         return caseId;
@@ -66,6 +64,14 @@ public class AddCaseRequest {
         this.judgeId = judgeId;
     }
 
+    public String getJudgeName() {
+        return judgeName;
+    }
+
+    public void setJudgeName(String judgeName) {
+        this.judgeName = judgeName;
+    }
+
     public String getJudgeAssistantPhone() {
         return judgeAssistantPhone;
     }
@@ -90,6 +96,14 @@ public class AddCaseRequest {
         this.litigationSubjectId = litigationSubjectId;
     }
 
+    public String getLitigationSubjectName() {
+        return litigationSubjectName;
+    }
+
+    public void setLitigationSubjectName(String litigationSubjectName) {
+        this.litigationSubjectName = litigationSubjectName;
+    }
+
     public String getLitigationDescription() {
         return litigationDescription;
     }
@@ -104,6 +118,14 @@ public class AddCaseRequest {
 
     public void setEndResultId(Integer endResultId) {
         this.endResultId = endResultId;
+    }
+
+    public String getEndResultName() {
+        return endResultName;
+    }
+
+    public void setEndResultName(String endResultName) {
+        this.endResultName = endResultName;
     }
 
     public Date getCaseEndDate() {
@@ -138,6 +160,14 @@ public class AddCaseRequest {
         this.courtId = courtId;
     }
 
+    public String getCourtName() {
+        return courtName;
+    }
+
+    public void setCourtName(String courtName) {
+        this.courtName = courtName;
+    }
+
     public Integer getStatusId() {
         return statusId;
     }
@@ -146,11 +176,35 @@ public class AddCaseRequest {
         this.statusId = statusId;
     }
 
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
     public Integer getCourtInstanceId() {
         return courtInstanceId;
     }
 
     public void setCourtInstanceId(Integer courtInstanceId) {
         this.courtInstanceId = courtInstanceId;
+    }
+
+    public String getCourtInstanceName() {
+        return courtInstanceName;
+    }
+
+    public void setCourtInstanceName(String courtInstanceName) {
+        this.courtInstanceName = courtInstanceName;
+    }
+
+    public String getCourtInstanceNote() {
+        return courtInstanceNote;
+    }
+
+    public void setCourtInstanceNote(String courtInstanceNote) {
+        this.courtInstanceNote = courtInstanceNote;
     }
 }
