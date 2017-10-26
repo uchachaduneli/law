@@ -13,15 +13,15 @@
     $(document).ready(function () {
 
         $('input[name="startdate"]').datepicker({
-            format: "yyyy-mm-dd",
+            format: "dd/mm/yyyy",
             autoclose: true,
             language: 'ka'
         }).on('changeDate', function (ev) {
-//            $("#monthSeterInputId").val($("#srch_datepicker").val());
+//            $("#caseStartDateInput").val($("#caseStartDateInput").val());
         });
 
         $('input[name="enddate"]').datepicker({
-            format: "yyyy-mm-dd",
+            format: "dd/mm/yyyy",
             autoclose: true,
             language: 'ka'
         }).on('changeDate', function (ev) {
@@ -98,11 +98,11 @@
 
         $scope.showDetails = function (id) {
             if (id != undefined) {
-
                 var selected = $filter('filter')($scope.list, {caseId: id}, true);
                 $scope.slcted = selected[0];
 
                 function rsFnc(res) {
+                    console.log(res.data);
                     $scope.slctedCaseInstances = res.data;
                 }
 
@@ -119,6 +119,7 @@
             if (id != undefined) {
                 var selected = $filter('filter')($scope.list, {caseId: id}, true);
                 $scope.request = selected[0];
+//                $scope.request.judgeId = parseInt($scope.request.judgeId);
             }
         };
 
@@ -133,10 +134,16 @@
                     $scope.loadMainData();
                     closeModal('editModal');
                 } else {
-                    errorMsg('ოპერაცია არ სრულდება');
+                    errorMsg('ოპერაცია არ სრულდება! გადაამოწმეთ ველების მართებულობა');
                 }
             }
 
+            if ($scope.request.caseStartDate != undefined && $scope.request.caseStartDate.includes('/')) {
+                $scope.request.caseStartDate = $scope.request.caseStartDate.split(/\//).reverse().join('-')
+            }
+            if ($scope.request.caseEndDate != undefined && $scope.request.caseEndDate.includes('/')) {
+                $scope.request.caseEndDate = $scope.request.caseEndDate.split(/\//).reverse().join('-')
+            }
             ajaxCall($http, "cases/save-case", angular.toJson($scope.request), resFunc);
         };
 
@@ -221,7 +228,9 @@
                             <th class="text-right">სასამართლო ინსტანცია(ები):</th>
                             <td>
                                 <ul>
-                                    <li ng-repeat="v in slctedCaseInstances">{{v.id}}</li>
+                                    <li ng-repeat="v in slctedCaseInstances">{{v.courtInstanceName}} -- {{v.insertDate}}<br/>
+                                        <small>{{v.note}}</small>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>
@@ -283,7 +292,8 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" name="startdate" ng-model="caseStartDate"
+                                    <input type="text" name="startdate" ng-model="request.caseStartDate"
+                                           id="caseStartDateInput"
                                            class="form-control pull-right">
                                 </div>
                             </div>
@@ -295,7 +305,8 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" name="enddate" ng-model="caseEndDate"
+                                    <input type="text" name="enddate" ng-model="request.caseEndDate"
+                                           id="caseEndDateInput"
                                            class="form-control pull-right">
                                 </div>
                             </div>
@@ -321,9 +332,13 @@
                             <label class="control-label col-sm-3">სასამართლო ინსტანცია</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.courtInstanceId">
-                                    <option ng-repeat="v in courtInstances" value="{{v.courtInstanceId}}">{{v.name}}
+                                    <option ng-repeat="v in courtInstances" value="{{v.instanceId}}">{{v.name}}
                                     </option>
                                 </select>
+                            </div>
+                            <div class="col-sm-9">
+                                <textarea rows="5" cols="10" placeholder="შენიშვნა" ng-model="request.courtInstanceNote"
+                                          class="form-control input-sm"></textarea>
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
@@ -337,7 +352,7 @@
                         <div class="form-group col-sm-10 ">
                             <label class="control-label col-sm-3">სასამართლო</label>
                             <div class="col-sm-9">
-                                <select class="form-control" ng-model="request.endResultId">
+                                <select class="form-control" ng-model="request.courtId">
                                     <option ng-repeat="v in courts" value="{{v.courtId}}">{{v.name}}</option>
                                 </select>
                             </div>
