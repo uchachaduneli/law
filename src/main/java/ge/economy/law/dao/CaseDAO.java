@@ -46,6 +46,8 @@ public class CaseDAO extends AbstractDAO {
         return dslContext.
                 select()
                 .from(Tables.COURT_INSTANCE_HISTORY)
+                .join(Tables.COURT_INSTANCE)
+                .on(Tables.COURT_INSTANCE_HISTORY.COURT_INSTANCE_ID.eq(Tables.COURT_INSTANCE.INSTANCE_ID))
                 .where(Tables.COURT_INSTANCE_HISTORY.CASE_ID.eq(itemId))
                 .fetch();
     }
