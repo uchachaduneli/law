@@ -34,6 +34,7 @@
     app.controller("angController", function ($scope, $http, $filter) {
         $scope.start = 0;
         $scope.limit = "15";
+        $scope.request = {};
 
         $scope.loadMainData = function () {
             function getMainData(res) {
@@ -119,12 +120,13 @@
             if (id != undefined) {
                 var selected = $filter('filter')($scope.list, {caseId: id}, true);
                 $scope.request = selected[0];
+                console.log($scope.request);
 //                $scope.request.judgeId = parseInt($scope.request.judgeId);
             }
         };
 
         $scope.init = function () {
-            $scope.request = null;
+            $scope.request = {};
         };
 
         $scope.save = function () {
@@ -274,7 +276,9 @@
                             <label class="control-label col-sm-3">მოსამართლე</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.judgeId">
-                                    <option ng-repeat="v in judges" value="{{v.judgeId}}">{{v.name}}</option>
+                                    <option ng-repeat="v in judges" ng-selected="v.judgeId === request.judgeId"
+                                            value="v.judgeId">{{v.name}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -315,7 +319,9 @@
                             <label class="control-label col-sm-3">დავის საგანი</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.litigationSubjectId">
-                                    <option ng-repeat="v in litigationsubjects" value="{{v.litigationSubjectId}}">
+                                    <option ng-repeat="v in litigationsubjects"
+                                            ng-selected="v.litigationSubjectId === request.litigationSubjectId"
+                                            value="{{v.litigationSubjectId}}">
                                         {{v.name}}
                                     </option>
                                 </select>
@@ -332,7 +338,9 @@
                             <label class="control-label col-sm-3">სასამართლო ინსტანცია</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.courtInstanceId">
-                                    <option ng-repeat="v in courtInstances" value="{{v.instanceId}}">{{v.name}}
+                                    <option ng-repeat="v in courtInstances"
+                                            ng-selected="v.instanceId === request.courtInstanceId"
+                                            value="{{v.instanceId}}">{{v.name}}
                                     </option>
                                 </select>
                             </div>
@@ -345,7 +353,10 @@
                             <label class="control-label col-sm-3">საქმის დამთავრების შედეგი</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.endResultId">
-                                    <option ng-repeat="v in endresults" value="{{v.endResultId}}">{{v.name}}</option>
+                                    <option ng-repeat="v in endresults"
+                                            ng-selected="request.endResultId === v.endResultId"
+                                            value="{{v.endResultId}}">{{v.name}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -353,7 +364,9 @@
                             <label class="control-label col-sm-3">სასამართლო</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.courtId">
-                                    <option ng-repeat="v in courts" value="{{v.courtId}}">{{v.name}}</option>
+                                    <option ng-repeat="v in courts" ng-selected="v.courtId === request.courtId"
+                                            value="{{v.courtId}}">{{v.name}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -361,7 +374,9 @@
                             <label class="control-label col-sm-3">სტატუსი</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.statusId">
-                                    <option ng-repeat="v in statuses" value="{{v.statusId}}">{{v.name}}</option>
+                                    <option ng-repeat="v in statuses" ng-selected="v.statusId === request.statusId"
+                                            value="{{v.statusId}}">{{v.name}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
