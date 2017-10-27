@@ -45,6 +45,11 @@ public class WebController {
         return "caseresults";
     }
 
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @RequestMapping("/")
     public String defaultFnc() {
         return "";
