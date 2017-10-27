@@ -84,7 +84,7 @@ public class UsersService {
         return UserDTO.translate(record);
     }
 
-    public UserDTO signIn(String username, String password) throws Exception {
+    public UserDTO login(String username, String password) throws Exception {
         Record record = userDAO.getUser(username, MD5Provider.doubleMd5(password));
         UserDTO user = null;
         if (record != null) {

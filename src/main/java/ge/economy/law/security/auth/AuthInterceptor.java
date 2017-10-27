@@ -13,32 +13,18 @@ import java.io.IOException;
 @Component
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 
-    public static final String CURRENT_USER = "currentUser";
-
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws IOException {
 
-//        String uri = request.getRequestURI();
-//        User user = (User) request.getSession().getAttribute(CURRENT_USER);
+        Integer userId = (Integer) request.getSession().getAttribute("userId");
 
-//        if (user == null && request.getHeader("X-Requested-With") == null) {
-//
-//            // getRequestURI() contains rootpath, uri also contains rootpath
-//            if (uri.startsWith(request.getContextPath())) {
-//                uri = uri.replace(request.getContextPath(), "");
-//            }
-//
-//            if (uri.length() > 0 && !uri.equals("/")) {
-//                response.sendRedirect("login?uri=" + uri);
-//            } else {
-//                response.sendRedirect("login");
-//            }
-//
-//            return false;
-//        } else if (user == null) {
-//            response.sendError(353, "Session Expired");
-//            return false;
-//        }
+        if (userId == null && request.getHeader("X-Requested-With") == null) {
+            response.sendRedirect("login");
+            return false;
+        } else if (userId == null) {
+            response.sendError(353, "სესიას გაუვიდა ვადა, გთხოვთ თავიდან გაიაროთ ავტორიზაცია");
+            return false;
+        }
         return true;
     }
 }

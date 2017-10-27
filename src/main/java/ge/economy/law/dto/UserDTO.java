@@ -21,9 +21,11 @@ public class UserDTO {
     @JsonSerialize(using = JsonDateSerializeSupport.class)
     private Date insertDate;
 
+    public final static int USER_STATUS_ACTIVE = 1;
+    public final static int USER_STATUS_INACTIVE = 2;
 
-    public final static Integer USER_STATUS_ACTIVE = 1;
-    public final static Integer USER_STATUS_INACTIVE = 2;
+    public static final int USER_ADMIN = 1;
+    public static final int USER_OPERATOR = 2;
 
 
     public static UserDTO translate(Record record) {
