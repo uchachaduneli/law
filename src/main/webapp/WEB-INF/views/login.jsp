@@ -41,11 +41,7 @@
 
             $scope.login = function () {
                 function errorLogin(res) {
-                    if (res == "" || (res.length < 500 && res.contains('/dishes'))) {
-                        window.location = 'dishes';
-                    } else {
-                        alert('არასწორი მომხმარებელი ან პაროლი');
-                    }
+                    alert('არასწორი მომხმარებელი ან პაროლი');
                 }
 
                 function success(res) {
@@ -59,7 +55,7 @@
     </script>
 
 </head>
-<body class="hold-transition login-page">
+<body ng-app="app" class="hold-transition login-page">
 <div class="login-box" data-role="none" ng-controller="loginCtrl">
     <div class="login-logo">
         <a href=""><b>LAW</b> economy</a>
