@@ -41,7 +41,7 @@
 
             $scope.login = function () {
                 function errorLogin(res) {
-                    alert('არასწორი მომხმარებელი ან პაროლი');
+                    errorMsg('ავტორიზაცია ვერ ხერხდება! გადაამოწმეთ ველების სისწორე')
                 }
 
                 function success(res) {
@@ -65,7 +65,7 @@
         <form>
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" id="username" name="username" ng-model="user.username"
-                       placeholder="ნიკი">
+                       placeholder="მომხმარებელი">
                 <span class="fa fa-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">

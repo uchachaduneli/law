@@ -59,10 +59,13 @@
                     $scope.loadMainData();
                     closeModal('editModal');
                 } else {
-                    errorMsg('მითითებული ნიკით მომხმარებელი უკვე არსებობს');
+                    errorMsg('ოპერაცია არ სრულდება გადაამოწმეთ ველების სისწორე');
                 }
             }
 
+            if ($scope.request.insertDate != undefined && $scope.request.insertDate.includes('/')) {
+                $scope.request.insertDate = $scope.request.insertDate.split(/\//).reverse().join('-')
+            }
             ajaxCall($http, "users/save-user", angular.toJson($scope.request), resFunc);
         };
 
@@ -96,7 +99,7 @@
                 <div class="row">
                     <form class="form-horizontal" name="myForm">
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">ნიკი</label>
+                            <label class="control-label col-sm-3">მომხმარებელი</label>
                             <div class="col-sm-9">
                                 <input type="text" ng-model="request.username"
                                        class="form-control input-sm">
@@ -125,7 +128,9 @@
                             <label class="control-label col-sm-3">ტიპი</label>
                             <div class="col-xs-9 btn-group">
                                 <select class="form-control" ng-model="request.typeId">
-                                    <option ng-repeat="s in userTypes" value="{{s.typeId}}">{{s.name}}</option>
+                                    <option ng-repeat="s in userTypes" ng-selected="s.typeId === request.typeId"
+                                            value="{{s.typeId}}">{{s.name}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -174,7 +179,7 @@
                         <th>ID</th>
                         <th>სახელი</th>
                         <th>გვარი</th>
-                        <th>ნიკი</th>
+                        <th>მომხმარებელი</th>
                         <th>ტიპი</th>
                         <th>სტატუსი</th>
                         <th class="col-md-1 text-center">დამატ. დრო</th>

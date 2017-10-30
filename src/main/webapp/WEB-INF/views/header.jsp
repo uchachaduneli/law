@@ -73,13 +73,14 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-user"></i>
-                            <span class="hidden-xs">User Desc</span>
+                            <span class="hidden-xs"><%= session.getAttribute("firstname") %> <%= session.getAttribute("lastname")%></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
                                 <p>
-                                    saxeli gvari
-                                    <small>Member since Nov. 2012</small>
+                                    <%= session.getAttribute("firstname") %> <%= session.getAttribute("lastname")%>
+                                    <small><%= session.getAttribute("typeName") %>
+                                    </small>
                                 </p>
                             </li>
                             <li class="user-footer">
@@ -93,7 +94,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-sign-out"></i></a>
+                        <a href="logout"><i class="fa fa-sign-out"></i></a>
                     </li>
                 </ul>
             </div>
