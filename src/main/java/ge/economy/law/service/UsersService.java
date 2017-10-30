@@ -47,7 +47,7 @@ public class UsersService {
         record.setTypeId(request.getTypeId());
         record.setStatusId(request.getStatusId());
 
-        if (request.getPassword() != null) {
+        if (request.getPassword() != null && !request.getPassword().equals(record.getPassword())) {
             record.setPassword(MD5Provider.doubleMd5(request.getPassword()));
         }
         if (newRecord) {
