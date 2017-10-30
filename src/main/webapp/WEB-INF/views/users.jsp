@@ -129,7 +129,7 @@
                             <div class="col-xs-9 btn-group">
                                 <select class="form-control" ng-model="request.typeId">
                                     <option ng-repeat="s in userTypes" ng-selected="s.typeId === request.typeId"
-                                            value="{{s.typeId}}">{{s.name}}
+                                            ng-value="s.typeId">{{s.name}}
                                     </option>
                                 </select>
                             </div>
@@ -192,7 +192,7 @@
                         <td>{{r.firstname}}</td>
                         <td>{{r.lastname}}</td>
                         <td>{{r.username}}</td>
-                        <td>{{r.typeId == 2 ? 'ოპერატორი': 'ადმინისტრატორი'}}</td>
+                        <td>{{r.typeId == 1 ? 'ოპერატორი': 'ადმინისტრატორი'}}</td>
                         <td>{{r.statusId == 1 ? 'აქტიური': 'პასიური'}}</td>
                         <td class="text-center">
                             <small>{{r.insertDate}}</small>
