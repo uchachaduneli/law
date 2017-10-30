@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 
 /**
  * @author ucha
@@ -38,8 +37,6 @@ public class AuthController {
 
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
     public String verify(@RequestParam(value = "uri", required = false) String originalUri, HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        Map<String, String[]> mp = request.getParameterMap();
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
