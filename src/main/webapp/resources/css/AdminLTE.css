@@ -1312,7 +1312,7 @@ a:focus {
 }
 
 .navbar-nav > .user-menu > .dropdown-menu > li.user-header {
-    height: 175px;
+    height: 80px;
     padding: 10px;
     text-align: center;
 }
