@@ -17,9 +17,18 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws IOException {
 
         Integer userId = (Integer) request.getSession().getAttribute("userId");
+        String uri = request.getRequestURI();
 
         if (userId == null && request.getHeader("X-Requested-With") == null) {
-            response.sendRedirect("login");
+            if (uri.startsWith(request.getContextPath())) {
+                uri = uri.replace(request.getContextPath(), "");
+            }
+
+            if (uri.length() > 0 && !uri.equals("/")) {
+                response.sendRedirect("login?redirect=" + uri);
+            } else {
+                response.sendRedirect("login");
+            }
             return false;
         } else if (userId == null) {
             response.sendError(353, "სესიას გაუვიდა ვადა, გთხოვთ თავიდან გაიაროთ ავტორიზაცია");

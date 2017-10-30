@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author ucha
@@ -56,10 +57,21 @@ public class AuthController {
                 default:
                     break;
             }
+//            response.sendRedirect("cases");
             return "redirect:cases";
         } else {
             response.sendError(400, "მომხმარებელი ან პაროლი არასწორია");
             return null;
         }
+    }
+
+    @RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})
+    public String logout(HttpSession session) {
+        session.removeAttribute("userId");
+        session.removeAttribute("firstname");
+        session.removeAttribute("lastname");
+        session.removeAttribute("typeId");
+        session.invalidate();
+        return "redirect:login";
     }
 }
