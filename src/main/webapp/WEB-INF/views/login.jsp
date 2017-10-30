@@ -48,7 +48,7 @@
                     console.log(res);
                 }
 
-                ajaxCall($http, "login?" + $scope.uri + "&username=" + $scope.user.username + "&password=" + $scope.user.password, null, reload, errorLogin);
+                ajaxCall($http, "login?" + $scope.uri + "&username=" + $scope.user.username + "&password=" + $scope.user.password, null, location.reload(), errorLogin);
             };
         });
 
