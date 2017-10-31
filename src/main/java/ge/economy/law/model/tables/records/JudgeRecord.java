@@ -101,21 +101,21 @@ public class JudgeRecord extends UpdatableRecordImpl<JudgeRecord> implements Rec
     // Record4 type implementation
     // -------------------------------------------------------------------------
 
-	/**
-	 * {@inheritDoc}
+    /**
+     * {@inheritDoc}
      */
     @Override
     public Row4<Integer, String, String, String> fieldsRow() {
         return (Row4) super.fieldsRow();
     }
 
-	/**
-	 * {@inheritDoc}
+    /**
+     * {@inheritDoc}
      */
     @Override
     public Row4<Integer, String, String, String> valuesRow() {
         return (Row4) super.valuesRow();
-    }
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -126,9 +126,9 @@ public class JudgeRecord extends UpdatableRecordImpl<JudgeRecord> implements Rec
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
+     * {@inheritDoc}
+     */
+    @Override
     public Field<String> field2() {
         return Judge.JUDGE.NAME;
     }
@@ -155,12 +155,12 @@ public class JudgeRecord extends UpdatableRecordImpl<JudgeRecord> implements Rec
 	@Override
 	public Integer value1() {
 		return getJudgeId();
-	}
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String value2() {
         return getName();
     }
@@ -179,7 +179,7 @@ public class JudgeRecord extends UpdatableRecordImpl<JudgeRecord> implements Rec
     @Override
     public String value4() {
         return getAssistantPhone();
-    }
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -195,8 +195,8 @@ public class JudgeRecord extends UpdatableRecordImpl<JudgeRecord> implements Rec
 	 */
 	@Override
 	public JudgeRecord value2(String value) {
-		setName(value);
-		return this;
+        setName(value);
+        return this;
     }
 
     /**
@@ -225,19 +225,19 @@ public class JudgeRecord extends UpdatableRecordImpl<JudgeRecord> implements Rec
         value1(value1);
         value2(value2);
         value3(value3);
-        value4(value4);
-        return this;
-    }
+		value4(value4);
+		return this;
+	}
 
 	// -------------------------------------------------------------------------
 	// Constructors
 	// -------------------------------------------------------------------------
 
 	/**
-	 * Create a detached JudgeRecord
-	 */
-	public JudgeRecord() {
-		super(Judge.JUDGE);
+     * Create a detached JudgeRecord
+     */
+    public JudgeRecord() {
+        super(Judge.JUDGE);
     }
 
     /**
@@ -248,7 +248,7 @@ public class JudgeRecord extends UpdatableRecordImpl<JudgeRecord> implements Rec
 
         setValue(0, judgeId);
         setValue(1, name);
-        setValue(2, assistant);
-        setValue(3, assistantPhone);
-    }
+		setValue(2, assistant);
+		setValue(3, assistantPhone);
+	}
 }

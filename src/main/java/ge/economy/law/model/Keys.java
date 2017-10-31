@@ -4,35 +4,14 @@
 package ge.economy.law.model;
 
 
-import ge.economy.law.model.tables.Case;
-import ge.economy.law.model.tables.Court;
-import ge.economy.law.model.tables.CourtInstance;
-import ge.economy.law.model.tables.CourtInstanceHistory;
-import ge.economy.law.model.tables.EndResult;
-import ge.economy.law.model.tables.Judge;
-import ge.economy.law.model.tables.LitigationSubject;
-import ge.economy.law.model.tables.Status;
-import ge.economy.law.model.tables.User;
-import ge.economy.law.model.tables.UserStatus;
-import ge.economy.law.model.tables.UserType;
-import ge.economy.law.model.tables.records.CaseRecord;
-import ge.economy.law.model.tables.records.CourtInstanceHistoryRecord;
-import ge.economy.law.model.tables.records.CourtInstanceRecord;
-import ge.economy.law.model.tables.records.CourtRecord;
-import ge.economy.law.model.tables.records.EndResultRecord;
-import ge.economy.law.model.tables.records.JudgeRecord;
-import ge.economy.law.model.tables.records.LitigationSubjectRecord;
-import ge.economy.law.model.tables.records.StatusRecord;
-import ge.economy.law.model.tables.records.UserRecord;
-import ge.economy.law.model.tables.records.UserStatusRecord;
-import ge.economy.law.model.tables.records.UserTypeRecord;
-
-import javax.annotation.Generated;
-
+import ge.economy.law.model.tables.*;
+import ge.economy.law.model.tables.records.*;
 import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.AbstractKeys;
+
+import javax.annotation.Generated;
 
 
 /**
@@ -56,7 +35,6 @@ public class Keys {
 	public static final Identity<CaseRecord, Integer> IDENTITY_CASE = Identities0.IDENTITY_CASE;
 	public static final Identity<CourtRecord, Integer> IDENTITY_COURT = Identities0.IDENTITY_COURT;
 	public static final Identity<CourtInstanceRecord, Integer> IDENTITY_COURT_INSTANCE = Identities0.IDENTITY_COURT_INSTANCE;
-	public static final Identity<CourtInstanceHistoryRecord, Integer> IDENTITY_COURT_INSTANCE_HISTORY = Identities0.IDENTITY_COURT_INSTANCE_HISTORY;
 	public static final Identity<EndResultRecord, Integer> IDENTITY_END_RESULT = Identities0.IDENTITY_END_RESULT;
 	public static final Identity<JudgeRecord, Integer> IDENTITY_JUDGE = Identities0.IDENTITY_JUDGE;
 	public static final Identity<LitigationSubjectRecord, Integer> IDENTITY_LITIGATION_SUBJECT = Identities0.IDENTITY_LITIGATION_SUBJECT;
@@ -72,7 +50,6 @@ public class Keys {
 	public static final UniqueKey<CaseRecord> CASE_PKEY = UniqueKeys0.CASE_PKEY;
 	public static final UniqueKey<CourtRecord> COURT_PKEY = UniqueKeys0.COURT_PKEY;
 	public static final UniqueKey<CourtInstanceRecord> COURT_INSTANCE_PKEY1 = UniqueKeys0.COURT_INSTANCE_PKEY1;
-	public static final UniqueKey<CourtInstanceHistoryRecord> COURT_INSTANCE_PKEY = UniqueKeys0.COURT_INSTANCE_PKEY;
 	public static final UniqueKey<EndResultRecord> END_RESULT_PKEY = UniqueKeys0.END_RESULT_PKEY;
 	public static final UniqueKey<JudgeRecord> JUDGE_PKEY = UniqueKeys0.JUDGE_PKEY;
 	public static final UniqueKey<LitigationSubjectRecord> LITIGATION_SUBJECT_PKEY = UniqueKeys0.LITIGATION_SUBJECT_PKEY;
@@ -101,7 +78,6 @@ public class Keys {
 		public static Identity<CaseRecord, Integer> IDENTITY_CASE = createIdentity(Case.CASE, Case.CASE.CASE_ID);
 		public static Identity<CourtRecord, Integer> IDENTITY_COURT = createIdentity(Court.COURT, Court.COURT.COURT_ID);
 		public static Identity<CourtInstanceRecord, Integer> IDENTITY_COURT_INSTANCE = createIdentity(CourtInstance.COURT_INSTANCE, CourtInstance.COURT_INSTANCE.INSTANCE_ID);
-		public static Identity<CourtInstanceHistoryRecord, Integer> IDENTITY_COURT_INSTANCE_HISTORY = createIdentity(CourtInstanceHistory.COURT_INSTANCE_HISTORY, CourtInstanceHistory.COURT_INSTANCE_HISTORY.ID);
 		public static Identity<EndResultRecord, Integer> IDENTITY_END_RESULT = createIdentity(EndResult.END_RESULT, EndResult.END_RESULT.END_RESULT_ID);
 		public static Identity<JudgeRecord, Integer> IDENTITY_JUDGE = createIdentity(Judge.JUDGE, Judge.JUDGE.JUDGE_ID);
 		public static Identity<LitigationSubjectRecord, Integer> IDENTITY_LITIGATION_SUBJECT = createIdentity(LitigationSubject.LITIGATION_SUBJECT, LitigationSubject.LITIGATION_SUBJECT.LITIGATION_SUBJECT_ID);
@@ -115,7 +91,6 @@ public class Keys {
 		public static final UniqueKey<CaseRecord> CASE_PKEY = createUniqueKey(Case.CASE, Case.CASE.CASE_ID);
 		public static final UniqueKey<CourtRecord> COURT_PKEY = createUniqueKey(Court.COURT, Court.COURT.COURT_ID);
 		public static final UniqueKey<CourtInstanceRecord> COURT_INSTANCE_PKEY1 = createUniqueKey(CourtInstance.COURT_INSTANCE, CourtInstance.COURT_INSTANCE.INSTANCE_ID);
-		public static final UniqueKey<CourtInstanceHistoryRecord> COURT_INSTANCE_PKEY = createUniqueKey(CourtInstanceHistory.COURT_INSTANCE_HISTORY, CourtInstanceHistory.COURT_INSTANCE_HISTORY.ID);
 		public static final UniqueKey<EndResultRecord> END_RESULT_PKEY = createUniqueKey(EndResult.END_RESULT, EndResult.END_RESULT.END_RESULT_ID);
 		public static final UniqueKey<JudgeRecord> JUDGE_PKEY = createUniqueKey(Judge.JUDGE, Judge.JUDGE.JUDGE_ID);
 		public static final UniqueKey<LitigationSubjectRecord> LITIGATION_SUBJECT_PKEY = createUniqueKey(LitigationSubject.LITIGATION_SUBJECT, LitigationSubject.LITIGATION_SUBJECT.LITIGATION_SUBJECT_ID);

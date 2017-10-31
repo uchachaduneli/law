@@ -296,7 +296,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Field<Date> field5() {
         return Case.CASE.CASE_START_DATE;
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -304,7 +304,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Field<Integer> field6() {
         return Case.CASE.LITIGATION_SUBJECT_ID;
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -312,7 +312,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Field<String> field7() {
         return Case.CASE.LITIGATION_DESCRIPTION;
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -320,7 +320,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Field<Integer> field8() {
         return Case.CASE.END_RESULT_ID;
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -328,7 +328,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Field<Date> field9() {
         return Case.CASE.CASE_END_DATE;
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -336,7 +336,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Field<String> field10() {
         return Case.CASE.NOTE;
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -344,7 +344,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Field<String> field11() {
         return Case.CASE.ADD_USER;
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -352,7 +352,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Field<Integer> field12() {
         return Case.CASE.COURT_ID;
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -360,7 +360,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Field<Integer> field13() {
         return Case.CASE.STATUS_ID;
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -368,7 +368,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Field<Integer> field14() {
         return Case.CASE.COURT_INSTANCE_ID;
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -408,7 +408,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Date value5() {
         return getCaseStartDate();
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -416,7 +416,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Integer value6() {
         return getLitigationSubjectId();
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -424,7 +424,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public String value7() {
         return getLitigationDescription();
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -432,7 +432,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Integer value8() {
         return getEndResultId();
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -440,7 +440,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Date value9() {
         return getCaseEndDate();
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -448,7 +448,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public String value10() {
         return getNote();
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -456,7 +456,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public String value11() {
         return getAddUser();
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -464,7 +464,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Integer value12() {
         return getCourtId();
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -472,7 +472,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Integer value13() {
         return getStatusId();
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -480,7 +480,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public Integer value14() {
         return getCourtInstanceId();
-	}
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -524,7 +524,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public CaseRecord value5(Date value) {
         setCaseStartDate(value);
-		return this;
+        return this;
 	}
 
 	/**
@@ -533,7 +533,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public CaseRecord value6(Integer value) {
         setLitigationSubjectId(value);
-		return this;
+        return this;
 	}
 
 	/**
@@ -542,7 +542,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public CaseRecord value7(String value) {
         setLitigationDescription(value);
-		return this;
+        return this;
 	}
 
 	/**
@@ -551,7 +551,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public CaseRecord value8(Integer value) {
         setEndResultId(value);
-		return this;
+        return this;
 	}
 
 	/**
@@ -560,7 +560,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public CaseRecord value9(Date value) {
         setCaseEndDate(value);
-		return this;
+        return this;
 	}
 
 	/**
@@ -569,7 +569,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public CaseRecord value10(String value) {
         setNote(value);
-		return this;
+        return this;
 	}
 
 	/**
@@ -578,7 +578,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public CaseRecord value11(String value) {
         setAddUser(value);
-		return this;
+        return this;
 	}
 
 	/**
@@ -587,7 +587,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public CaseRecord value12(Integer value) {
         setCourtId(value);
-		return this;
+        return this;
 	}
 
 	/**
@@ -596,7 +596,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public CaseRecord value13(Integer value) {
         setStatusId(value);
-		return this;
+        return this;
 	}
 
 	/**
@@ -605,7 +605,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public CaseRecord value14(Integer value) {
         setCourtInstanceId(value);
-		return this;
+        return this;
 	}
 
 	/**
@@ -614,7 +614,7 @@ public class CaseRecord extends UpdatableRecordImpl<CaseRecord> implements Recor
 	@Override
     public CaseRecord values(Integer value1, String value2, String value3, Integer value4, Date value5, Integer value6, String value7, Integer value8, Date value9, String value10, String value11, Integer value12, Integer value13, Integer value14) {
         value1(value1);
-		value2(value2);
+        value2(value2);
 		value3(value3);
 		value4(value4);
 		value5(value5);
