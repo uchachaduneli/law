@@ -222,7 +222,7 @@
                         </tr>
                         <tr>
                             <th class="text-right">თანამშრომელი</th>
-                            <td>{{slcted.addUser}}</td>
+                            <td>{{slcted.addUserName}}</td>
                         </tr>
                         <tr>
                             <th class="text-right">სტატუსი</th>
@@ -450,7 +450,7 @@
                         <td>{{r.judgeName}}</td>
                         <td>{{r.caseStartDate}}</td>
                         <td>{{r.caseEndDate}}</td>
-                        <td>{{r.addUser}}</td>
+                        <td>{{r.addUserName}}</td>
                         <td>{{r.statusName}}</td>
                         <td class="text-center">
                             <a ng-click="showDetails(r.caseId)" data-toggle="modal" title="დეტალურად"
