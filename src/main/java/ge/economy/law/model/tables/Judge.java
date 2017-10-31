@@ -7,18 +7,12 @@ package ge.economy.law.model.tables;
 import ge.economy.law.model.Keys;
 import ge.economy.law.model.Public;
 import ge.economy.law.model.tables.records.JudgeRecord;
-
-import java.util.Arrays;
-import java.util.List;
+import org.jooq.*;
+import org.jooq.impl.TableImpl;
 
 import javax.annotation.Generated;
-
-import org.jooq.Field;
-import org.jooq.Identity;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
-import org.jooq.impl.TableImpl;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -34,7 +28,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Judge extends TableImpl<JudgeRecord> {
 
-	private static final long serialVersionUID = 1262588045;
+    private static final long serialVersionUID = -1594206594;
 
 	/**
 	 * The reference instance of <code>public.judge</code>
@@ -58,6 +52,16 @@ public class Judge extends TableImpl<JudgeRecord> {
 	 * The column <code>public.judge.name</code>.
 	 */
 	public final TableField<JudgeRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
+
+    /**
+     * The column <code>public.judge.assistant</code>.
+     */
+    public final TableField<JudgeRecord, String> ASSISTANT = createField("assistant", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
+
+    /**
+     * The column <code>public.judge.assistant_phone</code>.
+     */
+    public final TableField<JudgeRecord, String> ASSISTANT_PHONE = createField("assistant_phone", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
 	/**
 	 * Create a <code>public.judge</code> table reference

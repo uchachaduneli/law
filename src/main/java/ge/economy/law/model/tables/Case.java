@@ -7,20 +7,13 @@ package ge.economy.law.model.tables;
 import ge.economy.law.model.Keys;
 import ge.economy.law.model.Public;
 import ge.economy.law.model.tables.records.CaseRecord;
+import org.jooq.*;
+import org.jooq.impl.TableImpl;
 
+import javax.annotation.Generated;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.annotation.Generated;
-
-import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Identity;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
-import org.jooq.impl.TableImpl;
 
 
 /**
@@ -36,7 +29,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Case extends TableImpl<CaseRecord> {
 
-	private static final long serialVersionUID = -1183616585;
+    private static final long serialVersionUID = 1427943955;
 
 	/**
 	 * The reference instance of <code>public.case</code>
@@ -72,11 +65,6 @@ public class Case extends TableImpl<CaseRecord> {
 	public final TableField<CaseRecord, Integer> JUDGE_ID = createField("judge_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
-	 * The column <code>public.case.judge_assistant_phone</code>.
-	 */
-	public final TableField<CaseRecord, String> JUDGE_ASSISTANT_PHONE = createField("judge_assistant_phone", org.jooq.impl.SQLDataType.VARCHAR.length(200), this, "");
-
-	/**
 	 * The column <code>public.case.case_start_date</code>.
 	 */
 	public final TableField<CaseRecord, Date> CASE_START_DATE = createField("case_start_date", org.jooq.impl.SQLDataType.DATE, this, "");
@@ -109,7 +97,7 @@ public class Case extends TableImpl<CaseRecord> {
 	/**
 	 * The column <code>public.case.add_user</code>.
 	 */
-	public final TableField<CaseRecord, String> ADD_USER = createField("add_user", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
+    public final TableField<CaseRecord, String> ADD_USER = createField("add_user", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
 	 * The column <code>public.case.court_id</code>.
