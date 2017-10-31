@@ -145,6 +145,7 @@
             if ($scope.request.caseEndDate != undefined && $scope.request.caseEndDate.includes('/')) {
                 $scope.request.caseEndDate = $scope.request.caseEndDate.split(/\//).reverse().join('-')
             }
+            console.log(angular.toJson($scope.request));
             ajaxCall($http, "cases/save-case", angular.toJson($scope.request), resFunc);
         };
 
@@ -276,7 +277,7 @@
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.judgeId">
                                     <option ng-repeat="v in judges" ng-selected="v.judgeId === request.judgeId"
-                                            value="v.judgeId">{{v.name}}
+                                            value="{{v.judgeId}}">{{v.name}}
                                     </option>
                                 </select>
                             </div>
