@@ -10,12 +10,16 @@ public class JudgeDTO {
 
     private int judgeId;
     private String name;
+    private String assistant;
+    private String assistantPhone;
 
 
     public static JudgeDTO translate(Record record) {
         JudgeDTO dto = new JudgeDTO();
         dto.setJudgeId(record.getValue(Tables.JUDGE.JUDGE_ID));
         dto.setName(record.getValue(Tables.JUDGE.NAME));
+        dto.setAssistant(record.getValue(Tables.JUDGE.ASSISTANT));
+        dto.setAssistantPhone(record.getValue(Tables.JUDGE.ASSISTANT_PHONE));
         return dto;
     }
 
@@ -26,6 +30,22 @@ public class JudgeDTO {
             list.add(JudgeDTO.translate(record));
         }
         return list;
+    }
+
+    public String getAssistant() {
+        return assistant;
+    }
+
+    public void setAssistant(String assistant) {
+        this.assistant = assistant;
+    }
+
+    public String getAssistantPhone() {
+        return assistantPhone;
+    }
+
+    public void setAssistantPhone(String assistantPhone) {
+        this.assistantPhone = assistantPhone;
     }
 
     public int getJudgeId() {
