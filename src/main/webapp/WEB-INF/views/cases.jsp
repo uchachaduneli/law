@@ -30,7 +30,6 @@
 
     });
 
-    var app = angular.module("app", []);
     app.controller("angController", function ($scope, $http, $filter) {
         $scope.start = 0;
         $scope.limit = "15";

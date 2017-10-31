@@ -9,7 +9,6 @@
 <%@include file="header.jsp" %>
 
 <script>
-    var app = angular.module("app", []);
     app.controller("angController", function ($scope, $http, $filter) {
 
         $scope.loadMainData = function () {

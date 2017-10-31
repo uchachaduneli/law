@@ -1,4 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="ge.economy.law.dto.UserDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    boolean isAdmin = ((Integer) session.getAttribute("typeId") != null && (Integer) session.getAttribute("typeId") == UserDTO.USER_ADMIN);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,13 +59,35 @@
             }
 
         });
-        //        var myapp = angular.module('app', []);
+
+        var app = angular.module("app", []);
+        app.controller("profileCtrl", function ($scope, $http, $location) {
+            var absUrl = $location.absUrl();
+            $scope.uri = "";
+            if (absUrl.split("?")[1]) {
+                $scope.uri = absUrl.split("?")[1].split("=")[1];
+            }
+
+            $scope.changePassword = function () {
+                function resFunc(res) {
+                    if (res.errorCode == 0) {
+                        successMsg('ოპერაცია დასრულდა წარმატებით');
+                        closeModal('dropdown');
+                    } else {
+                        errorMsg('ოპერაცია არ სრულდება გადაამოწმეთ ველების სისწორე');
+                    }
+                    $scope.newpass = {};
+                }
+
+                ajaxCall($http, "users/change-password?pass=" + $scope.newpass.password + "&newpass=" + $scope.newpass.newpassword, null, resFunc);
+            };
+        });
     </script>
 </head>
 <body ng-app="app" class="hold-transition skin-blue-light sidebar-mini">
 <div class="wrapper">
     <header class="main-header">
-        <a href="#" class="logo">
+        <a href="" class="logo">
             <span class="logo-lg"><b>LAW</b></span>
         </a>
         <nav class="navbar navbar-static-top">
@@ -68,7 +95,7 @@
                 <span class="sr-only">მენიუს შეკეცვა</span>
             </a>
 
-            <div class="navbar-custom-menu">
+            <div class="navbar-custom-menu" ng-controller="profileCtrl">
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -83,17 +110,31 @@
                                     </small>
                                 </p>
                             </li>
+                            <li class="user-body text-center">
+                                <div class=" form-group has-feedback">
+                                    <input type="password" name="password" placeholder="ძველი პაროლი"
+                                           ng-model="newpass.password"
+                                           class="form-control">
+                                    <span class="fa fa-key form-control-feedback"></span>
+                                </div>
+                                <div class="form-group has-feedback">
+                                    <input type="password" name="password" placeholder="ახალი პაროლი"
+                                           ng-model="newpass.newpassword"
+                                           class="form-control">
+                                    <span class="fa fa-key form-control-feedback"></span>
+                                </div>
+                            </li>
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="" ng-click="changePassword()" class="btn btn-default btn-flat">შეცვლა</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="logout" class="btn btn-default btn-flat">გამოსვლა</a>
                                 </div>
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li title="გამოსვლა">
                         <a href="logout"><i class="fa fa-sign-out"></i></a>
                     </li>
                 </ul>
@@ -146,13 +187,15 @@
                             </span>
                         </a>
                     </li>
-                    <li>
-                        <a href="users">
-                            <i class="fa fa-users"></i>
-                            <span>მომხმარებლები</span>
-                            </span>
-                        </a>
-                    </li>
+                    <c:if test="<%= isAdmin %>">
+                        <li>
+                            <a href="users">
+                                <i class="fa fa-users"></i>
+                                <span>მომხმარებლები</span>
+                                </span>
+                            </a>
+                        </li>
+                    </c:if>
                 </ul>
             </section>
         </aside>
