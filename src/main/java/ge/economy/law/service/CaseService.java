@@ -7,7 +7,6 @@ import ge.economy.law.dto.CourtInstanceHistoryDTO;
 import ge.economy.law.dto.StatusDTO;
 import ge.economy.law.model.Tables;
 import ge.economy.law.model.tables.records.CaseRecord;
-import ge.economy.law.model.tables.records.CourtInstanceHistoryRecord;
 import ge.economy.law.request.AddCaseRequest;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,18 +43,17 @@ public class CaseService {
         boolean newRecord = false;
         boolean newInstanceHidtoryRecord = false;
         CaseRecord record = null;
-        CourtInstanceHistoryRecord instanceHistoryRecord = null;
         if (request.getCaseId() != null) {
             record = caseDAO.getCaseObjectById(request.getCaseId());
-        }
-
-        if (record == null || request.getCourtInstanceId() != record.getCourtInstanceId()) {//ინსტანციის ისტორიაში გადაყრა
-            newInstanceHidtoryRecord = true;
         }
 
         if (record == null) {
             record = dslContext.newRecord(Tables.CASE);
             newRecord = true;
+        }
+
+        if (!newRecord && request.getCourtInstanceId() != record.getCourtInstanceId()) {//ინსტანციის ისტორიაში გადაყრა
+            newInstanceHidtoryRecord = true;
         }
 
         record.setName(request.getName());
@@ -72,18 +70,10 @@ public class CaseService {
         record.setStatusId(request.getStatusId());
         record.setCourtInstanceId(request.getCourtInstanceId());
 
-        if (newRecord) {
+        if (newRecord || newInstanceHidtoryRecord) {// თუ ახალ ინსტანციაზე გადავიდა ახალი ჩანაწერი კეთდება ცხრილში დატაც მიყვება შეიძლება შეცვლილი
             record.store();
         } else {
             record.update();
-        }
-
-        if (newInstanceHidtoryRecord) {
-            instanceHistoryRecord = dslContext.newRecord(Tables.COURT_INSTANCE_HISTORY);
-            instanceHistoryRecord.setCaseId(record.getCaseId());
-            instanceHistoryRecord.setCourtInstanceId(request.getCourtInstanceId());
-            instanceHistoryRecord.setNote(request.getCourtInstanceNote());
-            instanceHistoryRecord.store();
         }
 
         return CaseDTO.translate(record);
