@@ -54,6 +54,8 @@ public class CaseService {
 
         if (!newRecord && request.getCourtInstanceId() != record.getCourtInstanceId()) {//ინსტანციის ისტორიაში გადაყრა
             newInstanceHidtoryRecord = true;
+            record = dslContext.newRecord(Tables.CASE);
+            record.setAddUserId(request.getAddUserId());
         }
 
         record.setName(request.getName());
@@ -75,7 +77,7 @@ public class CaseService {
             record.update();
         }
 
-        return CaseDTO.translate(record);
+        return CaseDTO.translate(caseDAO.getWholeCaseObjectById(record.getCaseId()));
     }
 
     public List<StatusDTO> getStatus() {

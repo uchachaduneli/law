@@ -70,4 +70,24 @@ public class CaseDAO extends AbstractDAO {
         return dslContext.fetchOne(Tables.CASE, Tables.CASE.CASE_ID.eq(id));
     }
 
+    public Record getWholeCaseObjectById(int id) {
+
+        return dslContext.select()
+                .from(Tables.CASE)
+                .join(Tables.JUDGE)
+                .on(Tables.CASE.JUDGE_ID.eq(Tables.JUDGE.JUDGE_ID))
+                .join(Tables.LITIGATION_SUBJECT)
+                .on(Tables.CASE.LITIGATION_SUBJECT_ID.eq(Tables.LITIGATION_SUBJECT.LITIGATION_SUBJECT_ID))
+                .join(Tables.END_RESULT)
+                .on(Tables.CASE.END_RESULT_ID.eq(Tables.END_RESULT.END_RESULT_ID))
+                .join(Tables.COURT)
+                .on(Tables.CASE.COURT_ID.eq(Tables.COURT.COURT_ID))
+                .join(Tables.USER)
+                .on(Tables.CASE.ADD_USER_ID.eq(Tables.USER.USER_ID))
+                .join(Tables.STATUS)
+                .on(Tables.CASE.STATUS_ID.eq(Tables.STATUS.STATUS_ID))
+                .where(Tables.CASE.CASE_ID.eq(id))
+                .fetchOne();
+    }
+
 }
