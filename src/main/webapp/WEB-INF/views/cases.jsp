@@ -407,11 +407,14 @@
         <div class="box">
             <div class="box-header">
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-block btn-primary btn-md" ng-click="init()" data-toggle="modal"
-                            data-target="#editModal">
-                        <i class="fa fa-plus" aria-hidden="true"></i> &nbsp;
-                        დამატება
-                    </button>
+                    <c:if test="<%= isAdmin %>">
+                        <button type="button" class="btn btn-block btn-primary btn-md" ng-click="init()"
+                                data-toggle="modal"
+                                data-target="#editModal">
+                            <i class="fa fa-plus" aria-hidden="true"></i> &nbsp;
+                            დამატება
+                        </button>
+                    </c:if>
                 </div>
                 <div class="col-md-2 col-xs-offset-8">
                     <select ng-change="loadMainData()" class="pull-right form-control" ng-model="limit"
@@ -456,13 +459,15 @@
                                data-target="#detailModal" class="btn btn-xs">
                                 <i class="fa fa-sticky-note-o"></i>&nbsp; დეტალურად
                             </a>&nbsp;&nbsp;
-                            <a ng-click="edit(r.caseId)" data-toggle="modal" data-target="#editModal"
-                               class="btn btn-xs">
-                                <i class="fa fa-pencil"></i>&nbsp;შეცვლა
-                            </a>&nbsp;&nbsp;
-                            <a ng-click="remove(r.caseId)" class="btn btn-xs">
-                                <i class="fa fa-trash-o"></i>&nbsp;წაშლა
-                            </a>
+                            <c:if test="<%= isAdmin %>">
+                                <a ng-click="edit(r.caseId)" data-toggle="modal" data-target="#editModal"
+                                   class="btn btn-xs">
+                                    <i class="fa fa-pencil"></i>&nbsp;შეცვლა
+                                </a>&nbsp;&nbsp;
+                                <a ng-click="remove(r.caseId)" class="btn btn-xs">
+                                    <i class="fa fa-trash-o"></i>&nbsp;წაშლა
+                                </a>
+                            </c:if>
                         </td>
                     </tr>
                     </tbody>
