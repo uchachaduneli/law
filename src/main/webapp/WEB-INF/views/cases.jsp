@@ -145,7 +145,6 @@
             if ($scope.request.caseEndDate != undefined && $scope.request.caseEndDate.includes('/')) {
                 $scope.request.caseEndDate = $scope.request.caseEndDate.split(/\//).reverse().join('-')
             }
-            console.log(angular.toJson($scope.request));
             ajaxCall($http, "cases/save-case", angular.toJson($scope.request), resFunc);
         };
 
