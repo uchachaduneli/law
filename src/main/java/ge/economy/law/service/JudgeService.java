@@ -37,6 +37,8 @@ public class JudgeService {
             newRecord = true;
         }
         record.setName(request.getName());
+        record.setAssistant(request.getAssistant());
+        record.setAssistantPhone(request.getAssistantPhone());
         if (newRecord) {
             record.store();
         } else {

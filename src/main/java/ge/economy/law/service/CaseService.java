@@ -61,7 +61,6 @@ public class CaseService {
         record.setName(request.getName());
         record.setNumber(request.getNumber());
         record.setJudgeId(request.getJudgeId());
-        record.setJudgeAssistantPhone(request.getJudgeAssistantPhone());
         record.setCaseStartDate(new Date(request.getCaseStartDate().getTime()));
         record.setCaseEndDate(new Date(request.getCaseEndDate().getTime()));
         record.setLitigationSubjectId(request.getLitigationSubjectId());
