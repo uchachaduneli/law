@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * @author ucha
@@ -43,6 +45,17 @@ public class UserController {
     @ResponseBody
     public Response saveUser(@RequestBody AddUserRequest request) {
         return Response.withSuccess(userService.saveUser(request));
+    }
+
+    @RequestMapping({"/change-password"})
+    @ResponseBody
+    public Response saveUser(HttpServletRequest servletRequest, @RequestParam String pass, @RequestParam String newpass) throws Exception {
+        Integer userId = (Integer) servletRequest.getSession().getAttribute("userId");
+        if (userId != null) {
+            return Response.withSuccess(userService.changePassword(userId, pass, newpass));
+        } else {
+            return Response.withError("პაროლის შესაცვლელად გაიარეთ ავტორიზაცია");
+        }
     }
 
     @RequestMapping({"/delete-user"})
