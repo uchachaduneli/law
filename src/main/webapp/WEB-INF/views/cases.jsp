@@ -32,7 +32,7 @@
 
     app.controller("angController", function ($scope, $http, $filter) {
         $scope.start = 0;
-        $scope.limit = "15";
+        $scope.limit = "10";
         $scope.request = {};
 
         $scope.loadMainData = function () {
@@ -419,7 +419,8 @@
                 <div class="col-md-2 col-xs-offset-8">
                     <select ng-change="loadMainData()" class="pull-right form-control" ng-model="limit"
                             id="rowCountSelectId">
-                        <option value="15" selected>მაჩვენე 15</option>
+                        <option value="10" selected>მაჩვენე 10</option>
+                        <option value="15">15</option>
                         <option value="30">30</option>
                         <option value="50">50</option>
                         <option value="100">100</option>
