@@ -98,4 +98,22 @@ public class UsersService {
     public void deleteUser(int id) {
         userDAO.deleteUser(id);
     }
+
+    public UserDTO changePassword(Integer userId, String pass, String newpass) throws Exception {
+        UserDTO user = null;
+        UserRecord record = (UserRecord) dslContext
+                .select()
+                .from(Tables.USER)
+                .where(Tables.USER.USER_ID.eq(userId))
+                .and(Tables.USER.PASSWORD.eq(MD5Provider.doubleMd5(pass)))
+                .fetchOne();
+        if (record != null) {
+            record.setPassword(MD5Provider.doubleMd5(newpass));
+            record.update();
+            user = UserDTO.translate(record);
+        } else {
+            throw new Exception("ამ მონაცემებით აქტიური მომხმარებელი არ იძებნება");
+        }
+        return user;
+    }
 }
