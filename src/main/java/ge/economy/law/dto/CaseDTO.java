@@ -27,7 +27,8 @@ public class CaseDTO {
     @JsonSerialize(using = JsonDateSerializeSupport.class)
     private Date caseEndDate;
     private String note;
-    private String addUser;
+    private Integer addUserId;
+    private String addUserName;
     private Integer courtId;
     private String courtName;
     private Integer statusId;
@@ -43,7 +44,7 @@ public class CaseDTO {
         dto.setName(record.getValue(Tables.CASE.NAME));
         dto.setNumber(record.getValue(Tables.CASE.NUMBER));
         dto.setJudgeId(record.getValue(Tables.CASE.JUDGE_ID));
-        if (dto.getJudgeId() != null && record.field(Tables.JUDGE.NAME) != null) {
+        if (dto.getJudgeId() != null) {
             dto.setJudgeName(record.getValue(Tables.JUDGE.NAME));
             dto.setJudgeAssistant(record.getValue(Tables.JUDGE.ASSISTANT));
             dto.setJudgeAssistantPhone(record.getValue(Tables.JUDGE.ASSISTANT_PHONE));
@@ -60,7 +61,10 @@ public class CaseDTO {
         }
         dto.setCaseEndDate(record.getValue(Tables.CASE.CASE_END_DATE));
         dto.setNote(record.getValue(Tables.CASE.NOTE));
-        dto.setAddUser(record.getValue(Tables.CASE.ADD_USER));
+        dto.setAddUserId(record.getValue(Tables.CASE.ADD_USER_ID));
+        if (dto.getAddUserId() != null) {
+            dto.setAddUserName(record.getValue(Tables.USER.FIRSTNAME) + " " + record.getValue(Tables.USER.LASTNAME));
+        }
         dto.setCourtId(record.getValue(Tables.CASE.COURT_ID));
         if (dto.getCourtId() != null && record.field(Tables.COURT.NAME) != null) {
             dto.setCourtName(record.getValue(Tables.COURT.NAME));
@@ -205,12 +209,20 @@ public class CaseDTO {
         this.note = note;
     }
 
-    public String getAddUser() {
-        return addUser;
+    public Integer getAddUserId() {
+        return addUserId;
     }
 
-    public void setAddUser(String addUser) {
-        this.addUser = addUser;
+    public void setAddUserId(Integer addUserId) {
+        this.addUserId = addUserId;
+    }
+
+    public String getAddUserName() {
+        return addUserName;
+    }
+
+    public void setAddUserName(String addUserName) {
+        this.addUserName = addUserName;
     }
 
     public Integer getCourtId() {

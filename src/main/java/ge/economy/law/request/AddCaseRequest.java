@@ -12,6 +12,7 @@ public class AddCaseRequest {
     private String number;
     private Integer judgeId;
     private String judgeName;
+    private String judgeAssistant;
     private String judgeAssistantPhone;
     @JsonSerialize(using = JsonDateSerializeSupport.class)
     private Date caseStartDate;
@@ -23,7 +24,8 @@ public class AddCaseRequest {
     @JsonSerialize(using = JsonDateSerializeSupport.class)
     private Date caseEndDate;
     private String note;
-    private String addUser;
+    private Integer addUserId;
+    private String addUserName;
     private Integer courtId;
     private String courtName;
     private Integer statusId;
@@ -70,6 +72,14 @@ public class AddCaseRequest {
 
     public void setJudgeName(String judgeName) {
         this.judgeName = judgeName;
+    }
+
+    public String getJudgeAssistant() {
+        return judgeAssistant;
+    }
+
+    public void setJudgeAssistant(String judgeAssistant) {
+        this.judgeAssistant = judgeAssistant;
     }
 
     public String getJudgeAssistantPhone() {
@@ -144,12 +154,20 @@ public class AddCaseRequest {
         this.note = note;
     }
 
-    public String getAddUser() {
-        return addUser;
+    public Integer getAddUserId() {
+        return addUserId;
     }
 
-    public void setAddUser(String addUser) {
-        this.addUser = addUser;
+    public void setAddUserId(Integer addUserId) {
+        this.addUserId = addUserId;
+    }
+
+    public String getAddUserName() {
+        return addUserName;
+    }
+
+    public void setAddUserName(String addUserName) {
+        this.addUserName = addUserName;
     }
 
     public Integer getCourtId() {

@@ -28,7 +28,7 @@ import java.util.List;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Judge extends TableImpl<JudgeRecord> {
 
-    private static final long serialVersionUID = -1594206594;
+	private static final long serialVersionUID = -1594206594;
 
 	/**
 	 * The reference instance of <code>public.judge</code>
@@ -53,15 +53,15 @@ public class Judge extends TableImpl<JudgeRecord> {
 	 */
 	public final TableField<JudgeRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
 
-    /**
-     * The column <code>public.judge.assistant</code>.
-     */
-    public final TableField<JudgeRecord, String> ASSISTANT = createField("assistant", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
+	/**
+	 * The column <code>public.judge.assistant</code>.
+	 */
+	public final TableField<JudgeRecord, String> ASSISTANT = createField("assistant", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
 
-    /**
-     * The column <code>public.judge.assistant_phone</code>.
-     */
-    public final TableField<JudgeRecord, String> ASSISTANT_PHONE = createField("assistant_phone", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
+	/**
+	 * The column <code>public.judge.assistant_phone</code>.
+	 */
+	public final TableField<JudgeRecord, String> ASSISTANT_PHONE = createField("assistant_phone", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "");
 
 	/**
 	 * Create a <code>public.judge</code> table reference

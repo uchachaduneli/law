@@ -27,7 +27,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JudgeRecord extends UpdatableRecordImpl<JudgeRecord> implements Record4<Integer, String, String, String> {
 
-    private static final long serialVersionUID = 501453536;
+	private static final long serialVersionUID = 501453536;
 
 	/**
 	 * Setter for <code>public.judge.judge_id</code>.
@@ -57,33 +57,33 @@ public class JudgeRecord extends UpdatableRecordImpl<JudgeRecord> implements Rec
 		return (String) getValue(1);
 	}
 
-    /**
-     * Setter for <code>public.judge.assistant</code>.
-     */
-    public void setAssistant(String value) {
-        setValue(2, value);
-    }
+	/**
+	 * Setter for <code>public.judge.assistant</code>.
+	 */
+	public void setAssistant(String value) {
+		setValue(2, value);
+	}
 
-    /**
-     * Getter for <code>public.judge.assistant</code>.
-     */
-    public String getAssistant() {
-        return (String) getValue(2);
-    }
+	/**
+	 * Getter for <code>public.judge.assistant</code>.
+	 */
+	public String getAssistant() {
+		return (String) getValue(2);
+	}
 
-    /**
-     * Setter for <code>public.judge.assistant_phone</code>.
-     */
-    public void setAssistantPhone(String value) {
-        setValue(3, value);
-    }
+	/**
+	 * Setter for <code>public.judge.assistant_phone</code>.
+	 */
+	public void setAssistantPhone(String value) {
+		setValue(3, value);
+	}
 
-    /**
-     * Getter for <code>public.judge.assistant_phone</code>.
-     */
-    public String getAssistantPhone() {
-        return (String) getValue(3);
-    }
+	/**
+	 * Getter for <code>public.judge.assistant_phone</code>.
+	 */
+	public String getAssistantPhone() {
+		return (String) getValue(3);
+	}
 
 	// -------------------------------------------------------------------------
 	// Primary key information
@@ -98,23 +98,23 @@ public class JudgeRecord extends UpdatableRecordImpl<JudgeRecord> implements Rec
 	}
 
 	// -------------------------------------------------------------------------
-    // Record4 type implementation
-    // -------------------------------------------------------------------------
+	// Record4 type implementation
+	// -------------------------------------------------------------------------
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Row4<Integer, String, String, String> fieldsRow() {
-        return (Row4) super.fieldsRow();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Row4<Integer, String, String, String> fieldsRow() {
+		return (Row4) super.fieldsRow();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Row4<Integer, String, String, String> valuesRow() {
-        return (Row4) super.valuesRow();
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Row4<Integer, String, String, String> valuesRow() {
+		return (Row4) super.valuesRow();
 	}
 
 	/**
@@ -126,28 +126,28 @@ public class JudgeRecord extends UpdatableRecordImpl<JudgeRecord> implements Rec
 	}
 
 	/**
-     * {@inheritDoc}
-     */
-    @Override
-    public Field<String> field2() {
-        return Judge.JUDGE.NAME;
-    }
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<String> field2() {
+		return Judge.JUDGE.NAME;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Field<String> field3() {
-        return Judge.JUDGE.ASSISTANT;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<String> field3() {
+		return Judge.JUDGE.ASSISTANT;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Field<String> field4() {
-        return Judge.JUDGE.ASSISTANT_PHONE;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<String> field4() {
+		return Judge.JUDGE.ASSISTANT_PHONE;
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -155,30 +155,30 @@ public class JudgeRecord extends UpdatableRecordImpl<JudgeRecord> implements Rec
 	@Override
 	public Integer value1() {
 		return getJudgeId();
-    }
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String value2() {
-        return getName();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String value2() {
+		return getName();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String value3() {
-        return getAssistant();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String value3() {
+		return getAssistant();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String value4() {
-        return getAssistantPhone();
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String value4() {
+		return getAssistantPhone();
 	}
 
 	/**
@@ -195,36 +195,36 @@ public class JudgeRecord extends UpdatableRecordImpl<JudgeRecord> implements Rec
 	 */
 	@Override
 	public JudgeRecord value2(String value) {
-        setName(value);
-        return this;
-    }
+		setName(value);
+		return this;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public JudgeRecord value3(String value) {
-        setAssistant(value);
-        return this;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public JudgeRecord value3(String value) {
+		setAssistant(value);
+		return this;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public JudgeRecord value4(String value) {
-        setAssistantPhone(value);
-        return this;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public JudgeRecord value4(String value) {
+		setAssistantPhone(value);
+		return this;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public JudgeRecord values(Integer value1, String value2, String value3, String value4) {
-        value1(value1);
-        value2(value2);
-        value3(value3);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public JudgeRecord values(Integer value1, String value2, String value3, String value4) {
+		value1(value1);
+		value2(value2);
+		value3(value3);
 		value4(value4);
 		return this;
 	}
@@ -234,20 +234,20 @@ public class JudgeRecord extends UpdatableRecordImpl<JudgeRecord> implements Rec
 	// -------------------------------------------------------------------------
 
 	/**
-     * Create a detached JudgeRecord
-     */
-    public JudgeRecord() {
-        super(Judge.JUDGE);
-    }
+	 * Create a detached JudgeRecord
+	 */
+	public JudgeRecord() {
+		super(Judge.JUDGE);
+	}
 
-    /**
-     * Create a detached, initialised JudgeRecord
-     */
-    public JudgeRecord(Integer judgeId, String name, String assistant, String assistantPhone) {
-        super(Judge.JUDGE);
+	/**
+	 * Create a detached, initialised JudgeRecord
+	 */
+	public JudgeRecord(Integer judgeId, String name, String assistant, String assistantPhone) {
+		super(Judge.JUDGE);
 
-        setValue(0, judgeId);
-        setValue(1, name);
+		setValue(0, judgeId);
+		setValue(1, name);
 		setValue(2, assistant);
 		setValue(3, assistantPhone);
 	}

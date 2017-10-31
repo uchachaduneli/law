@@ -1,7 +1,6 @@
 package ge.economy.law.controller;
 
 import ge.economy.law.misc.Response;
-import ge.economy.law.model.tables.User;
 import ge.economy.law.request.AddCaseRequest;
 import ge.economy.law.service.CaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +38,14 @@ public class CaseController {
     @ResponseBody
     @RequestMapping({"/get-instance-history"})
     public Response getInitiate(@RequestParam int id) {
-        return Response.withSuccess(caseService.getInstanceHistory(id));
+        return null;
+//        return Response.withSuccess(caseService.getInstanceHistory(id));
     }
 
     @ResponseBody
     @RequestMapping({"/save-case"})
     public Response saveIssue(@RequestBody AddCaseRequest request, HttpServletRequest servletRequest) {
-        request.setAddUser((String) servletRequest.getSession().getAttribute("user_desc"));
+        request.setAddUserId((Integer) servletRequest.getSession().getAttribute("userId"));
         return Response.withSuccess(caseService.save(request));
     }
 

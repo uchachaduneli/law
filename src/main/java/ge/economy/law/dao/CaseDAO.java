@@ -28,6 +28,8 @@ public class CaseDAO extends AbstractDAO {
                         .on(Tables.CASE.END_RESULT_ID.eq(Tables.END_RESULT.END_RESULT_ID))
                         .join(Tables.COURT)
                         .on(Tables.CASE.COURT_ID.eq(Tables.COURT.COURT_ID))
+                        .join(Tables.USER)
+                        .on(Tables.CASE.ADD_USER_ID.eq(Tables.USER.USER_ID))
                         .join(Tables.STATUS)
                         .on(Tables.CASE.STATUS_ID.eq(Tables.STATUS.STATUS_ID));
 
@@ -43,13 +45,14 @@ public class CaseDAO extends AbstractDAO {
     }
 
     public List<Record> getInstanceHistory(int itemId) {
-        return dslContext.
-                select()
-                .from(Tables.COURT_INSTANCE_HISTORY)
-                .join(Tables.COURT_INSTANCE)
-                .on(Tables.COURT_INSTANCE_HISTORY.COURT_INSTANCE_ID.eq(Tables.COURT_INSTANCE.INSTANCE_ID))
-                .where(Tables.COURT_INSTANCE_HISTORY.CASE_ID.eq(itemId))
-                .fetch();
+        return null;
+//        return dslContext.
+//                select()
+//                .from(Tables.COURT_INSTANCE_HISTORY)
+//                .join(Tables.COURT_INSTANCE)
+//                .on(Tables.COURT_INSTANCE_HISTORY.COURT_INSTANCE_ID.eq(Tables.COURT_INSTANCE.INSTANCE_ID))
+//                .where(Tables.COURT_INSTANCE_HISTORY.CASE_ID.eq(itemId))
+//                .fetch();
     }
 
     public List<Record> getCaseStatuses() {

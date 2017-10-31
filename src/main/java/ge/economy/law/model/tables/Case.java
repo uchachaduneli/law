@@ -29,7 +29,7 @@ import java.util.List;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Case extends TableImpl<CaseRecord> {
 
-    private static final long serialVersionUID = 1427943955;
+    private static final long serialVersionUID = 450905820;
 
 	/**
 	 * The reference instance of <code>public.case</code>
@@ -95,11 +95,6 @@ public class Case extends TableImpl<CaseRecord> {
 	public final TableField<CaseRecord, String> NOTE = createField("note", org.jooq.impl.SQLDataType.VARCHAR.length(1000), this, "");
 
 	/**
-	 * The column <code>public.case.add_user</code>.
-	 */
-    public final TableField<CaseRecord, String> ADD_USER = createField("add_user", org.jooq.impl.SQLDataType.VARCHAR, this, "");
-
-	/**
 	 * The column <code>public.case.court_id</code>.
 	 */
 	public final TableField<CaseRecord, Integer> COURT_ID = createField("court_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
@@ -113,6 +108,11 @@ public class Case extends TableImpl<CaseRecord> {
 	 * The column <code>public.case.court_instance_id</code>.
 	 */
 	public final TableField<CaseRecord, Integer> COURT_INSTANCE_ID = createField("court_instance_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+    /**
+     * The column <code>public.case.add_user_id</code>.
+     */
+    public final TableField<CaseRecord, Integer> ADD_USER_ID = createField("add_user_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * Create a <code>public.case</code> table reference

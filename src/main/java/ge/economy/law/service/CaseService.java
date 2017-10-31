@@ -3,7 +3,6 @@ package ge.economy.law.service;
 
 import ge.economy.law.dao.CaseDAO;
 import ge.economy.law.dto.CaseDTO;
-import ge.economy.law.dto.CourtInstanceHistoryDTO;
 import ge.economy.law.dto.StatusDTO;
 import ge.economy.law.model.Tables;
 import ge.economy.law.model.tables.records.CaseRecord;
@@ -50,6 +49,7 @@ public class CaseService {
         if (record == null) {
             record = dslContext.newRecord(Tables.CASE);
             newRecord = true;
+            record.setAddUserId(request.getAddUserId());
         }
 
         if (!newRecord && request.getCourtInstanceId() != record.getCourtInstanceId()) {//ინსტანციის ისტორიაში გადაყრა
@@ -65,7 +65,6 @@ public class CaseService {
         record.setLitigationDescription(request.getLitigationDescription());
         record.setEndResultId(request.getEndResultId());
         record.setNote(request.getNote());
-        record.setAddUser(request.getAddUser());
         record.setCourtId(request.getCourtId());
         record.setStatusId(request.getStatusId());
         record.setCourtInstanceId(request.getCourtInstanceId());
@@ -77,11 +76,6 @@ public class CaseService {
         }
 
         return CaseDTO.translate(record);
-    }
-
-
-    public List<CourtInstanceHistoryDTO> getInstanceHistory(int id) {
-        return CourtInstanceHistoryDTO.translateArray(caseDAO.getInstanceHistory(id));
     }
 
     public List<StatusDTO> getStatus() {
