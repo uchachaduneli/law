@@ -58,7 +58,9 @@
 
             ajaxCall($http, "judges/save-judge", angular.toJson({
                 id: $scope.request.judgeId,
-                name: $scope.request.name
+                name: $scope.request.name,
+                assistant: $scope.request.assistant,
+                assistantPhone: $scope.request.assistantPhone
             }), resFunc);
         };
 
@@ -82,6 +84,20 @@
                             <label class="control-label col-sm-3">მოსამართლე</label>
                             <div class="col-sm-9">
                                 <input type="text" ng-model="request.name"
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">თანაშემწე</label>
+                            <div class="col-sm-9">
+                                <input type="text" ng-model="request.assistant"
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">თანაშემწის ტელეფონი</label>
+                            <div class="col-sm-9">
+                                <input type="text" ng-model="request.assistantPhone"
                                        class="form-control input-sm">
                             </div>
                         </div>
@@ -123,6 +139,8 @@
                     <tr>
                         <th>ID</th>
                         <th>სახელი</th>
+                        <th>თანაშემწე</th>
+                        <th>თანაშემწის ტელეფონი</th>
                         <c:if test="<%= isAdmin %>">
                             <th class="col-md-3 text-center">Action</th>
                         </c:if>
@@ -132,6 +150,8 @@
                     <tr ng-repeat="r in list">
                         <td>{{r.judgeId}}</td>
                         <td>{{r.name}}</td>
+                        <td>{{r.assistant}}</td>
+                        <td>{{r.assistantPhone}}</td>
                         <c:if test="<%= isAdmin %>">
                             <td class="text-center">
                                 <a ng-click="edit(r.judgeId)" data-toggle="modal" data-target="#editModal"

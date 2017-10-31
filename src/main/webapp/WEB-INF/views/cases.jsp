@@ -193,6 +193,10 @@
                             <td>{{slcted.judgeName}}</td>
                         </tr>
                         <tr>
+                            <th class="text-right">თანაშემწე</th>
+                            <td>{{slcted.judgeAssistant}}</td>
+                        </tr>
+                        <tr>
                             <th class="text-right">თანაშემწის ტელეფონი</th>
                             <td>{{slcted.judgeAssistantPhone}}</td>
                         </tr>
@@ -279,13 +283,6 @@
                                             value="{{v.judgeId}}">{{v.name}}
                                     </option>
                                 </select>
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">თანაშემწის ტელეფონი</label>
-                            <div class="col-sm-9">
-                                <input type="text" ng-model="request.judgeAssistantPhone"
-                                       class="form-control input-sm">
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
