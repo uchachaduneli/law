@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.List;
 
+import static org.jooq.impl.DSL.max;
+import static org.jooq.impl.DSL.row;
+
 /**
  * Created by ME.
  */
@@ -33,7 +36,12 @@ public class CaseDAO extends AbstractDAO {
                         .join(Tables.STATUS)
                         .on(Tables.CASE.STATUS_ID.eq(Tables.STATUS.STATUS_ID));
 
-        selectConditionStep.where();
+        selectConditionStep.where(Tables.CASE.CASE_ID.eq(
+                dslContext.
+                        select(max(Tables.CASE.CASE_ID))
+                        .from(Tables.CASE).
+                        where(Tables.CASE.NUMBER.eq(row(Tables.CASE.NUMBER))).fetchOne()));
+
         SelectOnConditionStep<Record> selectConditionStepSize = selectConditionStep;
         int recordSize = selectConditionStepSize.fetch().size();
         selectConditionStep.orderBy(Tables.CASE.CASE_ID.desc()).limit(limit).offset(start);
