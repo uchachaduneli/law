@@ -57,8 +57,9 @@ public class AuthController {
                 default:
                     break;
             }
-//            response.sendRedirect("cases");
-            return "redirect:cases";
+            response.sendRedirect("cases");
+//            return "redirect:cases";
+            return null;
         } else {
             response.sendError(400, "მომხმარებელი ან პაროლი არასწორია");
             return null;

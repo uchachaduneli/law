@@ -3,10 +3,14 @@ package ge.economy.law.dao;
 import ge.economy.law.model.Tables;
 import ge.economy.law.model.tables.Case;
 import ge.economy.law.model.tables.records.CaseRecord;
+import ge.economy.law.request.SearchCaseRequest;
+import org.jooq.Condition;
 import org.jooq.Record;
-import org.jooq.SelectOnConditionStep;
+import org.jooq.SelectConditionStep;
+import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,11 +23,56 @@ import static org.jooq.impl.DSL.max;
 @Repository
 public class CaseDAO extends AbstractDAO {
 
-    public HashMap<String, Object> getCases(int start, int limit) {
+    public HashMap<String, Object> getCases(int start, int limit, SearchCaseRequest srchCase) {
         Case c = Tables.CASE.as("c");
-        Case d = Tables.CASE.as("d");
+        List<Condition> condition = new ArrayList<>();
+        if (srchCase.getCaseId() != null) {
+            condition.add(c.CASE_ID.eq(srchCase.getCaseId()));
+        }
+        if (srchCase.getName() != null) {
+            condition.add(c.NAME.like("%" + srchCase.getName() + "%"));
+        }
+        if (srchCase.getNumber() != null) {
+            condition.add(c.NUMBER.like("%" + srchCase.getNumber() + "%"));
+        }
+        if (srchCase.getJudgeId() != null) {
+            condition.add(c.JUDGE_ID.eq(srchCase.getJudgeId()));
+        }
+        if (srchCase.getJudgeAssistant() != null) {
+            condition.add(Tables.JUDGE.ASSISTANT.like("%" + srchCase.getJudgeAssistant() + "%"));
+        }
+        if (srchCase.getJudgeAssistantPhone() != null) {
+            condition.add(Tables.JUDGE.ASSISTANT_PHONE.like("%" + srchCase.getJudgeAssistantPhone() + "%"));
+        }
+        if (srchCase.getCaseStartDateFrom() != null && srchCase.getCaseStartDateTo() != null) {
+            condition.add(c.CASE_START_DATE.between(new java.sql.Date(srchCase.getCaseStartDateFrom().getTime())).and(new java.sql.Date(srchCase.getCaseStartDateTo().getTime())));
+        }
+        if (srchCase.getCaseEndDateFrom() != null && srchCase.getCaseEndDateTo() != null) {
+            condition.add(c.CASE_START_DATE.between(new java.sql.Date(srchCase.getCaseEndDateFrom().getTime())).and(new java.sql.Date(srchCase.getCaseEndDateTo().getTime())));
+        }
+        if (srchCase.getLitigationSubjectId() != null) {
+            condition.add(c.LITIGATION_SUBJECT_ID.eq(srchCase.getLitigationSubjectId()));
+        }
+        if (srchCase.getEndResultId() != null) {
+            condition.add(c.END_RESULT_ID.eq(srchCase.getEndResultId()));
+        }
+        if (srchCase.getAddUserId() != null) {
+            condition.add(c.ADD_USER_ID.eq(srchCase.getAddUserId()));
+        }
+        if (srchCase.getCourtId() != null) {
+            condition.add(c.COURT_ID.eq(srchCase.getCourtId()));
+        }
+        if (srchCase.getStatusId() != null) {
+            condition.add(c.STATUS_ID.eq(srchCase.getStatusId()));
+        }
+        if (srchCase.getCourtInstanceId() != null) {
+            condition.add(c.COURT_INSTANCE_ID.eq(srchCase.getCourtInstanceId()));
+        } else {
+            condition.add(c.CASE_ID.eq(dslContext.select(max(Tables.CASE.CASE_ID)).from(Tables.CASE)
+                    .where(Tables.CASE.NUMBER.eq(c.NUMBER))));
+        }
 
-        SelectOnConditionStep<Record> selectConditionStep = (SelectOnConditionStep<Record>) dslContext.select()
+        SelectConditionStep<Record> selectConditionStep = dslContext.select()
                 .from(c)
                 .join(Tables.LITIGATION_SUBJECT)
                 .on(c.LITIGATION_SUBJECT_ID.eq(Tables.LITIGATION_SUBJECT.LITIGATION_SUBJECT_ID))
@@ -37,11 +86,10 @@ public class CaseDAO extends AbstractDAO {
                 .on(c.JUDGE_ID.eq(Tables.JUDGE.JUDGE_ID))
                 .join(Tables.STATUS)
                 .on(c.STATUS_ID.eq(Tables.STATUS.STATUS_ID))
-                .where(c.CASE_ID.eq(dslContext.select(max(Tables.CASE.CASE_ID)).from(Tables.CASE)
-                        .where(Tables.CASE.NUMBER.eq(c.NUMBER))));
+                .where(DSL.and(condition));
 
 
-        SelectOnConditionStep<Record> selectConditionStepSize = selectConditionStep;
+        SelectConditionStep<Record> selectConditionStepSize = selectConditionStep;
         int recordSize = selectConditionStepSize.fetch().size();
         selectConditionStep.orderBy(c.CASE_ID.desc()).limit(limit).offset(start);
 
@@ -96,5 +144,4 @@ public class CaseDAO extends AbstractDAO {
                 .where(Tables.CASE.CASE_ID.eq(id))
                 .fetchOne();
     }
-
 }

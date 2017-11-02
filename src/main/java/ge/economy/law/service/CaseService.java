@@ -7,6 +7,7 @@ import ge.economy.law.dto.StatusDTO;
 import ge.economy.law.model.Tables;
 import ge.economy.law.model.tables.records.CaseRecord;
 import ge.economy.law.request.AddCaseRequest;
+import ge.economy.law.request.SearchCaseRequest;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,10 +28,10 @@ public class CaseService {
     @Autowired
     private DSLContext dslContext;
 
-    public HashMap<String, Object> getCases(int start, int limit) {
+    public HashMap<String, Object> getCases(int start, int limit, SearchCaseRequest srchCase) {
         new HashMap();
         HashMap<String, Object> resultMap = new HashMap();
-        HashMap<String, Object> map = caseDAO.getCases(start, limit);
+        HashMap<String, Object> map = caseDAO.getCases(start, limit, srchCase);
         List<CaseDTO> items = CaseDTO.translateArray((List) map.get("list"));
         resultMap.put("list", items);
         resultMap.put("size", map.get("size"));

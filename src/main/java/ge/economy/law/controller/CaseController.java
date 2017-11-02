@@ -2,6 +2,7 @@ package ge.economy.law.controller;
 
 import ge.economy.law.misc.Response;
 import ge.economy.law.request.AddCaseRequest;
+import ge.economy.law.request.SearchCaseRequest;
 import ge.economy.law.service.CaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +26,8 @@ public class CaseController {
 
     @ResponseBody
     @RequestMapping({"/get-cases"})
-    public Response getInitiate(@RequestParam("start") int start, @RequestParam("limit") int limit) {
-        return Response.withSuccess(caseService.getCases(start, limit));
+    public Response getInitiate(@RequestParam("start") int start, @RequestParam("limit") int limit, @RequestBody SearchCaseRequest srchCase) {
+        return Response.withSuccess(caseService.getCases(start, limit, srchCase));
     }
 
     @ResponseBody
