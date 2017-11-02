@@ -34,13 +34,14 @@
         $scope.start = 0;
         $scope.limit = "10";
         $scope.request = {};
+        $scope.srchCase = {};
 
         $scope.loadMainData = function () {
             function getMainData(res) {
                 $scope.list = res.data.list;
             }
 
-            ajaxCall($http, "cases/get-cases?start=" + $scope.start + "&limit=" + $scope.limit, null, getMainData);
+            ajaxCall($http, "cases/get-cases?start=" + $scope.start + "&limit=" + $scope.limit, angular.toJson($scope.srchCase), getMainData);
         }
 
         $scope.loadMainData();
