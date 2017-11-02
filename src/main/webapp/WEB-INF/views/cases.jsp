@@ -399,7 +399,6 @@
     </div>
 </div>
 
-
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -423,6 +422,46 @@
                         <option value="50">50</option>
                         <option value="100">100</option>
                     </select>
+                </div>
+                <div class="row">
+                    <hr class="col-md-12"/>
+                </div>
+                <div class="col-md-12">
+                    <div id="filter-panel" class="filter-panel">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-inline" role="form">
+                                    <div class="form-group">
+                                        <label style="margin-right:0;" for="pref-perpage">Rows per page:</label>
+                                        <select id="pref-perpage" class="form-control input-sm">
+                                            <option value="2">2</option>
+                                        </select>
+                                    </div> <!-- form group [rows] -->
+                                    <div class="form-group">
+                                        <label style="margin-right:0;" for="pref-search">Search:</label>
+                                        <input type="text" class="form-control input-sm" id="pref-search">
+                                    </div><!-- form group [search] -->
+                                    <div class="form-group">
+                                        <label style="margin-right:0;" for="pref-orderby">Order by:</label>
+                                        <select id="pref-orderby" class="form-control">
+                                            <option>Descendent</option>
+                                        </select>
+                                    </div> <!-- form group [order by] -->
+                                    <div class="form-group">
+                                        <div class="checkbox" style="margin-left:10px; margin-right:10px;">
+                                            <label><input type="checkbox"> Ingested</label>
+                                        </div>
+                                        <div class="checkbox" style="margin-left:10px; margin-right:10px;">
+                                            <label><input type="checkbox"> Automated</label>
+                                        </div>
+                                        <button type="submit" class="btn btn-default filter-col">
+                                            <span class="glyphicon glyphicon-record"></span> Save Settings
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.box-header -->
