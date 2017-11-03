@@ -26,7 +26,7 @@ public class CaseDAO extends AbstractDAO {
     public HashMap<String, Object> getCases(int start, int limit, SearchCaseRequest srchCase) {
         Case c = Tables.CASE.as("c");
         List<Condition> condition = new ArrayList<>();
-        if (srchCase.getCaseId() != null) {
+        if (srchCase.getCaseId() != null && srchCase.getCaseId() > 0) {
             condition.add(c.CASE_ID.eq(srchCase.getCaseId()));
         }
         if (srchCase.getName() != null) {
@@ -35,7 +35,7 @@ public class CaseDAO extends AbstractDAO {
         if (srchCase.getNumber() != null) {
             condition.add(c.NUMBER.like("%" + srchCase.getNumber() + "%"));
         }
-        if (srchCase.getJudgeId() != null) {
+        if (srchCase.getJudgeId() != null && srchCase.getJudgeId() > 0) {
             condition.add(c.JUDGE_ID.eq(srchCase.getJudgeId()));
         }
         if (srchCase.getJudgeAssistant() != null) {
@@ -50,22 +50,22 @@ public class CaseDAO extends AbstractDAO {
         if (srchCase.getCaseEndDateFrom() != null && srchCase.getCaseEndDateTo() != null) {
             condition.add(c.CASE_START_DATE.between(new java.sql.Date(srchCase.getCaseEndDateFrom().getTime())).and(new java.sql.Date(srchCase.getCaseEndDateTo().getTime())));
         }
-        if (srchCase.getLitigationSubjectId() != null) {
+        if (srchCase.getLitigationSubjectId() != null && srchCase.getLitigationSubjectId() > 0) {
             condition.add(c.LITIGATION_SUBJECT_ID.eq(srchCase.getLitigationSubjectId()));
         }
-        if (srchCase.getEndResultId() != null) {
+        if (srchCase.getEndResultId() != null && srchCase.getEndResultId() > 0) {
             condition.add(c.END_RESULT_ID.eq(srchCase.getEndResultId()));
         }
-        if (srchCase.getAddUserId() != null) {
+        if (srchCase.getAddUserId() != null && srchCase.getAddUserId() > 0) {
             condition.add(c.ADD_USER_ID.eq(srchCase.getAddUserId()));
         }
-        if (srchCase.getCourtId() != null) {
+        if (srchCase.getCourtId() != null && srchCase.getCourtId() > 0) {
             condition.add(c.COURT_ID.eq(srchCase.getCourtId()));
         }
-        if (srchCase.getStatusId() != null) {
+        if (srchCase.getStatusId() != null && srchCase.getStatusId() > 0) {
             condition.add(c.STATUS_ID.eq(srchCase.getStatusId()));
         }
-        if (srchCase.getCourtInstanceId() != null) {
+        if (srchCase.getCourtInstanceId() != null && srchCase.getCourtInstanceId() > 0) {
             condition.add(c.COURT_INSTANCE_ID.eq(srchCase.getCourtInstanceId()));
         } else {
             condition.add(c.CASE_ID.eq(dslContext.select(max(Tables.CASE.CASE_ID)).from(Tables.CASE)
