@@ -82,6 +82,12 @@
 
         ajaxCall($http, "cases/get-status", null, getstatuses);
 
+        function getUsers(res) {
+            $scope.users = res.data;
+        }
+
+        ajaxCall($http, "users/get-users", null, getUsers);
+
         $scope.remove = function (id) {
             if (confirm("დარწმუნებული ხართ რომ გსურთ წაშლა?")) {
                 if (id != undefined) {
@@ -430,103 +436,189 @@
                     <div id="filter-panel" class="filter-panel">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <form class="form-inline" role="form">
-                                    <div class="form-group">
-                                        <label style="margin-right:0;" for="pref-perpage">Rows per page:</label>
-                                        <select id="pref-perpage" class="form-control input-sm">
-                                            <option value="2">2</option>
-                                        </select>
-                                    </div> <!-- form group [rows] -->
-                                    <div class="form-group">
-                                        <label style="margin-right:0;" for="pref-search">Search:</label>
-                                        <input type="text" class="form-control input-sm" id="pref-search">
-                                    </div><!-- form group [search] -->
-                                    <div class="form-group">
-                                        <label style="margin-right:0;" for="pref-orderby">Order by:</label>
-                                        <select id="pref-orderby" class="form-control">
-                                            <option>Descendent</option>
-                                        </select>
-                                    </div> <!-- form group [order by] -->
-                                    <div class="form-group">
-                                        <div class="checkbox" style="margin-left:10px; margin-right:10px;">
-                                            <label><input type="checkbox"> Ingested</label>
+                                <div class="form-group col-md-1">
+                                    <input type="text" class="form-control" ng-model="srchCase.caseId"
+                                           placeholder="ID">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <input type="text" class="form-control" ng-model="srchCase.name"
+                                           placeholder="დასახელება">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <input type="text" class="form-control" ng-model="srchCase.number"
+                                           placeholder="საქმის #">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <input type="text" class="form-control"
+                                           ng-model="srchCase.judgeAssistant" placeholder="თანაშემწე">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <input type="text" class="form-control"
+                                           ng-model="srchCase.judgeAssistantPhone" placeholder="თანაშემწის ტელ.">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <div class="input-group">
+                                        <div class="input-append">
+                                            <input type="text" name="startdate" class="form-control"
+                                                   placeholder="დან"
+                                                   ng-model="srchCase.caseStartDateFrom" placeholder="">
                                         </div>
-                                        <div class="checkbox" style="margin-left:10px; margin-right:10px;">
-                                            <label><input type="checkbox"> Automated</label>
+                                        <span class="input-group-addon">დაწყებ. თარიღ.</span>
+                                        <div class="input-append">
+                                            <input type="text" name="startdate" class="form-control"
+                                                   placeholder="მდე"
+                                                   ng-model="srchCase.caseStartDateTo" placeholder="">
                                         </div>
-                                        <button type="submit" class="btn btn-default filter-col">
-                                            <span class="glyphicon glyphicon-record"></span> Save Settings
-                                        </button>
                                     </div>
-                                </form>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <div class="input-group">
+                                        <div class="input-append">
+                                            <input type="text" name="enddate" class="form-control" placeholder="დან"
+                                                   ng-model="srchCase.caseEndDateFrom" placeholder="">
+                                        </div>
+                                        <span class="input-group-addon">დასრ. თარიღ.</span>
+                                        <div class="input-append">
+                                            <input type="text" name="enddate" class="form-control" placeholder="მდე"
+                                                   ng-model="srchCase.caseEndDateTo" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <select class="form-control" ng-model="srchCase.judgeId">
+                                        <option value="" selected="selected">მოსამართლე</option>
+                                        <option ng-repeat="v in judges" ng-selected="v.judgeId === srchCase.judgeId"
+                                                value="{{v.judgeId}}">{{v.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <select class="form-control" ng-model="srchCase.litigationSubjectId">
+                                        <option value="" selected="selected">დავის საგანი</option>
+                                        <option ng-repeat="v in litigationsubjects"
+                                                ng-selected="v.litigationSubjectId === srchCase.litigationSubjectId"
+                                                value="{{v.litigationSubjectId}}">
+                                            {{v.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <select class="form-control" ng-model="srchCase.courtInstanceId">
+                                        <option value="" selected="selected">სასამართლო ინსტანცია</option>
+                                        <option ng-repeat="v in courtInstances"
+                                                ng-selected="v.instanceId === srchCase.courtInstanceId"
+                                                value="{{v.instanceId}}">{{v.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <select class="form-control" ng-model="srchCase.endResultId">
+                                        <option value="" selected="selected">დამთავრების შედეგი</option>
+                                        <option ng-repeat="v in endresults"
+                                                ng-selected="srchCase.endResultId === v.endResultId"
+                                                value="{{v.endResultId}}">{{v.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <select class="form-control" ng-model="srchCase.courtId">
+                                        <option value="" selected="selected">სასამართლო</option>
+                                        <option ng-repeat="v in courts"
+                                                ng-selected="v.courtId === srchCase.courtId"
+                                                value="{{v.courtId}}">{{v.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <select class="form-control" ng-model="srchCase.statusId">
+                                        <option value="" selected="selected">სტატუსი</option>
+                                        <option ng-repeat="v in statuses"
+                                                ng-selected="v.statusId === srchCase.statusId"
+                                                value="{{v.statusId}}">{{v.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <select class="form-control" ng-model="srchCase.addUserId">
+                                        <option value="" selected="selected">მომხმარებელი</option>
+                                        <option ng-repeat="v in users"
+                                                ng-selected="v.userId === srchCase.addUserId"
+                                                value="{{v.userId}}">{{v.firstname}}{{v.lastname}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <button class="btn btn-default col-md-11" ng-click="loadMainData()">
+                                        <span class="fa fa-search"></span> &nbsp; &nbsp;ძებნა &nbsp; &nbsp;
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>დასახელება</th>
-                        <th>საქმის #</th>
-                        <th>სასამართლო</th>
-                        <th>მოსამართლე</th>
-                        <th>საქმე დაიწყო</th>
-                        <th>საქმე დასრულდა</th>
-                        <th>თანამშრომელი</th>
-                        <th>სტატუსი</th>
-                        <th class="col-md-2 text-center">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody title="დეტალური ინფორმაციისთვის დაკლიკეთ ორჯერ">
-                    <tr ng-repeat="r in list" ng-dblclick="handleDoubleClick(r.caseId)">
-                        <td>{{r.caseId}}</td>
-                        <td>{{r.name}}</td>
-                        <td>{{r.number}}</td>
-                        <td>{{r.courtName}}</td>
-                        <td>{{r.judgeName}}</td>
-                        <td>{{r.caseStartDate}}</td>
-                        <td>{{r.caseEndDate}}</td>
-                        <td>{{r.addUserName}}</td>
-                        <td>{{r.statusName}}</td>
-                        <td class="text-center">
-                            <a ng-click="showDetails(r.caseId)" data-toggle="modal" title="დეტალურად"
-                               data-target="#detailModal" class="btn btn-xs">
-                                <i class="fa fa-sticky-note-o"></i>&nbsp; დეტალურად
-                            </a>&nbsp;&nbsp;
-                            <c:if test="<%= isAdmin %>">
-                                <a ng-click="edit(r.caseId)" data-toggle="modal" data-target="#editModal"
-                                   class="btn btn-xs">
-                                    <i class="fa fa-pencil"></i>&nbsp;შეცვლა
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>დასახელება</th>
+                            <th>საქმის #</th>
+                            <th>სასამართლო</th>
+                            <th>მოსამართლე</th>
+                            <th>საქმე დაიწყო</th>
+                            <th>საქმე დასრულდა</th>
+                            <th>თანამშრომელი</th>
+                            <th>სტატუსი</th>
+                            <th class="col-md-2 text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody title="დეტალური ინფორმაციისთვის დაკლიკეთ ორჯერ">
+                        <tr ng-repeat="r in list" ng-dblclick="handleDoubleClick(r.caseId)">
+                            <td>{{r.caseId}}</td>
+                            <td>{{r.name}}</td>
+                            <td>{{r.number}}</td>
+                            <td>{{r.courtName}}</td>
+                            <td>{{r.judgeName}}</td>
+                            <td>{{r.caseStartDate}}</td>
+                            <td>{{r.caseEndDate}}</td>
+                            <td>{{r.addUserName}}</td>
+                            <td>{{r.statusName}}</td>
+                            <td class="text-center">
+                                <a ng-click="showDetails(r.caseId)" data-toggle="modal" title="დეტალურად"
+                                   data-target="#detailModal" class="btn btn-xs">
+                                    <i class="fa fa-sticky-note-o"></i>&nbsp; დეტალურად
                                 </a>&nbsp;&nbsp;
-                                <a ng-click="remove(r.caseId)" class="btn btn-xs">
-                                    <i class="fa fa-trash-o"></i>&nbsp;წაშლა
-                                </a>
-                            </c:if>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                                <c:if test="<%= isAdmin %>">
+                                    <a ng-click="edit(r.caseId)" data-toggle="modal" data-target="#editModal"
+                                       class="btn btn-xs">
+                                        <i class="fa fa-pencil"></i>&nbsp;შეცვლა
+                                    </a>&nbsp;&nbsp;
+                                    <a ng-click="remove(r.caseId)" class="btn btn-xs">
+                                        <i class="fa fa-trash-o"></i>&nbsp;წაშლა
+                                    </a>
+                                </c:if>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col col-xs-8 col-xs-offset-4">
-                            <ul class="pagination pull-right">
-                                <li>
-                                    <a ng-click="handlePage(-1)">«</a>
-                                </li>
-                                <li>
-                                    <a ng-click="handlePage(1)">»</a>
-                                </li>
-                            </ul>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col col-xs-8 col-xs-offset-4">
+                                <ul class="pagination pull-right">
+                                    <li>
+                                        <a ng-click="handlePage(-1)">«</a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="handlePage(1)">»</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <%@include file="footer.jsp" %>
