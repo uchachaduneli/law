@@ -40,15 +40,19 @@
             }
 
             $scope.login = function () {
-                function errorLogin(res) {
-                    errorMsg('ავტორიზაცია ვერ ხერხდება! გადაამოწმეთ ველების სისწორე')
-                }
 
-                function success(res) {
-                    console.log(res);
-                }
+                $.ajax({
+                    type: "POST",
+                    url: "login",
+                    data: "username=" + $scope.user.username + "&password=" + $scope.user.password,
+                    success: function (response) {
+                        location.reload();
 
-                ajaxCall($http, "login?" + $scope.uri + "&username=" + $scope.user.username + "&password=" + $scope.user.password, null, location.reload(), errorLogin);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus, errorThrown);
+                    }
+                });
             };
         });
 
