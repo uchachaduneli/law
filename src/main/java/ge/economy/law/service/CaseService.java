@@ -88,4 +88,8 @@ public class CaseService {
     public void deleteCase(int id) {
         caseDAO.deleteCase(id);
     }
+
+    public List<CaseDTO> getInstanceHistory(int id, String number) {
+        return CaseDTO.translateArray(caseDAO.getInstanceHistory(id, number));
+    }
 }

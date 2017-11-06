@@ -38,9 +38,8 @@ public class CaseController {
 
     @ResponseBody
     @RequestMapping({"/get-instance-history"})
-    public Response getInitiate(@RequestParam int id) {
-        return null;
-//        return Response.withSuccess(caseService.getInstanceHistory(id));
+    public Response getInitiate(@RequestParam int id, @RequestParam String number) {
+        return Response.withSuccess(caseService.getInstanceHistory(id, number));
     }
 
     @ResponseBody
