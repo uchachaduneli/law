@@ -186,7 +186,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="detailModalLabel">დეტალური ინფორმაცია</h4>
+                <h4 class="modal-title" id="detailModalLabel">დეტალური ინფორმაცია საქმე #({{slcted.number}})</h4>
             </div>
             <div class="modal-body">
                 <ul class="nav nav-tabs col-md-12">
@@ -355,10 +355,6 @@
                                             value="{{v.instanceId}}">{{v.name}}
                                     </option>
                                 </select>
-                            </div>
-                            <div class="col-sm-9">
-                                <textarea rows="5" cols="10" placeholder="შენიშვნა" ng-model="request.courtInstanceNote"
-                                          class="form-control input-sm"></textarea>
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
