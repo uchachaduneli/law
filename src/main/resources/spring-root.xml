@@ -25,10 +25,10 @@
 
     <bean id="dtSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/law?currentSchema=public"/>
-        <!--<property name="url" value="jdbc:postgresql://10.0.11.7:5432/law?currentSchema=public"/>-->
-        <property name="username" value="postgres"/>
-        <property name="password" value="root"/>
+        <!--<property name="url" value="jdbc:postgresql://localhost:5432/law?currentSchema=public"/>-->
+        <property name="url" value="jdbc:postgresql://10.20.21.85:5432/lawyers?currentSchema=public"/>
+        <property name="username" value="nlomineishvili"/>
+        <property name="password" value="2wsx@WSX"/>
     </bean>
 
 
