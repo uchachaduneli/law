@@ -57,6 +57,8 @@
                 $('#selected_item').text("მოსამართლეები");
             } else if (url.pathname.indexOf("users") > -1) {
                 $('#selected_item').text("მომხმარებლები");
+            } else if (url.pathname.indexOf("statistics") > -1) {
+                $('#selected_item').text("სტატისტიკა");
             }
 
         });
@@ -193,6 +195,13 @@
                             <a href="users">
                                 <i class="fa fa-users"></i>
                                 <span>მომხმარებლები</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="statistics">
+                                <i class="fa fa-bar-chart"></i>
+                                <span>სტატისტიკა</span>
                                 </span>
                             </a>
                         </li>
