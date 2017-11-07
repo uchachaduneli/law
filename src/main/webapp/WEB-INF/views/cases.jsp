@@ -121,7 +121,7 @@
                     $scope.caseInstances = res.data;
                 }
 
-                ajaxCall($http, "cases/get-instance-history?id=" + $scope.slcted.caseId + "&number=" + $scope.slcted.number, null, rsFnc);
+                ajaxCall($http, "cases/get-instance-history?id=" + $scope.slcted.caseId + "&number=" + $scope.slcted.groupId, null, rsFnc);
             }
         };
 
@@ -186,7 +186,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="detailModalLabel">დეტალური ინფორმაცია საქმე #({{slcted.number}})</h4>
+                <h4 class="modal-title" id="detailModalLabel">დეტალური ინფორმაცია</h4>
             </div>
             <div class="modal-body">
                 <ul class="nav nav-tabs col-md-12">
@@ -240,6 +240,10 @@
                             <td>{{slcted.litigationSubjectName}}</td>
                         </tr>
                         <tr>
+                            <th class="text-right">დავის საგნის ღირებულება</th>
+                            <td>{{slcted.litigationPrice}}</td>
+                        </tr>
+                        <tr>
                             <th class="text-right">დავის შინაარსი</th>
                             <td>{{slcted.litigationDescription}}</td>
                         </tr>
@@ -278,21 +282,21 @@
                 <div class="row">
                     <form class="form-horizontal" name="myForm">
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">დასახელება</label>
+                            <label class="control-label col-sm-3">დასახელება (*)</label>
                             <div class="col-sm-9">
                                 <input type="text" ng-model="request.name"
                                        class="form-control input-sm">
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">საქმის #</label>
+                            <label class="control-label col-sm-3">საქმის # (*)</label>
                             <div class="col-sm-9">
                                 <input type="text" ng-model="request.number"
                                        class="form-control input-sm">
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">მოსამართლე</label>
+                            <label class="control-label col-sm-3">მოსამართლე (*)</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.judgeId">
                                     <option ng-repeat="v in judges" ng-selected="v.judgeId === request.judgeId"
@@ -302,7 +306,7 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">საქმის დაწყების თარიღი</label>
+                            <label class="control-label col-sm-3">საქმის დაწყების თარიღი (*)</label>
                             <div class="col-sm-9">
                                 <div class="input-group date">
                                     <div class="input-group-addon">
@@ -328,7 +332,7 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">დავის საგანი</label>
+                            <label class="control-label col-sm-3">დავის საგანი (*)</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.litigationSubjectId">
                                     <option ng-repeat="v in litigationsubjects"
@@ -340,14 +344,21 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">დავის შინაარსი</label>
+                            <label class="control-label col-sm-3">დავის საგნის ღირებულება (*)</label>
+                            <div class="col-sm-9">
+                                <input ng-model="request.litigationPrice" type="number"
+                                       class="form-control input-sm"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">დავის შინაარსი (*)</label>
                             <div class="col-sm-9">
                                 <textarea rows="5" cols="10" ng-model="request.litigationDescription"
                                           class="form-control input-sm"></textarea>
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">სასამართლო ინსტანცია</label>
+                            <label class="control-label col-sm-3">სასამართლო ინსტანცია (*)</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.courtInstanceId">
                                     <option ng-repeat="v in courtInstances"
@@ -358,7 +369,7 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">საქმის დამთავრების შედეგი</label>
+                            <label class="control-label col-sm-3">საქმის დამთავრების შედეგი (*)</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.endResultId">
                                     <option ng-repeat="v in endresults"
@@ -369,7 +380,7 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">სასამართლო</label>
+                            <label class="control-label col-sm-3">სასამართლო (*)</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.courtId">
                                     <option ng-repeat="v in courts" ng-selected="v.courtId === request.courtId"
@@ -379,7 +390,7 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">სტატუსი</label>
+                            <label class="control-label col-sm-3">სტატუსი (*)</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.statusId">
                                     <option ng-repeat="v in statuses" ng-selected="v.statusId === request.statusId"
@@ -617,7 +628,31 @@
 
                     <div class="panel-footer">
                         <div class="row">
-                            <div class="col col-xs-8 col-xs-offset-4">
+                            <div class="col col-xs-4">
+                                <div class="small-box bg-aqua">
+                                    <div class="inner">
+                                        <h3>150</h3>
+
+                                        <p>New Orders</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-xs-4">
+                                <div class="small-box bg-aqua-active">
+                                    <div class="inner">
+                                        <h3>150</h3>
+
+                                        <p>New Orders</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-pie-graph"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-xs-4">
                                 <ul class="pagination pull-right">
                                     <li>
                                         <a ng-click="handlePage(-1)">«</a>
