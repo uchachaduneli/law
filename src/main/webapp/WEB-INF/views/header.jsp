@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="resources/css/global.css">
     <link rel="stylesheet" href="resources/css/bootstrap-select.css">
     <link rel="stylesheet" href="resources/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="resources/css/ionicons.min.css">
     <link rel="shortcut icon" type="image/png" href="resources/imgs/favicon.png"/>
 
     <script src="resources/js/jquery.js"></script>
