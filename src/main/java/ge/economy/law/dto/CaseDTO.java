@@ -34,8 +34,10 @@ public class CaseDTO {
     private Integer statusId;
     private String statusName;
     private Integer courtInstanceId;
+    private String groupId;
     private String courtInstanceName;
     private String courtInstanceNote;
+    private Double litigationPrice;
 
 
     public static CaseDTO translate(Record record) {
@@ -74,6 +76,8 @@ public class CaseDTO {
             dto.setStatusName(record.getValue(Tables.STATUS.NAME));
         }
         dto.setCourtInstanceId(record.getValue(Tables.CASE.COURT_INSTANCE_ID));
+        dto.setLitigationPrice(record.getValue(Tables.CASE.LITIGATION_PRICE));
+        dto.setGroupId(record.getValue(Tables.CASE.GROUP_ID));
         if (dto.getCourtInstanceId() != null && record.field(Tables.COURT_INSTANCE.NAME) != null) {
             dto.setCourtInstanceName(record.getValue(Tables.COURT_INSTANCE.NAME));
         }
@@ -87,6 +91,22 @@ public class CaseDTO {
             list.add(CaseDTO.translate(record));
         }
         return list;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public Double getLitigationPrice() {
+        return litigationPrice;
+    }
+
+    public void setLitigationPrice(Double litigationPrice) {
+        this.litigationPrice = litigationPrice;
     }
 
     public Integer getCaseId() {

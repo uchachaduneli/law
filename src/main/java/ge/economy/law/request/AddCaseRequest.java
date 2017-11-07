@@ -33,6 +33,24 @@ public class AddCaseRequest {
     private Integer courtInstanceId;
     private String courtInstanceName;
     private String courtInstanceNote;
+    private Double litigationPrice;
+    private String groupId;
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public Double getLitigationPrice() {
+        return litigationPrice;
+    }
+
+    public void setLitigationPrice(Double litigationPrice) {
+        this.litigationPrice = litigationPrice;
+    }
 
     public Integer getCaseId() {
         return caseId;

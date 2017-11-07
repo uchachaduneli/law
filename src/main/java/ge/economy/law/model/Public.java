@@ -58,7 +58,7 @@ public class Public extends SchemaImpl {
 			Sequences.JUDGE_JUDGE_ID_SEQ,
                 Sequences.LITIGATION_SUBJECT_LITIGATION_SUBJECT_ID_SEQ,
                 Sequences.STATUS_STATUS_ID_SEQ,
-			Sequences.USER_STATUS_STATUS_ID_SEQ,
+                Sequences.USER_STATUS_STATUS_ID_SEQ,
 			Sequences.USER_TYPE_TYPE_ID_SEQ,
 			Sequences.USER_USER_ID_SEQ);
 	}

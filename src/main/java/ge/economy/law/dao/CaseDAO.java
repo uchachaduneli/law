@@ -69,7 +69,7 @@ public class CaseDAO extends AbstractDAO {
             condition.add(c.COURT_INSTANCE_ID.eq(srchCase.getCourtInstanceId()));
         } else {
             condition.add(c.CASE_ID.eq(dslContext.select(max(Tables.CASE.CASE_ID)).from(Tables.CASE)
-                    .where(Tables.CASE.NUMBER.eq(c.NUMBER))));
+                    .where(Tables.CASE.GROUP_ID.eq(c.GROUP_ID))));
         }
 
         SelectConditionStep<Record> selectConditionStep = dslContext.select()
@@ -117,7 +117,7 @@ public class CaseDAO extends AbstractDAO {
                 .on(Tables.CASE.STATUS_ID.eq(Tables.STATUS.STATUS_ID))
                 .join(Tables.COURT_INSTANCE)
                 .on(Tables.CASE.COURT_INSTANCE_ID.eq(Tables.COURT_INSTANCE.INSTANCE_ID))
-                .where(Tables.CASE.NUMBER.eq(number)).orderBy(Tables.CASE.CASE_ID.asc())
+                .where(Tables.CASE.GROUP_ID.eq(number)).orderBy(Tables.CASE.CASE_ID.asc())
 //                .and(Tables.CASE.CASE_ID.ne(itemId))
                 .fetch();
     }

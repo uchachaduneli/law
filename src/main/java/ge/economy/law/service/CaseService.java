@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class CaseService {
             record = dslContext.newRecord(Tables.CASE);
             newRecord = true;
             record.setAddUserId(request.getAddUserId());
+            record.setGroupId(new SimpleDateFormat("yyMMddhhmmssMs").format(new java.util.Date()));
         }
 
         if (!newRecord && request.getCourtInstanceId() != record.getCourtInstanceId()) {//ინსტანციის ისტორიაში გადაყრა
@@ -59,8 +61,12 @@ public class CaseService {
             record.setAddUserId(request.getAddUserId());
         }
 
+        if (!newRecord) {
+            record.setGroupId(request.getGroupId());
+        }
         record.setName(request.getName());
         record.setNumber(request.getNumber());
+        record.setLitigationPrice(request.getLitigationPrice());
         record.setJudgeId(request.getJudgeId());
         record.setCaseStartDate(new Date(request.getCaseStartDate().getTime()));
         record.setCaseEndDate(new Date(request.getCaseEndDate().getTime()));
