@@ -68,7 +68,6 @@ public class Keys {
 	public static final ForeignKey<CaseRecord, EndResultRecord> CASE__FK_CASE_TO_END_RESULT = ForeignKeys0.CASE__FK_CASE_TO_END_RESULT;
 	public static final ForeignKey<CaseRecord, CourtRecord> CASE__FK_CASE_TO_COURT = ForeignKeys0.CASE__FK_CASE_TO_COURT;
 	public static final ForeignKey<UserRecord, UserTypeRecord> USER__FK_USER_TO_TYPE = ForeignKeys0.USER__FK_USER_TO_TYPE;
-	public static final ForeignKey<UserRecord, StatusRecord> USER__FK_USER_TO_STATUS = ForeignKeys0.USER__FK_USER_TO_STATUS;
 
 	// -------------------------------------------------------------------------
 	// [#1459] distribute members to avoid static initialisers > 64kb
@@ -107,6 +106,5 @@ public class Keys {
 		public static final ForeignKey<CaseRecord, EndResultRecord> CASE__FK_CASE_TO_END_RESULT = createForeignKey(ge.economy.law.model.Keys.END_RESULT_PKEY, Case.CASE, Case.CASE.END_RESULT_ID);
 		public static final ForeignKey<CaseRecord, CourtRecord> CASE__FK_CASE_TO_COURT = createForeignKey(ge.economy.law.model.Keys.COURT_PKEY, Case.CASE, Case.CASE.COURT_ID);
 		public static final ForeignKey<UserRecord, UserTypeRecord> USER__FK_USER_TO_TYPE = createForeignKey(ge.economy.law.model.Keys.USER_TYPE_PKEY, User.USER, User.USER.TYPE_ID);
-		public static final ForeignKey<UserRecord, StatusRecord> USER__FK_USER_TO_STATUS = createForeignKey(ge.economy.law.model.Keys.STATUS_PKEY, User.USER, User.USER.STATUS_ID);
 	}
 }

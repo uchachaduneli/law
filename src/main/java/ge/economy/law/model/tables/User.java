@@ -7,20 +7,13 @@ package ge.economy.law.model.tables;
 import ge.economy.law.model.Keys;
 import ge.economy.law.model.Public;
 import ge.economy.law.model.tables.records.UserRecord;
+import org.jooq.*;
+import org.jooq.impl.TableImpl;
 
+import javax.annotation.Generated;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.annotation.Generated;
-
-import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Identity;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
-import org.jooq.impl.TableImpl;
 
 
 /**
@@ -36,7 +29,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-	private static final long serialVersionUID = 1703684511;
+    private static final long serialVersionUID = 783846986;
 
 	/**
 	 * The reference instance of <code>public.user</code>
@@ -142,8 +135,8 @@ public class User extends TableImpl<UserRecord> {
 	 */
 	@Override
 	public List<ForeignKey<UserRecord, ?>> getReferences() {
-		return Arrays.<ForeignKey<UserRecord, ?>>asList(Keys.USER__FK_USER_TO_TYPE, Keys.USER__FK_USER_TO_STATUS);
-	}
+        return Arrays.<ForeignKey<UserRecord, ?>>asList(Keys.USER__FK_USER_TO_TYPE);
+    }
 
 	/**
 	 * {@inheritDoc}

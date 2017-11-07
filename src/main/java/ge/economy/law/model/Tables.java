@@ -23,12 +23,12 @@ import javax.annotation.Generated;
 public class Tables {
 
 	/**
-	 * განსახილველი საქმე
+	 * The table public.case
 	 */
 	public static final Case CASE = ge.economy.law.model.tables.Case.CASE;
 
 	/**
-	 * სასამართლოები
+	 * The table public.court
 	 */
 	public static final Court COURT = ge.economy.law.model.tables.Court.COURT;
 
@@ -38,22 +38,22 @@ public class Tables {
 	public static final CourtInstance COURT_INSTANCE = ge.economy.law.model.tables.CourtInstance.COURT_INSTANCE;
 
 	/**
-	 * საქმის დამთავრების შედეგი
+	 * The table public.end_result
 	 */
 	public static final EndResult END_RESULT = ge.economy.law.model.tables.EndResult.END_RESULT;
 
 	/**
-	 * მოსამართლეები
+	 * The table public.judge
 	 */
 	public static final Judge JUDGE = ge.economy.law.model.tables.Judge.JUDGE;
 
 	/**
-	 * დავის საგნები
+	 * The table public.litigation_subject
 	 */
 	public static final LitigationSubject LITIGATION_SUBJECT = ge.economy.law.model.tables.LitigationSubject.LITIGATION_SUBJECT;
 
 	/**
-	 * საქმის სტატუსი
+	 * The table public.status
 	 */
 	public static final Status STATUS = ge.economy.law.model.tables.Status.STATUS;
 
