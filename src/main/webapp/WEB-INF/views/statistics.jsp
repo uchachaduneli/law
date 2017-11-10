@@ -24,53 +24,106 @@
 <script>
     app.controller("angController", function ($scope, $http, $filter) {
         $scope.srchCase = {};
+        $scope.loadMainData = function () {
+            function getMainDataTest(res) {
+                $scope.list = res.data.list;
+                $scope.list = res.data.sum;
+                var dataProvider = [];
+                angular.forEach($scope.list, function (value, key) {
+                    dataProvider.push({})
+                    this.push(key + ': ' + value);
+                }, log);
+
+                var chart = AmCharts.makeChart("chartdiv", {
+                    "type": "serial",
+                    "theme": "light",
+                    "dataProvider": [{
+                        "country": "USA",
+                        "visits": 2025
+                    }, {
+                        "country": "Germany",
+                        "visits": 1322
+                    }],
+                    "valueAxes": [{
+                        "gridColor": "#FFFFFF",
+                        "gridAlpha": 0.2,
+                        "dashLength": 0
+                    }],
+                    "gridAboveGraphs": true,
+                    "startDuration": 1,
+                    "graphs": [{
+                        "balloonText": "[[category]]: <b>[[value]]</b>",
+                        "fillAlphas": 0.8,
+                        "lineAlpha": 0.2,
+                        "type": "column",
+                        "valueField": "visits"
+                    }],
+                    "chartCursor": {
+                        "categoryBalloonEnabled": false,
+                        "cursorAlpha": 0,
+                        "zoomable": false
+                    },
+                    "categoryField": "country",
+                    "categoryAxis": {
+                        "gridPosition": "start",
+                        "gridAlpha": 0,
+                        "tickPosition": "start",
+                        "tickLength": 20
+                    }
+
+                });
+            }
+
+            ajaxCall($http, "cases/get-statistics", angular.toJson($scope.srchCase), getMainDataTest);
+        };
+        $scope.loadMainData();
     });
 
 
-    var chart = AmCharts.makeChart("chartdiv", {
-        "type": "serial",
-        "theme": "light",
-        "dataProvider": [{
-            "country": "USA",
-            "visits": 2025
-        }, {
-            "country": "China",
-            "visits": 1882
-        }, {
-            "country": "Japan",
-            "visits": 1809
-        }, {
-            "country": "Germany",
-            "visits": 1322
-        }],
-        "valueAxes": [{
-            "gridColor": "#FFFFFF",
-            "gridAlpha": 0.2,
-            "dashLength": 0
-        }],
-        "gridAboveGraphs": true,
-        "startDuration": 1,
-        "graphs": [{
-            "balloonText": "[[category]]: <b>[[value]]</b>",
-            "fillAlphas": 0.8,
-            "lineAlpha": 0.2,
-            "type": "column",
-            "valueField": "visits"
-        }],
-        "chartCursor": {
-            "categoryBalloonEnabled": false,
-            "cursorAlpha": 0,
-            "zoomable": false
-        },
-        "categoryField": "country",
-        "categoryAxis": {
-            "gridPosition": "start",
-            "gridAlpha": 0,
-            "tickPosition": "start",
-            "tickLength": 20
-        }
-
-    });
+    //    var chart = AmCharts.makeChart("chartdiv", {
+    //        "type": "serial",
+    //        "theme": "light",
+    //        "dataProvider": [{
+    //            "country": "USA",
+    //            "visits": 2025
+    //        }, {
+    //            "country": "China",
+    //            "visits": 1882
+    //        }, {
+    //            "country": "Japan",
+    //            "visits": 1809
+    //        }, {
+    //            "country": "Germany",
+    //            "visits": 1322
+    //        }],
+    //        "valueAxes": [{
+    //            "gridColor": "#FFFFFF",
+    //            "gridAlpha": 0.2,
+    //            "dashLength": 0
+    //        }],
+    //        "gridAboveGraphs": true,
+    //        "startDuration": 1,
+    //        "graphs": [{
+    //            "balloonText": "[[category]]: <b>[[value]]</b>",
+    //            "fillAlphas": 0.8,
+    //            "lineAlpha": 0.2,
+    //            "type": "column",
+    //            "valueField": "visits"
+    //        }],
+    //        "chartCursor": {
+    //            "categoryBalloonEnabled": false,
+    //            "cursorAlpha": 0,
+    //            "zoomable": false
+    //        },
+    //        "categoryField": "country",
+    //        "categoryAxis": {
+    //            "gridPosition": "start",
+    //            "gridAlpha": 0,
+    //            "tickPosition": "start",
+    //            "tickLength": 20
+    //        }
+    //
+    //    });
 </script>
 
 <div class="col-md-12">
