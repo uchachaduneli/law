@@ -26,8 +26,14 @@ public class CaseController {
 
     @ResponseBody
     @RequestMapping({"/get-cases"})
-    public Response getInitiate(@RequestParam("start") int start, @RequestParam("limit") int limit, @RequestBody SearchCaseRequest srchCase) {
+    public Response getCases(@RequestParam("start") int start, @RequestParam("limit") int limit, @RequestBody SearchCaseRequest srchCase) {
         return Response.withSuccess(caseService.getCases(start, limit, srchCase));
+    }
+
+    @ResponseBody
+    @RequestMapping({"/get-statistics"})
+    public Response getStatistics(@RequestBody SearchCaseRequest srchCase) {
+        return Response.withSuccess(caseService.getReport(srchCase));
     }
 
     @ResponseBody
@@ -38,20 +44,20 @@ public class CaseController {
 
     @ResponseBody
     @RequestMapping({"/get-instance-history"})
-    public Response getInitiate(@RequestParam int id, @RequestParam String number) {
+    public Response getInstanceHistory(@RequestParam int id, @RequestParam String number) {
         return Response.withSuccess(caseService.getInstanceHistory(id, number));
     }
 
     @ResponseBody
     @RequestMapping({"/save-case"})
-    public Response saveIssue(@RequestBody AddCaseRequest request, HttpServletRequest servletRequest) {
+    public Response saveCase(@RequestBody AddCaseRequest request, HttpServletRequest servletRequest) {
         request.setAddUserId((Integer) servletRequest.getSession().getAttribute("userId"));
         return Response.withSuccess(caseService.save(request));
     }
 
     @RequestMapping({"/delete-case"})
     @ResponseBody
-    public Response deleteCourt(@RequestParam int id) {
+    public Response deleteCase(@RequestParam int id) {
         caseService.deleteCase(id);
         return Response.withSuccess(true);
     }

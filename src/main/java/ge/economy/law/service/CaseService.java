@@ -4,6 +4,7 @@ package ge.economy.law.service;
 import ge.economy.law.dao.CaseDAO;
 import ge.economy.law.dto.CaseDTO;
 import ge.economy.law.dto.StatusDTO;
+import ge.economy.law.dto.UserReportDTO;
 import ge.economy.law.model.Tables;
 import ge.economy.law.model.tables.records.CaseRecord;
 import ge.economy.law.request.AddCaseRequest;
@@ -36,6 +37,16 @@ public class CaseService {
         List<CaseDTO> items = CaseDTO.translateArray((List) map.get("list"));
         resultMap.put("list", items);
         resultMap.put("size", map.get("size"));
+        return resultMap;
+    }
+
+    public HashMap<String, Object> getReport(SearchCaseRequest srchCase) {
+        new HashMap();
+        HashMap<String, Object> resultMap = new HashMap();
+        HashMap<String, Object> map = caseDAO.getReport(srchCase);
+        List<UserReportDTO> items = UserReportDTO.translateArray((List) map.get("list"));
+        resultMap.put("list", items);
+        resultMap.put("sum", map.get("sum"));
         return resultMap;
     }
 
