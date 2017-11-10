@@ -27,23 +27,16 @@
         $scope.loadMainData = function () {
             function getMainDataTest(res) {
                 $scope.list = res.data.list;
-                $scope.list = res.data.sum;
+                $scope.sum = res.data.sum;
                 var dataProvider = [];
-                angular.forEach($scope.list, function (value, key) {
-                    dataProvider.push({})
-                    this.push(key + ': ' + value);
-                }, log);
+                angular.forEach($scope.list, function (v) {
+                    dataProvider.push(v);
+                });
 
                 var chart = AmCharts.makeChart("chartdiv", {
                     "type": "serial",
                     "theme": "light",
-                    "dataProvider": [{
-                        "country": "USA",
-                        "visits": 2025
-                    }, {
-                        "country": "Germany",
-                        "visits": 1322
-                    }],
+                    "dataProvider": dataProvider,
                     "valueAxes": [{
                         "gridColor": "#FFFFFF",
                         "gridAlpha": 0.2,
@@ -56,14 +49,14 @@
                         "fillAlphas": 0.8,
                         "lineAlpha": 0.2,
                         "type": "column",
-                        "valueField": "visits"
+                        "valueField": "count"
                     }],
                     "chartCursor": {
                         "categoryBalloonEnabled": false,
                         "cursorAlpha": 0,
                         "zoomable": false
                     },
-                    "categoryField": "country",
+                    "categoryField": "userDesc",
                     "categoryAxis": {
                         "gridPosition": "start",
                         "gridAlpha": 0,
@@ -77,53 +70,50 @@
             ajaxCall($http, "cases/get-statistics", angular.toJson($scope.srchCase), getMainDataTest);
         };
         $scope.loadMainData();
+
+        function getlitigationsubjects(res) {
+            $scope.litigationsubjects = res.data;
+        }
+
+        ajaxCall($http, "litigationsubjects/get-litigationsubjects", null, getlitigationsubjects);
+
+        function getjudges(res) {
+            $scope.judges = res.data;
+        }
+
+        ajaxCall($http, "judges/get-judges", null, getjudges);
+
+        function getcourtInstances(res) {
+            $scope.courtInstances = res.data;
+        }
+
+        ajaxCall($http, "courtInstances/get-courtinstances", null, getcourtInstances);
+
+        function getendresults(res) {
+            $scope.endresults = res.data;
+        }
+
+        ajaxCall($http, "endresults/get-endresults", null, getendresults);
+
+        function getcourts(res) {
+            $scope.courts = res.data;
+        }
+
+        ajaxCall($http, "courts/get-courts", null, getcourts);
+
+        function getstatuses(res) {
+            $scope.statuses = res.data;
+        }
+
+        ajaxCall($http, "cases/get-status", null, getstatuses);
+
+        function getUsers(res) {
+            $scope.users = res.data;
+        }
+
+        ajaxCall($http, "users/get-users", null, getUsers);
     });
 
-
-    //    var chart = AmCharts.makeChart("chartdiv", {
-    //        "type": "serial",
-    //        "theme": "light",
-    //        "dataProvider": [{
-    //            "country": "USA",
-    //            "visits": 2025
-    //        }, {
-    //            "country": "China",
-    //            "visits": 1882
-    //        }, {
-    //            "country": "Japan",
-    //            "visits": 1809
-    //        }, {
-    //            "country": "Germany",
-    //            "visits": 1322
-    //        }],
-    //        "valueAxes": [{
-    //            "gridColor": "#FFFFFF",
-    //            "gridAlpha": 0.2,
-    //            "dashLength": 0
-    //        }],
-    //        "gridAboveGraphs": true,
-    //        "startDuration": 1,
-    //        "graphs": [{
-    //            "balloonText": "[[category]]: <b>[[value]]</b>",
-    //            "fillAlphas": 0.8,
-    //            "lineAlpha": 0.2,
-    //            "type": "column",
-    //            "valueField": "visits"
-    //        }],
-    //        "chartCursor": {
-    //            "categoryBalloonEnabled": false,
-    //            "cursorAlpha": 0,
-    //            "zoomable": false
-    //        },
-    //        "categoryField": "country",
-    //        "categoryAxis": {
-    //            "gridPosition": "start",
-    //            "gridAlpha": 0,
-    //            "tickPosition": "start",
-    //            "tickLength": 20
-    //        }
-    //
-    //    });
 </script>
 
 <div class="col-md-12">
@@ -258,32 +248,32 @@
     </div>
 </div>
 <!-- /.box-header -->
-<div class="box-body">
+<div class="box-body row" style="padding: 1% !important;">
 
-    <div class="col col-xs-6">
+    <div class="col col-sm-12">
         <div class="small-box bg-aqua">
             <div class="inner">
-                <h3>150</h3>
+                <h3>{{sum}}₾ </h3>
 
-                <p>New Orders</p>
+                <p>დავის საგნის ღირებულება ჯამურად</p>
             </div>
             <div class="icon">
                 <i class="ion ion-stats-bars"></i>
             </div>
         </div>
     </div>
-    <div class="col col-xs-6">
-        <div class="small-box bg-aqua-active">
-            <div class="inner">
-                <h3>150</h3>
+    <%--<div class="col col-xs-6">--%>
+    <%--<div class="small-box bg-aqua-active">--%>
+    <%--<div class="inner">--%>
+    <%--<h3>150</h3>--%>
 
-                <p>New Orders</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-            </div>
-        </div>
-    </div>
+    <%--<p>New Orders</p>--%>
+    <%--</div>--%>
+    <%--<div class="icon">--%>
+    <%--<i class="ion ion-pie-graph"></i>--%>
+    <%--</div>--%>
+    <%--</div>--%>
+    <%--</div>--%>
 </div>
 <div id="chartdiv"></div>
 
