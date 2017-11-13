@@ -36,6 +36,7 @@
     <script src="resources/js/angular.js"></script>
     <script src="resources/js/global_util.js"></script>
     <script src="resources/js/growlMessages.js"></script>
+    <script src="resources/js/requireds.js"></script>
     <script>
         $(document).ready(function () {
             $(".datepicker").datepicker({language: 'ka'});

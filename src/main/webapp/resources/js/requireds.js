@@ -1,44 +1,48 @@
-function caseequredFields(formVar) {
-    if (formVar.identNumber.$error.required) {
-        errorMsg('საიდენტიფიკაციო ნომრის მითითება სავალდებულოა');
-        return false;
-    }
+function caseRequredFields(formVar) {
     if (formVar.name.$error.required) {
         errorMsg('დასახელების მითითება სავალდებულოა');
         return false;
     }
-    if (formVar.descriptionKa.$error.required) {
-        errorMsg('ქართული აღწერის მითითება სავალდებულოა');
+    if (formVar.number.$error.required) {
+        errorMsg('საქმის ნომრის მითითება სავალდებულოა');
         return false;
     }
-    if (formVar.descriptionEn.$error.required) {
-        errorMsg('ინგლისური აღწერის მითითება სავალდებულოა');
+    if (formVar.judgeId.$error.required) {
+        errorMsg('მოსამართლის მითითება სავალდებულოა');
         return false;
     }
-    if (formVar.descriptionRu.$error.required) {
-        errorMsg('რუსული აღწერის მითითება სავალდებულოა');
-        return false;
-    }
-    if (formVar.addressKa.$error.required) {
-        errorMsg('ქართულად მისამართის მითითება სავალდებულოა');
-        return false;
-    }
-    if (formVar.addressRu.$error.required) {
-        errorMsg(' რუსულად მისამართის მითითება სავალდებულოა');
-        return false;
-    }
-    if (formVar.addressEn.$error.required) {
-        errorMsg(' ინგლისურად მისამართის მითითება სავალდებულოა');
-        return false;
-    }
-    if (formVar.workingStart.$error.required && $("input[name=workingStart]").val().length === 0) {
-        errorMsg('სამუშაოს დაწყების დროის მითითება სავალდებულოა');
-        return false;
-    }
-    if (formVar.workingEnd.$error.required && $("input[name=workingEnd]").val().length === 0) {
-        errorMsg('სამუშაოს დასრულების დროის მითითება სავალდებულოა');
+    if (formVar.startdate.$error.required && $("input[name=startdate]").val().length === 0) {
+        errorMsg('საქმის დაწყების თარიღის მითითება სავალდებულოა');
         return false;
     }
 
+    if (formVar.litigationSubjectId.$error.required) {
+        errorMsg(' დავის საგნის მითითება სავალდებულოა');
+        return false;
+    }
+    if (formVar.litigationPrice.$error.required) {
+        errorMsg('დავის საგნის ღირებულების მითითება სავალდებულოა');
+        return false;
+    }
+    if (formVar.litigationDescription.$error.required) {
+        errorMsg(' დავის შინაარსის მითითება სავალდებულოა');
+        return false;
+    }
+    if (formVar.courtInstanceId.$error.required) {
+        errorMsg(' სასამართლო ინსტანციის მითითება სავალდებულოა');
+        return false;
+    }
+    if (formVar.endResultId.$error.required) {
+        errorMsg('საქმის დამთავრების შედეგის მითითება სავალდებულოა');
+        return false;
+    }
+    if (formVar.courtId.$error.required) {
+        errorMsg(' სასამართლოს მითითება სავალდებულოა');
+        return false;
+    }
+    if (formVar.statusId.$error.required) {
+        errorMsg(' სტატუსის მითითება სავალდებულოა');
+        return false;
+    }
     return true;
 }

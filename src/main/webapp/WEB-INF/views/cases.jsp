@@ -40,7 +40,7 @@
 
     app.controller("angController", function ($scope, $http, $filter) {
         $scope.start = 0;
-        $scope.limit = "10";
+        $scope.limit = "2";
         $scope.request = {};
         $scope.srchCase = {};
 
@@ -144,6 +144,11 @@
         };
 
         $scope.save = function () {
+
+            if (!caseRequredFields($scope.ediFormName)) {
+                return;
+            }
+
             function resFunc(res) {
                 if (res.errorCode == 0) {
                     successMsg('ოპერაცია დასრულდა წარმატებით');
@@ -280,25 +285,25 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <form class="form-horizontal" name="myForm">
+                    <form class="form-horizontal" name="ediFormName">
                         <div class="form-group col-sm-10 ">
                             <label class="control-label col-sm-3">დასახელება (*)</label>
                             <div class="col-sm-9">
-                                <input type="text" ng-model="request.name"
+                                <input type="text" ng-model="request.name" name="name" required
                                        class="form-control input-sm">
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
                             <label class="control-label col-sm-3">საქმის # (*)</label>
                             <div class="col-sm-9">
-                                <input type="text" ng-model="request.number"
+                                <input type="text" ng-model="request.number" name="number" required
                                        class="form-control input-sm">
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
                             <label class="control-label col-sm-3">მოსამართლე (*)</label>
                             <div class="col-sm-9">
-                                <select class="form-control" ng-model="request.judgeId">
+                                <select class="form-control" ng-model="request.judgeId" name="judgeId" required>
                                     <option ng-repeat="v in judges" ng-selected="v.judgeId === request.judgeId"
                                             value="{{v.judgeId}}">{{v.name}}
                                     </option>
@@ -313,7 +318,7 @@
                                         <i class="fa fa-calendar"></i>
                                     </div>
                                     <input type="text" name="startdate" ng-model="request.caseStartDate"
-                                           id="caseStartDateInput"
+                                           id="caseStartDateInput" required
                                            class="form-control pull-right">
                                 </div>
                             </div>
@@ -334,7 +339,8 @@
                         <div class="form-group col-sm-10 ">
                             <label class="control-label col-sm-3">დავის საგანი (*)</label>
                             <div class="col-sm-9">
-                                <select class="form-control" ng-model="request.litigationSubjectId">
+                                <select class="form-control" ng-model="request.litigationSubjectId"
+                                        name="litigationSubjectId" required>
                                     <option ng-repeat="v in litigationsubjects"
                                             ng-selected="v.litigationSubjectId === request.litigationSubjectId"
                                             value="{{v.litigationSubjectId}}">
@@ -346,7 +352,7 @@
                         <div class="form-group col-sm-10 ">
                             <label class="control-label col-sm-3">დავის საგნის ღირებულება (*)</label>
                             <div class="col-sm-9">
-                                <input ng-model="request.litigationPrice" type="number"
+                                <input ng-model="request.litigationPrice" type="number" name="litigationPrice" required
                                        class="form-control input-sm"/>
                             </div>
                         </div>
@@ -354,13 +360,15 @@
                             <label class="control-label col-sm-3">დავის შინაარსი (*)</label>
                             <div class="col-sm-9">
                                 <textarea rows="5" cols="10" ng-model="request.litigationDescription"
+                                          name="litigationDescription" required
                                           class="form-control input-sm"></textarea>
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
                             <label class="control-label col-sm-3">სასამართლო ინსტანცია (*)</label>
                             <div class="col-sm-9">
-                                <select class="form-control" ng-model="request.courtInstanceId">
+                                <select class="form-control" ng-model="request.courtInstanceId" name="courtInstanceId"
+                                        required>
                                     <option ng-repeat="v in courtInstances"
                                             ng-selected="v.instanceId === request.courtInstanceId"
                                             value="{{v.instanceId}}">{{v.name}}
@@ -371,7 +379,7 @@
                         <div class="form-group col-sm-10 ">
                             <label class="control-label col-sm-3">საქმის დამთავრების შედეგი (*)</label>
                             <div class="col-sm-9">
-                                <select class="form-control" ng-model="request.endResultId">
+                                <select class="form-control" ng-model="request.endResultId" name="endResultId" required>
                                     <option ng-repeat="v in endresults"
                                             ng-selected="request.endResultId === v.endResultId"
                                             value="{{v.endResultId}}">{{v.name}}
@@ -382,7 +390,7 @@
                         <div class="form-group col-sm-10 ">
                             <label class="control-label col-sm-3">სასამართლო (*)</label>
                             <div class="col-sm-9">
-                                <select class="form-control" ng-model="request.courtId">
+                                <select class="form-control" ng-model="request.courtId" name="courtId" required>
                                     <option ng-repeat="v in courts" ng-selected="v.courtId === request.courtId"
                                             value="{{v.courtId}}">{{v.name}}
                                     </option>
@@ -392,7 +400,7 @@
                         <div class="form-group col-sm-10 ">
                             <label class="control-label col-sm-3">სტატუსი (*)</label>
                             <div class="col-sm-9">
-                                <select class="form-control" ng-model="request.statusId">
+                                <select class="form-control" ng-model="request.statusId" name="statusId" required>
                                     <option ng-repeat="v in statuses" ng-selected="v.statusId === request.statusId"
                                             value="{{v.statusId}}">{{v.name}}
                                     </option>
@@ -438,7 +446,7 @@
                 <div class="col-md-2 col-xs-offset-8">
                     <select ng-change="loadMainData()" class="pull-right form-control" ng-model="limit"
                             id="rowCountSelectId">
-                        <option value="10" selected>მაჩვენე 10</option>
+                        <option value="2" selected>მაჩვენე 10</option>
                         <option value="15">15</option>
                         <option value="30">30</option>
                         <option value="50">50</option>
