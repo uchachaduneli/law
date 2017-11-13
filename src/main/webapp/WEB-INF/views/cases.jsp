@@ -40,7 +40,8 @@
 
     app.controller("angController", function ($scope, $http, $filter) {
         $scope.start = 0;
-        $scope.limit = "2";
+        $scope.page = 1;
+        $scope.limit = "10";
         $scope.request = {};
         $scope.srchCase = {};
 
@@ -174,9 +175,11 @@
 
         $scope.handlePage = function (h) {
             if (parseInt(h) >= 0) {
-                $scope.start += $scope.limit;
+                $scope.page += 1;
+                $scope.start = $scope.page * $scope.limit;
             } else {
-                $scope.start += $scope.limit;
+                $scope.page -= 1;
+                $scope.start = ($scope.page * $scope.limit) < 0 ? 0 : ($scope.page * $scope.limit);
             }
             $scope.loadMainData();
         }
@@ -446,7 +449,7 @@
                 <div class="col-md-2 col-xs-offset-8">
                     <select ng-change="loadMainData()" class="pull-right form-control" ng-model="limit"
                             id="rowCountSelectId">
-                        <option value="2" selected>მაჩვენე 10</option>
+                        <option value="10" selected>მაჩვენე 10</option>
                         <option value="15">15</option>
                         <option value="30">30</option>
                         <option value="50">50</option>
@@ -633,40 +636,15 @@
                         </tr>
                         </tbody>
                     </table>
-
                     <div class="panel-footer">
                         <div class="row">
-                            <div class="col col-xs-4">
-                                <div class="small-box bg-aqua">
-                                    <div class="inner">
-                                        <h3>150</h3>
-
-                                        <p>New Orders</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-stats-bars"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-xs-4">
-                                <div class="small-box bg-aqua-active">
-                                    <div class="inner">
-                                        <h3>150</h3>
-
-                                        <p>New Orders</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-pie-graph"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-xs-4">
+                            <div class="col col-md-12">
                                 <ul class="pagination pull-right">
                                     <li>
                                         <a ng-click="handlePage(-1)">«</a>
                                     </li>
                                     <li>
-                                        <a ng-click="handlePage(1)">»</a>
+                                        <a ng-click="handlePage(1)" ng>»</a>
                                     </li>
                                 </ul>
                             </div>
