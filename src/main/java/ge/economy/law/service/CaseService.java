@@ -80,7 +80,9 @@ public class CaseService {
         record.setLitigationPrice(request.getLitigationPrice());
         record.setJudgeId(request.getJudgeId());
         record.setCaseStartDate(new Date(request.getCaseStartDate().getTime()));
-        record.setCaseEndDate(new Date(request.getCaseEndDate().getTime()));
+        if (request.getCaseEndDate() != null) {
+            record.setCaseEndDate(new Date(request.getCaseEndDate().getTime()));
+        }
         record.setLitigationSubjectId(request.getLitigationSubjectId());
         record.setLitigationDescription(request.getLitigationDescription());
         record.setEndResultId(request.getEndResultId());
