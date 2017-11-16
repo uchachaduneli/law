@@ -29,6 +29,32 @@ public class UtilDAO extends AbstractDAO {
         return dslContext.fetchOne(Tables.COURT, Tables.COURT.COURT_ID.eq(id));
     }
 
+    public BoardRecord getBoardObjectById(int id) {
+        return dslContext.fetchOne(Tables.BOARD, Tables.BOARD.BOARD_ID.eq(id));
+    }
+
+    public List<Record> getBoards() {
+        return dslContext.
+                select().
+                from(Tables.BOARD).
+                fetch();
+    }
+
+    public void deleteBoard(int itemId) {
+        dslContext.deleteFrom(Tables.BOARD).where(Tables.BOARD.BOARD_ID.eq(itemId)).execute();
+    }
+
+    public List<Record> getCaseDocs(int caseId) {
+        return dslContext.
+                select().
+                from(Tables.CASE_DOC).where(Tables.CASE_DOC.CASE_ID.eq(caseId)).
+                fetch();
+    }
+
+    public void deleteCaseDoc(int itemId) {
+        dslContext.deleteFrom(Tables.CASE_DOC).where(Tables.CASE_DOC.DOC_ID.eq(itemId)).execute();
+    }
+
     public List<Record> getCourtInstances() {
         return dslContext.
                 select().

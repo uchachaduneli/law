@@ -22,10 +22,20 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
 
+    /**
+     * კოლეგია
+     */
+    public static final Board BOARD = ge.economy.law.model.tables.Board.BOARD;
+
 	/**
 	 * The table public.case
 	 */
 	public static final Case CASE = ge.economy.law.model.tables.Case.CASE;
+
+    /**
+     * The table public.case_doc
+     */
+    public static final CaseDoc CASE_DOC = ge.economy.law.model.tables.CaseDoc.CASE_DOC;
 
 	/**
 	 * The table public.court

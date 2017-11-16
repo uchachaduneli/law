@@ -38,6 +38,10 @@ public class CaseDTO {
     private String courtInstanceName;
     private String courtInstanceNote;
     private Double litigationPrice;
+    private Integer boardId;
+    private Integer ministryStatus;
+    private String boardName;
+    private String thirdPersons;
 
 
     public static CaseDTO translate(Record record) {
@@ -81,6 +85,12 @@ public class CaseDTO {
         if (dto.getCourtInstanceId() != null && record.field(Tables.COURT_INSTANCE.NAME) != null) {
             dto.setCourtInstanceName(record.getValue(Tables.COURT_INSTANCE.NAME));
         }
+        dto.setThirdPersons(record.getValue(Tables.CASE.THIRD_PERSONS));
+        dto.setMinistryStatus(record.getValue(Tables.CASE.MINISTRY_STATUS));
+        dto.setBoardId(record.getValue(Tables.CASE.BOARD_ID));
+        if (dto.getBoardId() != null && record.field(Tables.BOARD.NAME) != null) {
+            dto.setBoardName(record.getValue(Tables.BOARD.NAME));
+        }
         return dto;
     }
 
@@ -91,6 +101,38 @@ public class CaseDTO {
             list.add(CaseDTO.translate(record));
         }
         return list;
+    }
+
+    public Integer getMinistryStatus() {
+        return ministryStatus;
+    }
+
+    public void setMinistryStatus(Integer ministryStatus) {
+        this.ministryStatus = ministryStatus;
+    }
+
+    public Integer getBoardId() {
+        return boardId;
+    }
+
+    public void setBoardId(Integer boardId) {
+        this.boardId = boardId;
+    }
+
+    public String getBoardName() {
+        return boardName;
+    }
+
+    public void setBoardName(String boardName) {
+        this.boardName = boardName;
+    }
+
+    public String getThirdPersons() {
+        return thirdPersons;
+    }
+
+    public void setThirdPersons(String thirdPersons) {
+        this.thirdPersons = thirdPersons;
     }
 
     public String getGroupId() {

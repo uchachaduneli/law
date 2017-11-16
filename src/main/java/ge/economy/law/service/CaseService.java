@@ -89,6 +89,9 @@ public class CaseService {
         record.setNote(request.getNote());
         record.setCourtId(request.getCourtId());
         record.setStatusId(request.getStatusId());
+        record.setMinistryStatus(request.getMinistryStatus());
+        record.setBoardId(request.getBoardId());
+        record.setThirdPersons(request.getThirdPersons());
         record.setCourtInstanceId(request.getCourtInstanceId());
 
         if (newRecord || newInstanceHidtoryRecord) {// თუ ახალ ინსტანციაზე გადავიდა ახალი ჩანაწერი კეთდება ცხრილში დატაც მიყვება შეიძლება შეცვლილი

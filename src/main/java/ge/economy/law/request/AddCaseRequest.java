@@ -35,6 +35,42 @@ public class AddCaseRequest {
     private String courtInstanceNote;
     private Double litigationPrice;
     private String groupId;
+    private Integer boardId;
+    private String boardName;
+    private String thirdPersons;
+    private Integer ministryStatus;
+
+    public Integer getMinistryStatus() {
+        return ministryStatus;
+    }
+
+    public void setMinistryStatus(Integer ministryStatus) {
+        this.ministryStatus = ministryStatus;
+    }
+
+    public Integer getBoardId() {
+        return boardId;
+    }
+
+    public void setBoardId(Integer boardId) {
+        this.boardId = boardId;
+    }
+
+    public String getBoardName() {
+        return boardName;
+    }
+
+    public void setBoardName(String boardName) {
+        this.boardName = boardName;
+    }
+
+    public String getThirdPersons() {
+        return thirdPersons;
+    }
+
+    public void setThirdPersons(String thirdPersons) {
+        this.thirdPersons = thirdPersons;
+    }
 
     public String getGroupId() {
         return groupId;

@@ -29,7 +29,7 @@ import java.util.List;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Case extends TableImpl<CaseRecord> {
 
-    private static final long serialVersionUID = -177809592;
+    private static final long serialVersionUID = 1174216511;
 
 	/**
 	 * The reference instance of <code>public.case</code>
@@ -123,6 +123,21 @@ public class Case extends TableImpl<CaseRecord> {
      * The column <code>public.case.group_id</code>.
      */
     public final TableField<CaseRecord, String> GROUP_ID = createField("group_id", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+    /**
+     * The column <code>public.case.board_id</code>.
+     */
+    public final TableField<CaseRecord, Integer> BOARD_ID = createField("board_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+    /**
+     * The column <code>public.case.third_persons</code>.
+     */
+    public final TableField<CaseRecord, String> THIRD_PERSONS = createField("third_persons", org.jooq.impl.SQLDataType.VARCHAR.length(1000), this, "");
+
+    /**
+     * The column <code>public.case.ministry_status</code>.
+     */
+    public final TableField<CaseRecord, Integer> MINISTRY_STATUS = createField("ministry_status", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>public.case</code> table reference

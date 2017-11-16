@@ -32,8 +32,10 @@ public class Keys {
 	// IDENTITY definitions
 	// -------------------------------------------------------------------------
 
-	public static final Identity<CaseRecord, Integer> IDENTITY_CASE = Identities0.IDENTITY_CASE;
-	public static final Identity<CourtRecord, Integer> IDENTITY_COURT = Identities0.IDENTITY_COURT;
+    public static final Identity<BoardRecord, Integer> IDENTITY_BOARD = Identities0.IDENTITY_BOARD;
+    public static final Identity<CaseRecord, Integer> IDENTITY_CASE = Identities0.IDENTITY_CASE;
+    public static final Identity<CaseDocRecord, Integer> IDENTITY_CASE_DOC = Identities0.IDENTITY_CASE_DOC;
+    public static final Identity<CourtRecord, Integer> IDENTITY_COURT = Identities0.IDENTITY_COURT;
 	public static final Identity<CourtInstanceRecord, Integer> IDENTITY_COURT_INSTANCE = Identities0.IDENTITY_COURT_INSTANCE;
 	public static final Identity<EndResultRecord, Integer> IDENTITY_END_RESULT = Identities0.IDENTITY_END_RESULT;
 	public static final Identity<JudgeRecord, Integer> IDENTITY_JUDGE = Identities0.IDENTITY_JUDGE;
@@ -47,8 +49,10 @@ public class Keys {
 	// UNIQUE and PRIMARY KEY definitions
 	// -------------------------------------------------------------------------
 
-	public static final UniqueKey<CaseRecord> CASE_PKEY = UniqueKeys0.CASE_PKEY;
-	public static final UniqueKey<CourtRecord> COURT_PKEY = UniqueKeys0.COURT_PKEY;
+    public static final UniqueKey<BoardRecord> BOARD_PKEY = UniqueKeys0.BOARD_PKEY;
+    public static final UniqueKey<CaseRecord> CASE_PKEY = UniqueKeys0.CASE_PKEY;
+    public static final UniqueKey<CaseDocRecord> CASE_DOC_PKEY = UniqueKeys0.CASE_DOC_PKEY;
+    public static final UniqueKey<CourtRecord> COURT_PKEY = UniqueKeys0.COURT_PKEY;
 	public static final UniqueKey<CourtInstanceRecord> COURT_INSTANCE_PKEY1 = UniqueKeys0.COURT_INSTANCE_PKEY1;
 	public static final UniqueKey<EndResultRecord> END_RESULT_PKEY = UniqueKeys0.END_RESULT_PKEY;
 	public static final UniqueKey<JudgeRecord> JUDGE_PKEY = UniqueKeys0.JUDGE_PKEY;
@@ -74,8 +78,10 @@ public class Keys {
 	// -------------------------------------------------------------------------
 
 	private static class Identities0 extends AbstractKeys {
-		public static Identity<CaseRecord, Integer> IDENTITY_CASE = createIdentity(Case.CASE, Case.CASE.CASE_ID);
-		public static Identity<CourtRecord, Integer> IDENTITY_COURT = createIdentity(Court.COURT, Court.COURT.COURT_ID);
+        public static Identity<BoardRecord, Integer> IDENTITY_BOARD = createIdentity(Board.BOARD, Board.BOARD.BOARD_ID);
+        public static Identity<CaseRecord, Integer> IDENTITY_CASE = createIdentity(Case.CASE, Case.CASE.CASE_ID);
+        public static Identity<CaseDocRecord, Integer> IDENTITY_CASE_DOC = createIdentity(CaseDoc.CASE_DOC, CaseDoc.CASE_DOC.DOC_ID);
+        public static Identity<CourtRecord, Integer> IDENTITY_COURT = createIdentity(Court.COURT, Court.COURT.COURT_ID);
 		public static Identity<CourtInstanceRecord, Integer> IDENTITY_COURT_INSTANCE = createIdentity(CourtInstance.COURT_INSTANCE, CourtInstance.COURT_INSTANCE.INSTANCE_ID);
 		public static Identity<EndResultRecord, Integer> IDENTITY_END_RESULT = createIdentity(EndResult.END_RESULT, EndResult.END_RESULT.END_RESULT_ID);
 		public static Identity<JudgeRecord, Integer> IDENTITY_JUDGE = createIdentity(Judge.JUDGE, Judge.JUDGE.JUDGE_ID);
@@ -87,8 +93,10 @@ public class Keys {
 	}
 
 	private static class UniqueKeys0 extends AbstractKeys {
-		public static final UniqueKey<CaseRecord> CASE_PKEY = createUniqueKey(Case.CASE, Case.CASE.CASE_ID);
-		public static final UniqueKey<CourtRecord> COURT_PKEY = createUniqueKey(Court.COURT, Court.COURT.COURT_ID);
+        public static final UniqueKey<BoardRecord> BOARD_PKEY = createUniqueKey(Board.BOARD, Board.BOARD.BOARD_ID);
+        public static final UniqueKey<CaseRecord> CASE_PKEY = createUniqueKey(Case.CASE, Case.CASE.CASE_ID);
+        public static final UniqueKey<CaseDocRecord> CASE_DOC_PKEY = createUniqueKey(CaseDoc.CASE_DOC, CaseDoc.CASE_DOC.DOC_ID);
+        public static final UniqueKey<CourtRecord> COURT_PKEY = createUniqueKey(Court.COURT, Court.COURT.COURT_ID);
 		public static final UniqueKey<CourtInstanceRecord> COURT_INSTANCE_PKEY1 = createUniqueKey(CourtInstance.COURT_INSTANCE, CourtInstance.COURT_INSTANCE.INSTANCE_ID);
 		public static final UniqueKey<EndResultRecord> END_RESULT_PKEY = createUniqueKey(EndResult.END_RESULT, EndResult.END_RESULT.END_RESULT_ID);
 		public static final UniqueKey<JudgeRecord> JUDGE_PKEY = createUniqueKey(Judge.JUDGE, Judge.JUDGE.JUDGE_ID);
