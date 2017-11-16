@@ -97,6 +97,12 @@
 
         ajaxCall($http, "users/get-users", null, getUsers);
 
+        function getBoards(res) {
+            $scope.boards = res.data;
+        }
+
+        ajaxCall($http, "boards/get-boards", null, getBoards);
+
         $scope.remove = function (id) {
             if (confirm("დარწმუნებული ხართ რომ გსურთ წაშლა?")) {
                 if (id != undefined) {
@@ -224,6 +230,10 @@
                             <td>{{slcted.courtName}}</td>
                         </tr>
                         <tr>
+                            <th class="text-right">კოლეგია</th>
+                            <td>{{slcted.boardName}}</td>
+                        </tr>
+                        <tr>
                             <th class="text-right">მოსამართლე</th>
                             <td>{{slcted.judgeName}}</td>
                         </tr>
@@ -301,6 +311,16 @@
                             <div class="col-sm-9">
                                 <input type="text" ng-model="request.number" name="number" required
                                        class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">კოლეგია (*)</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="request.boardId" name="boardId" required>
+                                    <option ng-repeat="v in boards" ng-selected="v.boardId === request.boardId"
+                                            value="{{v.boardId}}">{{v.name}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
@@ -401,6 +421,26 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">სამინისტრო (*)</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="request.ministryStatus" name="ministryStatus"
+                                        required>
+                                    <option ng-selected="1 === request.ministryStatus" value="{{1}}">მოპასუხე
+                                    </option>
+                                    <option ng-selected="2 === request.ministryStatus" value="{{2}}">მესამე პირი
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">მესამე პირები</label>
+                            <div class="col-sm-9">
+                                <textarea rows="5" cols="10" ng-model="request.thirdPersons"
+                                          name="thirdPersons" required
+                                          class="form-control input-sm"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
                             <label class="control-label col-sm-3">სტატუსი (*)</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.statusId" name="statusId" required>
@@ -415,6 +455,20 @@
                             <div class="col-sm-9">
                                 <textarea rows="5" cols="10" ng-model="request.note"
                                           class="form-control input-sm"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">საქმის დოკუმენტები</label>
+                            <div class="col-sm-9">
+                                <div class="input-group input-file" name="Fichier1">
+                                    <input name="upload" type="file" id="fileinput" style="display: none;"/>
+                                    <input type="text" class="form-control" onclick="$('#fileinput').trigger('click');"
+                                           placeholder='აირჩიეთ ფაილი...'/>
+                                    <span class="input-group-btn">
+        		                        <button class="btn btn-default btn-choose" type="button"
+                                                onclick="$('#fileinput').trigger('click');">არჩევა</button>
+    		                        </span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group col-sm-10"></div>

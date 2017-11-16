@@ -56,6 +56,8 @@
                 $('#selected_item').text("დავის საგნები");
             } else if (url.pathname.indexOf("judges") > -1) {
                 $('#selected_item').text("მოსამართლეები");
+            } else if (url.pathname.indexOf("boards") > -1) {
+                $('#selected_item').text("კოლეგია");
             } else if (url.pathname.indexOf("users") > -1) {
                 $('#selected_item').text("მომხმარებლები");
             } else if (url.pathname.indexOf("statistics") > -1) {
@@ -181,6 +183,13 @@
                         <a href="litigsubjects">
                             <i class="fa fa-balance-scale"></i>
                             <span>დავის საგანი</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="boards">
+                            <i class="fa fa-graduation-cap"></i>
+                            <span>კოლეგია</span>
                             </span>
                         </a>
                     </li>

@@ -7,6 +7,10 @@ function caseRequredFields(formVar) {
         errorMsg('საქმის ნომრის მითითება სავალდებულოა');
         return false;
     }
+    if (formVar.boardId.$error.required) {
+        errorMsg('კოლეგიის მითითება სავალდებულოა');
+        return false;
+    }
     if (formVar.judgeId.$error.required) {
         errorMsg('მოსამართლის მითითება სავალდებულოა');
         return false;
@@ -38,6 +42,10 @@ function caseRequredFields(formVar) {
     }
     if (formVar.courtId.$error.required) {
         errorMsg(' სასამართლოს მითითება სავალდებულოა');
+        return false;
+    }
+    if (formVar.ministryStatus.$error.required) {
+        errorMsg(' სამინისტროს სტატუსის მითითება სავალდებულოა');
         return false;
     }
     if (formVar.statusId.$error.required) {
