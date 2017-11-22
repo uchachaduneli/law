@@ -4,14 +4,18 @@ import ge.economy.law.misc.Response;
 import ge.economy.law.request.AddCaseRequest;
 import ge.economy.law.request.SearchCaseRequest;
 import ge.economy.law.service.CaseService;
+import ge.economy.law.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 
 /**
@@ -23,6 +27,9 @@ public class CaseController {
 
     @Autowired
     private CaseService caseService;
+
+    @Autowired
+    private FileService fileService;
 
     @ResponseBody
     @RequestMapping({"/get-cases"})
@@ -60,6 +67,24 @@ public class CaseController {
     public Response deleteCase(@RequestParam int id) {
         caseService.deleteCase(id);
         return Response.withSuccess(true);
+    }
+
+    @RequestMapping("/add-doc")
+    @ResponseBody
+    private Response addImage(@RequestParam("file") MultipartFile file) throws IOException {
+        return Response.withSuccess(fileService.addFile(file));
+    }
+
+    @RequestMapping("/get-doc")
+    @ResponseBody
+    private void getImage(HttpServletResponse response, @RequestParam String name) throws IOException {
+        response.getOutputStream().write(fileService.readFile(name));
+    }
+
+    @RequestMapping("/get-doc-names")
+    @ResponseBody
+    private Response getImage(@RequestParam Integer caseId) throws IOException {
+        return Response.withSuccess(caseService.getCaseDocs(caseId));
     }
 
 }

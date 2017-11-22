@@ -51,8 +51,8 @@ public class UtilDAO extends AbstractDAO {
                 fetch();
     }
 
-    public void deleteCaseDoc(int itemId) {
-        dslContext.deleteFrom(Tables.CASE_DOC).where(Tables.CASE_DOC.DOC_ID.eq(itemId)).execute();
+    public void deleteCaseDoc(int caseId) {
+        dslContext.deleteFrom(Tables.CASE_DOC).where(Tables.CASE_DOC.CASE_ID.eq(caseId)).execute();
     }
 
     public List<Record> getCourtInstances() {

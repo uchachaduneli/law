@@ -2,11 +2,15 @@ package ge.economy.law.service;
 
 
 import ge.economy.law.dao.CaseDAO;
+import ge.economy.law.dao.UtilDAO;
 import ge.economy.law.dto.CaseDTO;
+import ge.economy.law.dto.CaseDocDTO;
 import ge.economy.law.dto.StatusDTO;
 import ge.economy.law.dto.UserReportDTO;
 import ge.economy.law.model.Tables;
+import ge.economy.law.model.tables.records.CaseDocRecord;
 import ge.economy.law.model.tables.records.CaseRecord;
+import ge.economy.law.request.AddCaseDocRequest;
 import ge.economy.law.request.AddCaseRequest;
 import ge.economy.law.request.SearchCaseRequest;
 import org.jooq.DSLContext;
@@ -26,6 +30,9 @@ public class CaseService {
 
     @Autowired
     private CaseDAO caseDAO;
+
+    @Autowired
+    private UtilDAO utilDAO;
 
     @Autowired
     private DSLContext dslContext;
@@ -100,6 +107,18 @@ public class CaseService {
             record.update();
         }
 
+        if (!request.getDocs().isEmpty() && record.getCaseId() != null) {
+            utilDAO.deleteCaseDoc(record.getCaseId());
+            CaseDocRecord docRecord;
+            for (AddCaseDocRequest doc : request.getDocs()) {
+                docRecord = dslContext.newRecord(Tables.CASE_DOC);
+                docRecord.setName(doc.getName());
+                docRecord.setCaseId(record.getCaseId());
+                docRecord.store();
+            }
+
+        }
+
         return CaseDTO.translate(caseDAO.getWholeCaseObjectById(record.getCaseId()));
     }
 
@@ -113,5 +132,9 @@ public class CaseService {
 
     public List<CaseDTO> getInstanceHistory(int id, String number) {
         return CaseDTO.translateArray(caseDAO.getInstanceHistory(id, number));
+    }
+
+    public List<CaseDocDTO> getCaseDocs(Integer caseId) {
+        return CaseDocDTO.translateArray(utilDAO.getCaseDocs(caseId));
     }
 }

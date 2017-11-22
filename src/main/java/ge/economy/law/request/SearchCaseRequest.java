@@ -27,6 +27,24 @@ public class SearchCaseRequest {
     private Integer courtId;
     private Integer statusId;
     private Integer courtInstanceId;
+    private Integer boardId;
+    private Integer ministryStatus;
+
+    public Integer getBoardId() {
+        return boardId;
+    }
+
+    public void setBoardId(Integer boardId) {
+        this.boardId = boardId;
+    }
+
+    public Integer getMinistryStatus() {
+        return ministryStatus;
+    }
+
+    public void setMinistryStatus(Integer ministryStatus) {
+        this.ministryStatus = ministryStatus;
+    }
 
     public Integer getCaseId() {
         return caseId;

@@ -64,6 +64,12 @@ public class CaseDAO extends AbstractDAO {
         if (srchCase.getStatusId() != null && srchCase.getStatusId() > 0) {
             condition.add(c.STATUS_ID.eq(srchCase.getStatusId()));
         }
+        if (srchCase.getBoardId() != null && srchCase.getBoardId() > 0) {
+            condition.add(c.BOARD_ID.eq(srchCase.getBoardId()));
+        }
+        if (srchCase.getMinistryStatus() != null && srchCase.getMinistryStatus() > 0) {
+            condition.add(c.MINISTRY_STATUS.eq(srchCase.getMinistryStatus()));
+        }
         if (srchCase.getCourtInstanceId() != null && srchCase.getCourtInstanceId() > 0) {
             condition.add(c.COURT_INSTANCE_ID.eq(srchCase.getCourtInstanceId()));
         } else {
@@ -195,6 +201,12 @@ public class CaseDAO extends AbstractDAO {
         }
         if (srchCase.getCourtId() != null && srchCase.getCourtId() > 0) {
             condition.add(c.COURT_ID.eq(srchCase.getCourtId()));
+        }
+        if (srchCase.getBoardId() != null && srchCase.getBoardId() > 0) {
+            condition.add(c.BOARD_ID.eq(srchCase.getBoardId()));
+        }
+        if (srchCase.getMinistryStatus() != null && srchCase.getMinistryStatus() > 0) {
+            condition.add(c.MINISTRY_STATUS.eq(srchCase.getMinistryStatus()));
         }
         if (srchCase.getStatusId() != null && srchCase.getStatusId() > 0) {
             condition.add(c.STATUS_ID.eq(srchCase.getStatusId()));

@@ -25,7 +25,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
             }
 
             if (uri.length() > 0 && !uri.equals("/")) {
-                response.sendRedirect("logi");
+                response.sendRedirect("login");
             } else {
                 response.sendRedirect("login");
             }

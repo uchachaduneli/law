@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import ge.economy.law.misc.JsonDateSerializeSupport;
 
 import java.util.Date;
+import java.util.List;
 
 public class AddCaseRequest {
 
@@ -39,6 +40,15 @@ public class AddCaseRequest {
     private String boardName;
     private String thirdPersons;
     private Integer ministryStatus;
+    private List<AddCaseDocRequest> docs;
+
+    public List<AddCaseDocRequest> getDocs() {
+        return docs;
+    }
+
+    public void setDocs(List<AddCaseDocRequest> docs) {
+        this.docs = docs;
+    }
 
     public Integer getMinistryStatus() {
         return ministryStatus;
