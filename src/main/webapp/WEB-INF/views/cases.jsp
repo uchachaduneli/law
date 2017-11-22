@@ -7,7 +7,31 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="header.jsp" %>
+<style>
+    @media print {
 
+        body * {
+            visibility: hidden;
+        }
+
+        #printable * {
+            visibility: visible;
+        }
+
+        .modal {
+            position: absolute;
+            left: 0;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            min-height: 550px
+        }
+
+        #printable button, i {
+            visibility: hidden !important;
+        }
+    }
+</style>
 <script>
 
     $(document).ready(function () {
@@ -258,8 +282,14 @@
                             {{v.courtInstanceName}}</a>
                     </li>
                 </ul>
-                <div class="row">
+                <div class="row" id="printable">
                     <table class="table table-striped">
+                        <tr colspan="2">
+                            <button onclick="window.print()" id="prntBtnId" class="pull-right btn btn-default"
+                                    style="margin-right: 15px;"><i class="fa fa-print"
+                                                                   aria-hidden="true">
+                                &nbsp; ბეჭდვა</i></button>
+                        </tr>
                         <tr>
                             <th class="col-md-4 text-right">ID</th>
                             <td>{{slcted.caseId}}</td>
@@ -350,7 +380,7 @@
     </div>
 </div>
 
-<div class="modal fade bs-example-modal-lg" id="editModal" role="dialog" aria-labelledby="editModalLabel"
+<div class="modal fade bs-example-modal-lg not-printable" id="editModal" role="dialog" aria-labelledby="editModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -562,7 +592,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row not-printable">
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
