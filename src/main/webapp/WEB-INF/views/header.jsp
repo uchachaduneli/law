@@ -188,7 +188,7 @@
                     </li>
                     <li>
                         <a href="boards">
-                            <i class="fa fa-graduation-cap"></i>
+                            <i class="fa fa-share-alt"></i>
                             <span>კოლეგია</span>
                             </span>
                         </a>

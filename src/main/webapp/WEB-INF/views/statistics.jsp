@@ -112,6 +112,12 @@
         }
 
         ajaxCall($http, "users/get-users", null, getUsers);
+
+        function getBoards(res) {
+            $scope.boards = res.data;
+        }
+
+        ajaxCall($http, "boards/get-boards", null, getBoards);
     });
 
 </script>
@@ -170,7 +176,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <select class="form-control" ng-model="srchCase.judgeId" ng-change="loadMainData()">
                         <option value="" selected="selected">მოსამართლე</option>
                         <option ng-repeat="v in judges" ng-selected="v.judgeId === srchCase.judgeId"
@@ -178,7 +184,7 @@
                         </option>
                     </select>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <select class="form-control" ng-model="srchCase.litigationSubjectId"
                             ng-change="loadMainData()">
                         <option value="" selected="selected">დავის საგანი</option>
@@ -199,7 +205,7 @@
                         </option>
                     </select>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <select class="form-control" ng-model="srchCase.endResultId"
                             ng-change="loadMainData()">
                         <option value="" selected="selected">დამთავრების შედეგი</option>
@@ -209,7 +215,7 @@
                         </option>
                     </select>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <select class="form-control" ng-model="srchCase.courtId" ng-change="loadMainData()">
                         <option value="" selected="selected">სასამართლო</option>
                         <option ng-repeat="v in courts"
@@ -235,6 +241,25 @@
                         <option ng-repeat="v in users"
                                 ng-selected="v.userId === srchCase.addUserId"
                                 value="{{v.userId}}">{{v.firstname}}{{v.lastname}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <select class="form-control" ng-model="srchCase.boardId"
+                            ng-change="loadMainData()">
+                        <option value="" selected="selected">კოლეგია</option>
+                        <option ng-repeat="v in boards" ng-selected="v.boardId === srchCase.boardId"
+                                value="{{v.boardId}}">{{v.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <select class="form-control" ng-model="srchCase.ministryStatus"
+                            ng-change="loadMainData()">
+                        <option value="" selected="selected">სამინისტროს სტატ.</option>
+                        <option ng-selected="1 === srchCase.ministryStatus" value="{{1}}">მოპასუხე
+                        </option>
+                        <option ng-selected="2 === srchCase.ministryStatus" value="{{2}}">მესამე პირი
                         </option>
                     </select>
                 </div>

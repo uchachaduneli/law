@@ -42,8 +42,9 @@
         $scope.start = 0;
         $scope.page = 1;
         $scope.limit = "10";
-        $scope.request = {};
+        $scope.request = {docs: []};
         $scope.srchCase = {};
+//        $scope.request.docs = [];
 
         $scope.loadMainData = function () {
             function getMainData(res) {
@@ -124,30 +125,46 @@
                 $scope.slcted = selected[0];
 
                 function rsFnc(res) {
-                    console.log(res.data);
                     $scope.caseInstances = res.data;
                 }
 
                 ajaxCall($http, "cases/get-instance-history?id=" + $scope.slcted.caseId + "&number=" + $scope.slcted.groupId, null, rsFnc);
+
+                $scope.loadCaseDocNames($scope.slcted.caseId);
             }
         };
+
+        $scope.loadCaseDocNames = function (caseId) {
+            function getDocNames(res) {
+                $scope.request.docs = res.data;
+            }
+
+            ajaxCall($http, "cases/get-doc-names?caseId=" + caseId, null, getDocNames);
+        }
 
         $scope.handleDoubleClick = function (id) {
             $scope.showDetails(id);
             $('#detailModal').modal('show');
         };
 
+        $scope.removeDoc = function (docname) {
+//            var selected = $filter('filter')($scope.request.docs, {name: docname}, true);
+            var index = $scope.request.docs.indexOf(docname);
+            $scope.request.docs.splice(index, 1);
+        }
         $scope.edit = function (id) {
+            $('#uploadDocNameInput').val();
             if (id != undefined) {
                 var selected = $filter('filter')($scope.list, {caseId: id}, true);
                 $scope.request = selected[0];
-                console.log($scope.request);
+                $scope.loadCaseDocNames($scope.request.caseId);
 //                $scope.request.judgeId = parseInt($scope.request.judgeId);
             }
         };
 
         $scope.init = function () {
-            $scope.request = {};
+            $scope.request = {docs: []};
+            $('#uploadDocNameInput').val();
         };
 
         $scope.save = function () {
@@ -190,6 +207,36 @@
             $scope.loadMainData();
         }
 
+        $scope.addDocument = function () {
+            $('#uploadDocNameInput').val($('#documentId')[0].files[0].name);
+            var oMyForm = new FormData();
+            oMyForm.append("file", $('#documentId')[0].files[0]);
+            $.ajax({
+                url: 'cases/add-doc',
+                data: oMyForm,
+                dataType: 'text',
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function (data) {
+                    if ($scope.request.docs === undefined) {
+                        $scope.request.docs = [];
+                    }
+                    $scope.request.docs.push({name: JSON.parse(data).data});
+                    successMsg('ატვირტვა დასრულდა წარმატებით, შეინახეთ ინფორმაცია');
+                    $scope.$apply();
+                    $('#uploadDocNameInput').val('');
+                    $('#documentId').val('');
+                },
+                error: function (data, status, headers, config) {
+                    console.log(data);
+                    console.log(status);
+                    console.log(headers);
+                    console.log(config);
+                }
+            });
+        };
+
     });
 </script>
 
@@ -228,6 +275,12 @@
                         <tr>
                             <th class="text-right">სასამართლო</th>
                             <td>{{slcted.courtName}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">სამინისტროს სტატუსი</th>
+                            <td>{{slcted.ministryStatus === 1 ? 'მოპასუხე': slcted.ministryStatus === 2 ? 'მესამე პირი'
+                                :''}}
+                            </td>
                         </tr>
                         <tr>
                             <th class="text-right">კოლეგია</th>
@@ -274,8 +327,18 @@
                             <td>{{slcted.addUserName}}</td>
                         </tr>
                         <tr>
-                            <th class="text-right">სტატუსი</th>
+                            <th class="text-right">საქმის სტატუსი</th>
                             <td>{{slcted.statusName}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">დოკუმენტები</th>
+                            <td>
+                                <ul>
+                                    <li ng-repeat="item in request.docs"><a
+                                            href="cases/get-doc?name={{item.name.split('.')[0]}}" target="_blank">{{item.name}}</a>
+                                    </li>
+                                </ul>
+                            </td>
                         </tr>
                     </table>
                     <div class="form-group"><br/></div>
@@ -421,7 +484,7 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">სამინისტრო (*)</label>
+                            <label class="control-label col-sm-3">სამინისტროს სტატუსი (*)</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.ministryStatus" name="ministryStatus"
                                         required>
@@ -441,7 +504,7 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-10 ">
-                            <label class="control-label col-sm-3">სტატუსი (*)</label>
+                            <label class="control-label col-sm-3">საქმის სტატუსი (*)</label>
                             <div class="col-sm-9">
                                 <select class="form-control" ng-model="request.statusId" name="statusId" required>
                                     <option ng-repeat="v in statuses" ng-selected="v.statusId === request.statusId"
@@ -461,14 +524,27 @@
                             <label class="control-label col-sm-3">საქმის დოკუმენტები</label>
                             <div class="col-sm-9">
                                 <div class="input-group input-file" name="Fichier1">
-                                    <input name="upload" type="file" id="fileinput" style="display: none;"/>
-                                    <input type="text" class="form-control" onclick="$('#fileinput').trigger('click');"
+                                    <input name="upload" type="file" id="documentId"
+                                           onchange="angular.element(this).scope().addDocument()"
+                                           style="display: none;"/>
+                                    <input type="text" id="uploadDocNameInput" class="form-control"
+                                           onclick="$('#documentId').trigger('click');"
                                            placeholder='აირჩიეთ ფაილი...'/>
                                     <span class="input-group-btn">
         		                        <button class="btn btn-default btn-choose" type="button"
-                                                onclick="$('#fileinput').trigger('click');">არჩევა</button>
+                                                onclick="$('#documentId').trigger('click');">არჩევა</button>
     		                        </span>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-10 ">
+                            <label class="control-label col-sm-3">დოკუმენტები ({{request.docs.length}})</label>
+                            <div class="col-sm-9">
+                                <ul>
+                                    <li class="col-md-12" ng-repeat="k in request.docs">{{k.name}}
+                                        &nbsp;&nbsp;&nbsp;<span class="fa fa-trash-o" ng-click="removeDoc()"></span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <div class="form-group col-sm-10"></div>
@@ -567,7 +643,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <select class="form-control" ng-model="srchCase.judgeId" ng-change="loadMainData()">
                                         <option value="" selected="selected">მოსამართლე</option>
                                         <option ng-repeat="v in judges" ng-selected="v.judgeId === srchCase.judgeId"
@@ -575,7 +651,7 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <select class="form-control" ng-model="srchCase.litigationSubjectId"
                                             ng-change="loadMainData()">
                                         <option value="" selected="selected">დავის საგანი</option>
@@ -596,7 +672,7 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <select class="form-control" ng-model="srchCase.endResultId"
                                             ng-change="loadMainData()">
                                         <option value="" selected="selected">დამთავრების შედეგი</option>
@@ -606,7 +682,7 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <select class="form-control" ng-model="srchCase.courtId" ng-change="loadMainData()">
                                         <option value="" selected="selected">სასამართლო</option>
                                         <option ng-repeat="v in courts"
@@ -632,6 +708,25 @@
                                         <option ng-repeat="v in users"
                                                 ng-selected="v.userId === srchCase.addUserId"
                                                 value="{{v.userId}}">{{v.firstname}}{{v.lastname}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <select class="form-control" ng-model="srchCase.boardId"
+                                            ng-change="loadMainData()">
+                                        <option value="" selected="selected">კოლეგია</option>
+                                        <option ng-repeat="v in boards" ng-selected="v.boardId === srchCase.boardId"
+                                                value="{{v.boardId}}">{{v.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <select class="form-control" ng-model="srchCase.ministryStatus"
+                                            ng-change="loadMainData()">
+                                        <option value="" selected="selected">სამინისტროს სტატ.</option>
+                                        <option ng-selected="1 === srchCase.ministryStatus" value="{{1}}">მოპასუხე
+                                        </option>
+                                        <option ng-selected="2 === srchCase.ministryStatus" value="{{2}}">მესამე პირი
                                         </option>
                                     </select>
                                 </div>
