@@ -77,9 +77,9 @@
     </bean>
 
     <bean name="fileService" class="ge.economy.law.service.FileService">
-        <property name="rootDir"
-                  value="C:\Program Files\Apache Software Foundation\Apache Tomcat 8.0.27\webapps\ROOT\uploads"/>
-        <!--<property name="rootDir" value="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\ROOT\uploads"/>-->
+        <!--<property name="rootDir"-->
+        <!--value="C:\Program Files\Apache Software Foundation\Apache Tomcat 8.0.27\webapps\ROOT\uploads"/>-->
+        <property name="rootDir" value="/usr/share/tomcat/webapps/domains/lawyers-test.economy.ge/uploads"/>
     </bean>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
