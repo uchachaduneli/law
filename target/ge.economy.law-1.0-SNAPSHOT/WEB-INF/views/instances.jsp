@@ -9,7 +9,6 @@
 <%@include file="header.jsp" %>
 
 <script>
-    var app = angular.module("app", []);
     app.controller("angController", function ($scope, $http, $filter) {
 
         $scope.loadMainData = function () {
@@ -107,11 +106,14 @@
         <div class="box">
             <div class="box-header">
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-block btn-primary btn-md" ng-click="init()" data-toggle="modal"
-                            data-target="#editModal">
-                        <i class="fa fa-plus" aria-hidden="true"></i> &nbsp;
-                        დამატება
-                    </button>
+                    <c:if test="<%= isAdmin %>">
+                        <button type="button" class="btn btn-block btn-primary btn-md" ng-click="init()"
+                                data-toggle="modal"
+                                data-target="#editModal">
+                            <i class="fa fa-plus" aria-hidden="true"></i> &nbsp;
+                            დამატება
+                        </button>
+                    </c:if>
                 </div>
             </div>
             <!-- /.box-header -->
@@ -121,22 +123,26 @@
                     <tr>
                         <th>ID</th>
                         <th>სახელი</th>
-                        <th class="col-md-3 text-center">Action</th>
+                        <c:if test="<%= isAdmin %>">
+                            <th class="col-md-3 text-center">Action</th>
+                        </c:if>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="r in list">
                         <td>{{r.instanceId}}</td>
                         <td>{{r.name}}</td>
-                        <td class="text-center">
-                            <a ng-click="edit(r.instanceId)" data-toggle="modal" data-target="#editModal"
-                               class="btn btn-xs">
-                                <i class="fa fa-pencil"></i>&nbsp;შეცვლა
-                            </a>&nbsp;|&nbsp;
-                            <a ng-click="remove(r.instanceId)" class="btn btn-xs">
-                                <i class="fa fa-trash-o"></i>&nbsp;წაშლა
-                            </a>
-                        </td>
+                        <c:if test="<%= isAdmin %>">
+                            <td class="text-center">
+                                <a ng-click="edit(r.instanceId)" data-toggle="modal" data-target="#editModal"
+                                   class="btn btn-xs">
+                                    <i class="fa fa-pencil"></i>&nbsp;შეცვლა
+                                </a>&nbsp;|&nbsp;
+                                <a ng-click="remove(r.instanceId)" class="btn btn-xs">
+                                    <i class="fa fa-trash-o"></i>&nbsp;წაშლა
+                                </a>
+                            </td>
+                        </c:if>
                     </tr>
                     </tbody>
                 </table>

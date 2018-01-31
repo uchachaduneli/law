@@ -1,4 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="ge.economy.law.dto.UserDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    boolean isAdmin = ((Integer) session.getAttribute("typeId") != null && (Integer) session.getAttribute("typeId") == UserDTO.USER_ADMIN);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +19,7 @@
     <link rel="stylesheet" href="resources/css/global.css">
     <link rel="stylesheet" href="resources/css/bootstrap-select.css">
     <link rel="stylesheet" href="resources/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="resources/css/ionicons.min.css">
     <link rel="shortcut icon" type="image/png" href="resources/imgs/favicon.png"/>
 
     <script src="resources/js/jquery.js"></script>
@@ -30,6 +36,7 @@
     <script src="resources/js/angular.js"></script>
     <script src="resources/js/global_util.js"></script>
     <script src="resources/js/growlMessages.js"></script>
+    <script src="resources/js/requireds.js"></script>
     <script>
         $(document).ready(function () {
             $(".datepicker").datepicker({language: 'ka'});
@@ -49,18 +56,44 @@
                 $('#selected_item').text("დავის საგნები");
             } else if (url.pathname.indexOf("judges") > -1) {
                 $('#selected_item').text("მოსამართლეები");
+            } else if (url.pathname.indexOf("boards") > -1) {
+                $('#selected_item').text("კოლეგია");
             } else if (url.pathname.indexOf("users") > -1) {
                 $('#selected_item').text("მომხმარებლები");
+            } else if (url.pathname.indexOf("statistics") > -1) {
+                $('#selected_item').text("სტატისტიკა");
             }
 
         });
-        //        var myapp = angular.module('app', []);
+
+        var app = angular.module("app", []);
+        app.controller("profileCtrl", function ($scope, $http, $location) {
+            var absUrl = $location.absUrl();
+            $scope.uri = "";
+            if (absUrl.split("?")[1]) {
+                $scope.uri = absUrl.split("?")[1].split("=")[1];
+            }
+
+            $scope.changePassword = function () {
+                function resFunc(res) {
+                    if (res.errorCode == 0) {
+                        successMsg('ოპერაცია დასრულდა წარმატებით');
+                        closeModal('dropdown');
+                    } else {
+                        errorMsg('ოპერაცია არ სრულდება გადაამოწმეთ ველების სისწორე');
+                    }
+                    $scope.newpass = {};
+                }
+
+                ajaxCall($http, "users/change-password?pass=" + $scope.newpass.password + "&newpass=" + $scope.newpass.newpassword, null, resFunc);
+            };
+        });
     </script>
 </head>
 <body ng-app="app" class="hold-transition skin-blue-light sidebar-mini">
 <div class="wrapper">
     <header class="main-header">
-        <a href="#" class="logo">
+        <a href="" class="logo">
             <span class="logo-lg"><b>LAW</b></span>
         </a>
         <nav class="navbar navbar-static-top">
@@ -68,32 +101,47 @@
                 <span class="sr-only">მენიუს შეკეცვა</span>
             </a>
 
-            <div class="navbar-custom-menu">
+            <div class="navbar-custom-menu" ng-controller="profileCtrl">
                 <ul class="nav navbar-nav">
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-user"></i>
-                            <span class="hidden-xs">User Desc</span>
+                            <span class="hidden-xs"><%= session.getAttribute("firstname") %> <%= session.getAttribute("lastname")%></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
                                 <p>
-                                    saxeli gvari
-                                    <small>Member since Nov. 2012</small>
+                                    <%= session.getAttribute("firstname") %> <%= session.getAttribute("lastname")%>
+                                    <small><%= session.getAttribute("typeName") %>
+                                    </small>
                                 </p>
+                            </li>
+                            <li class="user-body text-center">
+                                <div class=" form-group has-feedback">
+                                    <input type="password" name="password" placeholder="ძველი პაროლი"
+                                           ng-model="newpass.password"
+                                           class="form-control">
+                                    <span class="fa fa-key form-control-feedback"></span>
+                                </div>
+                                <div class="form-group has-feedback">
+                                    <input type="password" name="password" placeholder="ახალი პაროლი"
+                                           ng-model="newpass.newpassword"
+                                           class="form-control">
+                                    <span class="fa fa-key form-control-feedback"></span>
+                                </div>
                             </li>
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="" ng-click="changePassword()" class="btn btn-default btn-flat">შეცვლა</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="logout" class="btn btn-default btn-flat">გამოსვლა</a>
                                 </div>
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-sign-out"></i></a>
+                    <li title="გამოსვლა">
+                        <a href="logout"><i class="fa fa-sign-out"></i></a>
                     </li>
                 </ul>
             </div>
@@ -139,19 +187,35 @@
                         </a>
                     </li>
                     <li>
+                        <a href="boards">
+                            <i class="fa fa-share-alt"></i>
+                            <span>კოლეგია</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="judges">
                             <i class="fa fa-graduation-cap"></i>
                             <span>მოსამართლეები</span>
                             </span>
                         </a>
                     </li>
-                    <li>
-                        <a href="users">
-                            <i class="fa fa-users"></i>
-                            <span>მომხმარებლები</span>
-                            </span>
-                        </a>
-                    </li>
+                    <c:if test="<%= isAdmin %>">
+                        <li>
+                            <a href="users">
+                                <i class="fa fa-users"></i>
+                                <span>მომხმარებლები</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="statistics">
+                                <i class="fa fa-bar-chart"></i>
+                                <span>სტატისტიკა</span>
+                                </span>
+                            </a>
+                        </li>
+                    </c:if>
                 </ul>
             </section>
         </aside>

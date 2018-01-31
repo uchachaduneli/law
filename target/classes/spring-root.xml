@@ -3,15 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/tx
-       http://www.springframework.org/schema/tx/spring-tx.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd">
 
     <mvc:annotation-driven/>
 
@@ -21,14 +18,25 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
-    <tx:annotation-driven transaction-manager="platformTransactionManager"/>
-
     <bean id="dtSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/law?currentSchema=public"/>
-        <!--<property name="url" value="jdbc:postgresql://10.0.11.7:5432/law?currentSchema=public"/>-->
-        <property name="username" value="postgres"/>
-        <property name="password" value="root"/>
+        <!--<property name="url" value="jdbc:postgresql://localhost:5432/law?currentSchema=public"/>-->
+        <property name="url" value="jdbc:postgresql://10.20.21.85:5432/lawyers?currentSchema=public"/>
+        <property name="username" value="nlomineishvili"/>
+        <property name="password" value="2wsx@WSX"/>
+    </bean>
+
+
+    <bean id="propertyPlaceholderConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <!--<property name="locations">-->
+        <!--<list>-->
+        <!--<value>file:///opt/involve/config/involve-api.properties</value>-->
+        <!--<value>classpath:involve-api.properties</value>-->
+        <!--</list>-->
+        <!--</property>-->
     </bean>
 
     <bean id="transactionAwareDataSource"
@@ -54,6 +62,11 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/"/>
+            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/logout"/>
+            <mvc:exclude-mapping path="/resources/**"/>
+            <mvc:exclude-mapping path="/upload/file-upload"/>
             <bean class="ge.economy.law.security.auth.AuthInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
@@ -63,11 +76,11 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--<bean name="fileService" class="ge.economy.law.service.">-->
-    <!--<property name="rootDir"-->
-    <!--value="C:\Program Files\Apache Software Foundation\Apache Tomcat 8.0.27\webapps\ROOT\uploads"/>-->
-    <!--&lt;!&ndash;<property name="rootDir" value="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\ROOT\uploads"/>&ndash;&gt;-->
-    <!--</bean>-->
+    <bean name="fileService" class="ge.economy.law.service.FileService">
+        <!--<property name="rootDir"-->
+        <!--value="C:\Program Files\Apache Software Foundation\Apache Tomcat 8.0.27\webapps\ROOT\uploads"/>-->
+        <property name="rootDir" value="/usr/share/tomcat/webapps/domains/lawyers-test.economy.ge/uploads"/>
+    </bean>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="500000000"/>
